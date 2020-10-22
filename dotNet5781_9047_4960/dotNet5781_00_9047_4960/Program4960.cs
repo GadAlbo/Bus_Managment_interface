@@ -11,6 +11,7 @@ namespace dotNet5781_00_9047_4960
         static void Main(string[] args)
         {
             welcome4960();
+            welcome9047();
             Console.ReadKey();
         }
 
