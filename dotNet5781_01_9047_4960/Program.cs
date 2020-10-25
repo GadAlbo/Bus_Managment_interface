@@ -111,6 +111,15 @@ namespace dotNet5781_01_9047_4960
                     killFromRefueling = value;
                 }
             }
+            bus(string Lnumber,int yearSA, int mounthSA, int daySA, int yearC, int mounthC, int dayC,int allK, int kilometersC, int kilometersR)
+            {
+                LicenseNumber = Lnumber;
+                startOfActivity = new DateTime(yearSA, mounthSA, daySA);
+                LastCheckup = new DateTime(yearC, mounthC, dayC);
+                AllKilometrage = allK;
+                KillFromLastCheckup = kilometersC;
+                KillFromRefueling = kilometersR;
+            }
 
         }
         static void Main(string[] args)
