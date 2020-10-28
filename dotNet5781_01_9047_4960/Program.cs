@@ -132,8 +132,26 @@ namespace dotNet5781_01_9047_4960
                     }
             }
         }
+        enum Opitions { addBus, chooseBus, busTreatment, showKillFromLastCheckup, exit };
         static void Main(string[] args)
         {
+            Opitions op;
+            op = (Opitions)Console.Read();
+            switch (op)
+            {
+                case Opitions.addBus:
+                    break;
+                case Opitions.chooseBus:
+                    break;
+                case Opitions.busTreatment:
+                    break;
+                case Opitions.showKillFromLastCheckup:
+                    break;
+                case Opitions.exit:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
