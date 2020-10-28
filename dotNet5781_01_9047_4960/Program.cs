@@ -164,17 +164,17 @@ namespace dotNet5781_01_9047_4960
                                 break;
                             case '1':
                                 Console.WriteLine("Please Enter The total kl amount");
-                                int allk = Console.ReadLine();
+                                int allk = Convert.ToInt32(Console.ReadLine());
                                 AllKilometrage = allk;
                                 break;
                             case '2':
                                 Console.WriteLine("Please Enter The  kl amount from last checkup");
-                                int kilometersC = Console.ReadLine();
+                                int kilometersC = Convert.ToInt32(Console.ReadLine());
                                 KillFromLastCheckup = kilometersC;
                                 break;
                             case '3':
                                 Console.WriteLine("Please Enter The  kl amount from last refuel");
-                                int kilometersR = Console.ReadLine();
+                                int kilometersR = Convert.ToInt32(Console.ReadLine());
                                 KillFromRefueling = kilometersR;
                                 break;
                                 default:
