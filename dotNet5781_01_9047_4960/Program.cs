@@ -110,17 +110,18 @@ namespace dotNet5781_01_9047_4960
                     killFromRefueling = value;
                 }
             }
-            bus()
+
+            public bus()
             {
                 try
                 {
                     Console.WriteLine("Please Enter The Starting Date Of Activity");
                     Console.Write("year:");
-                    int yearSA = Console.Read();
+                    int yearSA = Convert.ToInt32(Console.ReadLine());
                     Console.Write(" mounth:");
-                    int mounthSA = Console.Read();
+                    int mounthSA = Convert.ToInt32(Console.ReadLine());
                     Console.Write(" day:");
-                    int daySA = Console.Read();
+                    int daySA = Convert.ToInt32(Console.ReadLine());
                     startOfActivity = new DateTime(yearSA, mounthSA, daySA);
                 }
                 catch (ArgumentOutOfRangeException outOfRange)
@@ -130,10 +131,10 @@ namespace dotNet5781_01_9047_4960
                 Console.Write("Please Enter The License Number No Spaces Or - :");
                 LicenseNumber = Console.ReadLine();
                 Console.WriteLine("If You Would Like To Tell Us More About The Vehicle Please Enter 1. else press any key to continue");
-                var decison = (char)Console.Read();
-                if(decison=='1')
+                int decison = Convert.ToInt32(Console.ReadLine());
+                if(decison==1)
                 {
-                    char op;
+                    int op;
                    
                     do
                     {
@@ -141,20 +142,20 @@ namespace dotNet5781_01_9047_4960
                         +"enter 1 to add the amount of all the killometers the car has\n"
                         +"enter 2 to add the amount of all the killometers from last checkup\n"
                         +"enter 3 to add the amount of all the killometers the car has from last refuel"
-                        +"press e to end");
-                        op= (char)Console.Read();
+                        +"press 4 to end");
+                        op= Convert.ToInt32(Console.ReadLine());
                         switch (op)
                             {
-                            case '0':
+                            case 0:
                                 try
                                 {
                                     Console.WriteLine("Please Enter The Last Checkup Date");
                                     Console.Write("year:");
-                                    int yearC = Console.Read();
+                                    int yearC = Convert.ToInt32(Console.ReadLine());
                                     Console.Write(" mounth:");
-                                    int mounthC = Console.Read();
+                                    int mounthC = Convert.ToInt32(Console.ReadLine());
                                     Console.Write(" day:");
-                                    int dayC = Console.Read();
+                                    int dayC = Convert.ToInt32(Console.ReadLine());
                                     LastCheckup = new DateTime(yearC, mounthC, dayC);
                                 }
                                 catch (ArgumentOutOfRangeException outOfRange)
@@ -162,26 +163,27 @@ namespace dotNet5781_01_9047_4960
                                     Console.WriteLine("Error: {0} in the last checkup date", outOfRange.Message);
                                 }
                                 break;
-                            case '1':
+                            case 1:
                                 Console.WriteLine("Please Enter The total kl amount");
                                 int allk = Convert.ToInt32(Console.ReadLine());
                                 AllKilometrage = allk;
                                 break;
-                            case '2':
+                            case 2:
                                 Console.WriteLine("Please Enter The  kl amount from last checkup");
                                 int kilometersC = Convert.ToInt32(Console.ReadLine());
                                 KillFromLastCheckup = kilometersC;
                                 break;
-                            case '3':
+                            case 3:
                                 Console.WriteLine("Please Enter The  kl amount from last refuel");
                                 int kilometersR = Convert.ToInt32(Console.ReadLine());
                                 KillFromRefueling = kilometersR;
                                 break;
-                                default:
-                                    break;
+                            default:
+                                Console.WriteLine("please try again:)");
+                                break;
                             }
 
-                    } while (op!='e');
+                    } while (op!=4);
                 }
             }
             public void AddKilometrage(int addKill)
@@ -216,6 +218,11 @@ namespace dotNet5781_01_9047_4960
                 switch (op)
                 {
                     case Opitions.addBus:
+                        {
+                            bus b=new bus();
+                            busList.Add(b);
+                        }
+                        ;
                         break;
                     case Opitions.chooseBus:
                         {
@@ -260,8 +267,8 @@ namespace dotNet5781_01_9047_4960
                                 if (t.Current.LicenseNumber == Lnumber)
                                 {
                                     Console.WriteLine("plese enter 1 for refuel and 2 treat\n");
-                                    int help = Console.Read();
-                                    if(help==1)
+                                    int help = Convert.ToInt32(Console.ReadLine());
+                                    if (help==1)
                                     {
                                         t.Current.KillFromRefueling = 0;
                                     }
