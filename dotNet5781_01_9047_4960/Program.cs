@@ -95,7 +95,7 @@ namespace dotNet5781_01_9047_4960
                     killFromRefueling = value;
                 }
             }
-            bus(string Lnumber,int yearSA, int mounthSA, int daySA, int yearC, int mounthC, int dayC,int allK, int kilometersC, int kilometersR)
+            bus(string Lnumber,int yearSA, int mounthSA, int daySA, int yearC, int mounthC, int dayC, int allK=0, int kilometersC=0, int kilometersR=0)
             {
                 LicenseNumber = Lnumber;
                 try
