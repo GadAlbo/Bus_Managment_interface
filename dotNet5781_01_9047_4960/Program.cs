@@ -201,6 +201,10 @@ namespace dotNet5781_01_9047_4960
                         Console.WriteLine("can not reduce the amount of kilometrage");
                     }
             }
+            public override string ToString() 
+            {
+                return "License Number:" + licenseNumber + " Total Kilometrage:" + allKilometrage;
+            }
         }
         enum Opitions { addBus, chooseBus, busTreatment, showKillFromLastCheckup, exit };
         static void Main(string[] args)
