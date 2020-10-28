@@ -28,7 +28,7 @@ namespace dotNet5781_01_9047_4960
                         }
                         else
                         {
-                            Console.WriteLine("license number is to long");
+                            Console.WriteLine("license number is not compatible with the year of departure");
                         }
                     }
                     else
@@ -39,7 +39,7 @@ namespace dotNet5781_01_9047_4960
                         }
                         else
                         {
-                            Console.WriteLine("license number is to long");
+                            Console.WriteLine("license number is not compatible with the year of departure");
                         }
                     }
                 } 
@@ -69,32 +69,16 @@ namespace dotNet5781_01_9047_4960
                 }
             }
             private int allKilometrage = 0;
-            public int AllKilometrage
-            {
-                get
-                {
-                    return allKilometrage;
-                }
-                private set
-                {
-                    if(value>0)
-                    {
-                        allKilometrage += value;
-                    }
-                    else
-                    {
-                        Console.WriteLine("can not reduce the amount of kilometrage");
-                    }
-                }
-            }
-            private int killFromLastCheckup;
+            public int AllKilometrage { get=>allKilometrage; private set=>allKilometrage=value; }
+            
+            private int killFromLastCheckup=0;
             public int KillFromLastCheckup
             {
                 get
                 {
                     return killFromLastCheckup;
                 }
-                private set
+                set 
                 {
                     killFromLastCheckup = value;
                 }
@@ -114,13 +98,39 @@ namespace dotNet5781_01_9047_4960
             bus(string Lnumber,int yearSA, int mounthSA, int daySA, int yearC, int mounthC, int dayC,int allK, int kilometersC, int kilometersR)
             {
                 LicenseNumber = Lnumber;
-                startOfActivity = new DateTime(yearSA, mounthSA, daySA);
-                LastCheckup = new DateTime(yearC, mounthC, dayC);
+                try
+                {
+                    startOfActivity = new DateTime(yearSA, mounthSA, daySA);
+                }
+                catch (ArgumentOutOfRangeException outOfRange)
+                {
+                    Console.WriteLine("Error: {0} in the start activity date", outOfRange.Message);
+                }
+                try
+                {
+                    LastCheckup = new DateTime(yearC, mounthC, dayC);
+                }
+                catch (ArgumentOutOfRangeException outOfRange)
+                {
+                    Console.WriteLine("Error: {0} in the last checkup date", outOfRange.Message);
+                }
                 AllKilometrage = allK;
                 KillFromLastCheckup = kilometersC;
                 KillFromRefueling = kilometersR;
             }
-
+            public void AddKilometrage(int addKill)
+            {
+                    if(addKill > 0)
+                    {
+                        allKilometrage += addKill;
+                        killFromLastCheckup += addKill;
+                        KillFromRefueling += addKill;
+                    }
+                    else
+                    {
+                        Console.WriteLine("can not reduce the amount of kilometrage");
+                    }
+            }
         }
         static void Main(string[] args)
         {
