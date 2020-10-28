@@ -26,7 +26,7 @@ namespace dotNet5781_01_9047_4960
                     {
                         if (value.Length == 7)
                         {
-                            licenseNumber = value[0]+ value [1]+"-"+value[2]+value[3] + value[4] + "-"+value[5] + value[6];
+                            licenseNumber = value[0] + ""+ value [1]+"-"+value[2]+value[3] + value[4] + "-"+value[5] + value[6];
                         }
                         else
                         {
@@ -118,9 +118,9 @@ namespace dotNet5781_01_9047_4960
                     Console.WriteLine("Please Enter The Starting Date Of Activity");
                     Console.Write("year:");
                     int yearSA = Convert.ToInt32(Console.ReadLine());
-                    Console.Write(" mounth:");
+                    Console.Write("mounth:");
                     int mounthSA = Convert.ToInt32(Console.ReadLine());
-                    Console.Write(" day:");
+                    Console.Write("day:");
                     int daySA = Convert.ToInt32(Console.ReadLine());
                     startOfActivity = new DateTime(yearSA, mounthSA, daySA);
                 }
@@ -141,7 +141,7 @@ namespace dotNet5781_01_9047_4960
                         Console.WriteLine("enter 0 to add last checkup date\n"
                         +"enter 1 to add the amount of all the killometers the car has\n"
                         +"enter 2 to add the amount of all the killometers from last checkup\n"
-                        +"enter 3 to add the amount of all the killometers the car has from last refuel"
+                        +"enter 3 to add the amount of all the killometers the car has from last refuel\n"
                         +"press 4 to end");
                         op= Convert.ToInt32(Console.ReadLine());
                         switch (op)
@@ -152,9 +152,9 @@ namespace dotNet5781_01_9047_4960
                                     Console.WriteLine("Please Enter The Last Checkup Date");
                                     Console.Write("year:");
                                     int yearC = Convert.ToInt32(Console.ReadLine());
-                                    Console.Write(" mounth:");
+                                    Console.Write("mounth:");
                                     int mounthC = Convert.ToInt32(Console.ReadLine());
-                                    Console.Write(" day:");
+                                    Console.Write("day:");
                                     int dayC = Convert.ToInt32(Console.ReadLine());
                                     LastCheckup = new DateTime(yearC, mounthC, dayC);
                                 }
@@ -177,6 +177,8 @@ namespace dotNet5781_01_9047_4960
                                 Console.WriteLine("Please Enter The  kl amount from last refuel");
                                 int kilometersR = Convert.ToInt32(Console.ReadLine());
                                 KillFromRefueling = kilometersR;
+                                break;
+                            case 4:
                                 break;
                             default:
                                 Console.WriteLine("please try again:)");
