@@ -152,9 +152,7 @@ namespace dotNet5781_01_9047_4960
                 switch (op)
                 {
                     case Opitions.addBus:
-                        {
-                            break;
-                        }
+                        break;
                     case Opitions.chooseBus:
                         {
                             Console.WriteLine("plese enter a bus license number\n");
