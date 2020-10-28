@@ -139,15 +139,16 @@ namespace dotNet5781_01_9047_4960
             do
             {
                 Console.WriteLine(
-                    "plese enter 0 for add a new bus\n" +
-                    "plese enter 1 for choose bus for a ride\n" +
-                    "plese enter 2 for refuel or treat bus\n" +
-                    "plese enter 3 for view the number of killometers each bus has traveled since the last treatment\n" +
-                    "plese enter 4 for exit\n");
+                    "plese enter 0 to add a new bus\n" +
+                    "plese enter 1 to choose bus for a ride\n" +
+                    "plese enter 2 to refuel or treat bus\n" +
+                    "plese enter 3 to view the number of killometers each bus has traveled since the last treatment\n" +
+                    "plese enter 4 to exit\n");
                 op = (Opitions)Console.Read();
                 switch (op)
                 {
                     case Opitions.addBus:
+                         Console.WriteLine("add bus"); 
                         break;
                     case Opitions.chooseBus:
                         break;
@@ -158,9 +159,10 @@ namespace dotNet5781_01_9047_4960
                     case Opitions.exit:
                         break;
                     default:
+                        Console.WriteLine("dd");
                         break;
                 }
-            } while (op != (Opitions)4);
+            } while (op != Opitions.exit);
         }
     }
 }
