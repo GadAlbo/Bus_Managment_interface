@@ -164,17 +164,17 @@ namespace dotNet5781_01_9047_4960
                                 break;
                             case '1':
                                 Console.WriteLine("Please Enter The total kl amount");
-                                int allk = Console.Read();
+                                int allk = Convert.ToInt32(Console.ReadLine());
                                 AllKilometrage = allk;
                                 break;
                             case '2':
                                 Console.WriteLine("Please Enter The  kl amount from last checkup");
-                                int kilometersC = Console.Read();
+                                int kilometersC = Convert.ToInt32(Console.ReadLine());
                                 KillFromLastCheckup = kilometersC;
                                 break;
                             case '3':
                                 Console.WriteLine("Please Enter The  kl amount from last refuel");
-                                int kilometersR = Console.Read();
+                                int kilometersR = Convert.ToInt32(Console.ReadLine());
                                 KillFromRefueling = kilometersR;
                                 break;
                                 default:
@@ -212,7 +212,7 @@ namespace dotNet5781_01_9047_4960
                     "plese enter 2 to refuel or treat bus\n" +
                     "plese enter 3 to view the number of killometers each bus has traveled since the last treatment\n" +
                     "plese enter 4 to exit\n");
-                op = (Opitions)Console.Read();
+                op = (Opitions)Convert.ToInt32(Console.ReadLine());
                 switch (op)
                 {
                     case Opitions.addBus:
