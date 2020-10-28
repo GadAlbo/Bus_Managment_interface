@@ -203,7 +203,7 @@ namespace dotNet5781_01_9047_4960
             }
             public override string ToString() 
             {
-                return "License Number:" + licenseNumber + " Total Kilometrage:" + allKilometrage;
+                return "License Number:" + licenseNumber + " Kilometrage from last checkup:" + killFromLastCheckup;
             }
         }
         enum Opitions { addBus, chooseBus, busTreatment, showKillFromLastCheckup, exit };
@@ -306,7 +306,10 @@ namespace dotNet5781_01_9047_4960
                     case Opitions.exit:
                         break;
                     default:
-                        break;
+                        {
+                            Console.WriteLine("you enter a wrong number :( , plese try again or enter 4 to exit\n");
+                            break;
+                        }
                 }
             } while (op != (Opitions)4);
         }
