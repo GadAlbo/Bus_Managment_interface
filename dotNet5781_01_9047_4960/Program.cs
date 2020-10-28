@@ -136,7 +136,16 @@ namespace dotNet5781_01_9047_4960
         static void Main(string[] args)
         {
             Opitions op;
-            op = (Opitions)Console.Read();
+            do
+            {
+                Console.WriteLine(
+                    "plese enter 0 for add a new bus/n" +
+                    "plese enter 1 for choose bus for a ride/n" +
+                    "plese enter 2 for refuel or treat bus/n" +
+                    "plese enter 3 for view the number of killometers each bus has traveled since the last treatment/n" +
+                    "plese enter 4 for exit/n");
+                op = (Opitions)Console.Read();
+            } while (op != (Opitions)4);
             switch (op)
             {
                 case Opitions.addBus:
