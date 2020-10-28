@@ -142,7 +142,7 @@ namespace dotNet5781_01_9047_4960
                         +"enter 2 to add the amount of all the killometers from last checkup\n"
                         +"enter 3 to add the amount of all the killometers the car has from last refuel"
                         +"press e to end");
-                        op= Console.ReadKey();
+                        op= (char)Console.Read();
                         switch (op)
                             {
                             case '0':
@@ -164,17 +164,17 @@ namespace dotNet5781_01_9047_4960
                                 break;
                             case '1':
                                 Console.WriteLine("Please Enter The total kl amount");
-                                int allk = Console.ReadLine();
+                                int allk = Console.Read();
                                 AllKilometrage = allk;
                                 break;
                             case '2':
                                 Console.WriteLine("Please Enter The  kl amount from last checkup");
-                                int kilometersC = Console.ReadLine();
+                                int kilometersC = Console.Read();
                                 KillFromLastCheckup = kilometersC;
                                 break;
                             case '3':
                                 Console.WriteLine("Please Enter The  kl amount from last refuel");
-                                int kilometersR = Console.ReadLine();
+                                int kilometersR = Console.Read();
                                 KillFromRefueling = kilometersR;
                                 break;
                                 default:
