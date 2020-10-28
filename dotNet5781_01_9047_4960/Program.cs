@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace dotNet5781_01_9047_4960
 {
     class Program
@@ -160,8 +161,9 @@ namespace dotNet5781_01_9047_4960
         enum Opitions { addBus, chooseBus, busTreatment, showKillFromLastCheckup, exit };
         static void Main(string[] args)
         {
+            Random r = new Random(DateTime.Now.Millisecond);
+            List<bus> busList = new List<bus>();
             Opitions op;
-            List<bus> BusList;
             do
             {
                 Console.WriteLine(
@@ -174,10 +176,42 @@ namespace dotNet5781_01_9047_4960
                 switch (op)
                 {
                     case Opitions.addBus:
-                         Console.WriteLine("add bus"); 
-                        break;
+                        {
+                            break;
+                        }
                     case Opitions.chooseBus:
-                        break;
+                        {
+                            Console.WriteLine("plese enter a bus license number\n");
+                            string Lnumber = Console.ReadLine();
+                            int random= r.Next();
+                            IEnumerator<bus> t = busList.GetEnumerator();
+                            bool check = false;
+                            while((t.MoveNext()&&(check==false)))
+                            {
+                                if(t.Current.LicenseNumber==Lnumber)
+                                {
+                                    int help = t.Current.KillFromLastCheckup;
+                                    int help1 = t.Current.KillFromRefueling;
+                                    if(help+random>20000)
+                                    {
+                                        Console.WriteLine("you can not drive more than 20000 killometrs without checkup\n");
+                                        check = true;
+                                    }
+                                    else if(help1 + random > 1200)
+                                    {
+                                        Console.WriteLine("you can not drive more than 1200 killometrs without refuel\n");
+                                        check = true;
+                                    }
+                                    else
+                                    {
+                                        t.Current.AddKilometrage(random);
+                                    }
+                                }
+
+                            }
+                            Console.WriteLine("this bus license number is not exists\n ");
+                            break;
+                        }
                     case Opitions.busTreatment:
                         break;
                     case Opitions.showKillFromLastCheckup:
@@ -185,10 +219,9 @@ namespace dotNet5781_01_9047_4960
                     case Opitions.exit:
                         break;
                     default:
-                        Console.WriteLine("dd");
                         break;
                 }
-            } while (op != Opitions.exit);
+            } while (op != (Opitions)4);
         }
     }
 }
