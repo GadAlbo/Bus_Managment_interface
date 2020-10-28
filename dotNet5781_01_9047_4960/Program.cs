@@ -142,7 +142,7 @@ namespace dotNet5781_01_9047_4960
                         +"enter 2 to add the amount of all the killometers from last checkup\n"
                         +"enter 3 to add the amount of all the killometers the car has from last refuel"
                         +"press e to end");
-                        op= Console.ReadKey();
+                        op= (char)Console.Read();
                         switch (op)
                             {
                             case '0':
@@ -212,7 +212,7 @@ namespace dotNet5781_01_9047_4960
                     "plese enter 2 to refuel or treat bus\n" +
                     "plese enter 3 to view the number of killometers each bus has traveled since the last treatment\n" +
                     "plese enter 4 to exit\n");
-                op = (Opitions)Console.Read();
+                op = (Opitions)Convert.ToInt32(Console.ReadLine());
                 switch (op)
                 {
                     case Opitions.addBus:
