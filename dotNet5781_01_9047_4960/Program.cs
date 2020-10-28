@@ -65,7 +65,7 @@ namespace dotNet5781_01_9047_4960
                 {
                     return lastCheckup;
                 }
-                private set
+                 set
                 {
                     lastCheckup = value;
                 }
@@ -105,7 +105,7 @@ namespace dotNet5781_01_9047_4960
                 {
                     return killFromRefueling;
                 }
-                private set
+                 set
                 {
                     killFromRefueling = value;
                 }
@@ -130,7 +130,7 @@ namespace dotNet5781_01_9047_4960
                 Console.Write("Please Enter The License Number No Spaces Or - :");
                 LicenseNumber = Console.ReadLine();
                 Console.WriteLine("If You Would Like To Tell Us More About The Vehicle Please Enter 1. else press any key to continue");
-                char decison = Console.ReadKey();
+                var decison = (char)Console.Read();
                 if(decison=='1')
                 {
                     char op;
@@ -216,9 +216,7 @@ namespace dotNet5781_01_9047_4960
                 switch (op)
                 {
                     case Opitions.addBus:
-                        {
-                            break;
-                        }
+                        break;
                     case Opitions.chooseBus:
                         {
                             Console.WriteLine("plese enter a bus license number\n");
@@ -253,9 +251,45 @@ namespace dotNet5781_01_9047_4960
                             break;
                         }
                     case Opitions.busTreatment:
-                        break;
+                        {
+                            Console.WriteLine("plese enter a bus license number\n");
+                            string Lnumber = Console.ReadLine();
+                            IEnumerator<bus> t = busList.GetEnumerator();
+                            while ((t.MoveNext()))
+                            {
+                                if (t.Current.LicenseNumber == Lnumber)
+                                {
+                                    Console.WriteLine("plese enter 1 for refuel and 2 treat\n");
+                                    int help = Console.Read();
+                                    if(help==1)
+                                    {
+                                        t.Current.KillFromRefueling = 0;
+                                    }
+                                    else if(help==2)
+                                    {
+                                        t.Current.KillFromLastCheckup = 0;
+                                        t.Current.lastCheckup= DateTime.Now; ;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("you not enter 1 or 2 :( plese try again\n");
+                                        break;
+                                    }
+                                }
+                            }
+                            Console.WriteLine("this bus license number is not exists\n");
+
+
+                            break;
+                        }
                     case Opitions.showKillFromLastCheckup:
-                        break;
+                        {
+                           foreach(bus abus in busList)
+                            {
+                                Console.WriteLine(abus);
+                            }
+                                break;
+                        }
                     case Opitions.exit:
                         break;
                     default:
