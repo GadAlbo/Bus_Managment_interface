@@ -95,16 +95,41 @@ namespace dotNet5781_01_9047_4960
                     killFromRefueling = value;
                 }
             }
-            bus(string Lnumber,int yearSA, int mounthSA, int daySA, int yearC, int mounthC, int dayC, int allK=0, int kilometersC=0, int kilometersR=0)
+            bus()
             {
-                LicenseNumber = Lnumber;
                 try
                 {
+                    Console.WriteLine("Please Enter The Starting Date Of Activity");
+                    Console.Write("year:");
+                    int yearSA = Console.Read();
+                    Console.Write(" mounth:");
+                    int mounthSA = Console.Read();
+                    Console.Write(" day:");
+                    int daySA = Console.Read();
                     startOfActivity = new DateTime(yearSA, mounthSA, daySA);
                 }
                 catch (ArgumentOutOfRangeException outOfRange)
                 {
-                    Console.WriteLine("Error: {0} in the start activity date", outOfRange.Message);
+                    Console.WriteLine("ERROR: {0} in the start activity date", outOfRange.Message);
+                }
+                Console.Write("Please Enter The License Number No Spaces Or - :");
+                LicenseNumber = Console.ReadLine();
+                Console.WriteLine("If You Would Like To Tell Us More About The Vehicle Please Enter 1. else press any key to continue");
+                char decison = Console.ReadKey();
+                if(decison=='1')
+                {
+                    char op;
+                    
+                    do
+                    {
+                        Console.WriteLine("enter 0 to add last checkup date\n"
+                        +"enter 1 to add the amount of all the killometers the car has\n"
+                        +"enter 2 to add the amount of all the killometers from last checkup\n"
+                        +"enter 3 to add the amount of all the killometers the car has from last refuel"
+                        +"press any other key to end");
+
+
+                    } while (true);
                 }
                 try
                 {
@@ -132,10 +157,11 @@ namespace dotNet5781_01_9047_4960
                     }
             }
         }
-        enum Opitions { addBus=0, chooseBus, busTreatment, showKillFromLastCheckup, exit };
+        enum Opitions { addBus, chooseBus, busTreatment, showKillFromLastCheckup, exit };
         static void Main(string[] args)
         {
             Opitions op;
+            List<bus> BusList;
             do
             {
                 Console.WriteLine(
