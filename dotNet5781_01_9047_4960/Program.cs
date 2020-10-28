@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +58,7 @@ namespace dotNet5781_01_9047_4960
                     startOfActivity = value;
                 }
             }
-            private DateTime LastCheckup;
+            private DateTime LastCheckup = new DateTime();
             public DateTime lastCheckup
             {
                 get
@@ -70,7 +71,20 @@ namespace dotNet5781_01_9047_4960
                 }
             }
             private int allKilometrage = 0;
-            public int AllKilometrage { get=>allKilometrage; private set=>allKilometrage=value; }
+            public int AllKilometrage 
+            {
+                get
+                {
+                    return allKilometrage;
+                }
+                set
+                {
+                    if(value>0)
+                        allKilometrage = value;
+                    else
+                        Console.WriteLine("kilometrage sould be positive");
+                }
+            }
             
             private int killFromLastCheckup=0;
             public int KillFromLastCheckup
@@ -84,7 +98,7 @@ namespace dotNet5781_01_9047_4960
                     killFromLastCheckup = value;
                 }
             }
-            private int killFromRefueling;
+            private int killFromRefueling=0;
             public int KillFromRefueling
             {
                 get
@@ -120,29 +134,55 @@ namespace dotNet5781_01_9047_4960
                 if(decison=='1')
                 {
                     char op;
-                    
+                   
                     do
                     {
                         Console.WriteLine("enter 0 to add last checkup date\n"
                         +"enter 1 to add the amount of all the killometers the car has\n"
                         +"enter 2 to add the amount of all the killometers from last checkup\n"
                         +"enter 3 to add the amount of all the killometers the car has from last refuel"
-                        +"press any other key to end");
+                        +"press e to end");
+                        op= Console.ReadKey();
+                        switch (op)
+                            {
+                            case '0':
+                                try
+                                {
+                                    Console.WriteLine("Please Enter The Last Checkup Date");
+                                    Console.Write("year:");
+                                    int yearC = Console.Read();
+                                    Console.Write(" mounth:");
+                                    int mounthC = Console.Read();
+                                    Console.Write(" day:");
+                                    int dayC = Console.Read();
+                                    LastCheckup = new DateTime(yearC, mounthC, dayC);
+                                }
+                                catch (ArgumentOutOfRangeException outOfRange)
+                                {
+                                    Console.WriteLine("Error: {0} in the last checkup date", outOfRange.Message);
+                                }
+                                break;
+                            case '1':
+                                Console.WriteLine("Please Enter The total kl amount");
+                                int allk = Console.ReadLine();
+                                AllKilometrage = allk;
+                                break;
+                            case '2':
+                                Console.WriteLine("Please Enter The  kl amount from last checkup");
+                                int kilometersC = Console.ReadLine();
+                                KillFromLastCheckup = kilometersC;
+                                break;
+                            case '3':
+                                Console.WriteLine("Please Enter The  kl amount from last refuel");
+                                int kilometersR = Console.ReadLine();
+                                KillFromRefueling = kilometersR;
+                                break;
+                                default:
+                                    break;
+                            }
 
-
-                    } while (true);
+                    } while (op!='e');
                 }
-                try
-                {
-                    LastCheckup = new DateTime(yearC, mounthC, dayC);
-                }
-                catch (ArgumentOutOfRangeException outOfRange)
-                {
-                    Console.WriteLine("Error: {0} in the last checkup date", outOfRange.Message);
-                }
-                AllKilometrage = allK;
-                KillFromLastCheckup = kilometersC;
-                KillFromRefueling = kilometersR;
             }
             public void AddKilometrage(int addKill)
             {
