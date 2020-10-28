@@ -132,35 +132,35 @@ namespace dotNet5781_01_9047_4960
                     }
             }
         }
-        enum Opitions { addBus, chooseBus, busTreatment, showKillFromLastCheckup, exit };
+        enum Opitions { addBus=0, chooseBus, busTreatment, showKillFromLastCheckup, exit };
         static void Main(string[] args)
         {
             Opitions op;
             do
             {
                 Console.WriteLine(
-                    "plese enter 0 for add a new bus/n" +
-                    "plese enter 1 for choose bus for a ride/n" +
-                    "plese enter 2 for refuel or treat bus/n" +
-                    "plese enter 3 for view the number of killometers each bus has traveled since the last treatment/n" +
-                    "plese enter 4 for exit/n");
+                    "plese enter 0 for add a new bus\n" +
+                    "plese enter 1 for choose bus for a ride\n" +
+                    "plese enter 2 for refuel or treat bus\n" +
+                    "plese enter 3 for view the number of killometers each bus has traveled since the last treatment\n" +
+                    "plese enter 4 for exit\n");
                 op = (Opitions)Console.Read();
+                switch (op)
+                {
+                    case Opitions.addBus:
+                        break;
+                    case Opitions.chooseBus:
+                        break;
+                    case Opitions.busTreatment:
+                        break;
+                    case Opitions.showKillFromLastCheckup:
+                        break;
+                    case Opitions.exit:
+                        break;
+                    default:
+                        break;
+                }
             } while (op != (Opitions)4);
-            switch (op)
-            {
-                case Opitions.addBus:
-                    break;
-                case Opitions.chooseBus:
-                    break;
-                case Opitions.busTreatment:
-                    break;
-                case Opitions.showKillFromLastCheckup:
-                    break;
-                case Opitions.exit:
-                    break;
-                default:
-                    break;
-            }
         }
     }
 }
