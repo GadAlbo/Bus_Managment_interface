@@ -187,7 +187,16 @@ namespace dotNet5781_01_9047_4960
                             break;
                         }
                     case Opitions.busTreatment:
-                        break;
+                        {
+                            Console.WriteLine("plese enter a bus license number\n");
+                            Console.WriteLine("plese enter 1 for refuel and 2 treat\n");
+                            int help = Console.Read();
+                            if(help==1)
+                            {
+
+                            }
+                            break;
+                        }
                     case Opitions.showKillFromLastCheckup:
                         break;
                     case Opitions.exit:
