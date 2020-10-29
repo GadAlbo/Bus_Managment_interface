@@ -284,7 +284,7 @@ namespace dotNet5781_01_9047_4960
             }
             public override string ToString() 
             {
-                return "License Number:" + licenseNumber + " Kilometrage from last checkup:" + killFromLastCheckup;
+                return "License Number:" + licenseNumber + "total Kilometrage from satrt of activity:" + killFromLastCheckup;
             }
         }
         enum Opitions { addBus, chooseBus, busTreatment, showKillFromLastCheckup, exit };
@@ -300,7 +300,7 @@ namespace dotNet5781_01_9047_4960
                     "plese enter 1 to choose bus for a ride\n" +
                     "plese enter 2 to refuel or treat bus\n" +
                     "plese enter 3 to view the number of killometers each bus has traveled since the last treatment\n" +
-                    "plese enter 4 to exit\n");
+                    "plese enter 4 to exit");
                 int optionC;
                 while (!Int32.TryParse(Console.ReadLine(), out optionC))
                 {
@@ -318,7 +318,7 @@ namespace dotNet5781_01_9047_4960
                         break;
                     case Opitions.chooseBus:
                         {
-                            Console.WriteLine("plese enter a Bus license number\n");
+                            Console.WriteLine("plese enter a Bus license number");
                             string Lnumber = Console.ReadLine();
                             int random= r.Next(0,1200);
                             IEnumerator<Bus> t = busList.GetEnumerator();
@@ -327,19 +327,25 @@ namespace dotNet5781_01_9047_4960
                             {
                                 if(t.Current.LicenseNumber==Lnumber)
                                 {
-                                    int help = t.Current.KillFromLastCheckup;
-                                    int help1 = t.Current.KillFromRefueling;
-                                    if(help+random>20000)
+                                    int kFromLastCheckup = t.Current.KillFromLastCheckup;
+                                    int kFromRefueling = t.Current.KillFromRefueling;
+                                    DateTime lastCheckup = t.Current.LastCheckup;
+                                    TimeSpan subtraction = DateTime.Now.Subtract(lastCheckup);
+                                    if (kFromLastCheckup + random>20000)
                                     {
-                                        Console.WriteLine("you can not drive more than 20000 killometrs without checkup\n");
+                                        Console.WriteLine("you can not drive more than 20000 killometrs without checkup");
                                         check = true;
                                         break;
                                     }
-                                    else if(help1 + random > 1200)
+                                    else if(kFromRefueling + random > 1200)
                                     {
-                                        Console.WriteLine("you can not drive more than 1200 killometrs without refuel\n");
+                                        Console.WriteLine("you can not drive more than 1200 killometrs without refuel");
                                         check = true;
                                         break;
+                                    }
+                                    else if (subtraction.TotalDays >365)
+                                    {
+                                        Console.WriteLine("please renew your license, the bus can not be on the roud without a checkup");
                                     }
                                     else
                                     {
@@ -353,7 +359,7 @@ namespace dotNet5781_01_9047_4960
                             }
                             if (check == false)
                             {
-                                Console.WriteLine("this Bus license number is not exists\n ");
+                                Console.WriteLine("this Bus license number is not exists ");
                             }
                             break;
                         }
