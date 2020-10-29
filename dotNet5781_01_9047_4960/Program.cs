@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_01_9047_4960
 {
-    class Program
+    public class Program
     {
-        class bus
+        class Bus
         {
             const int maxKilometrage = 20000;
             private string licenseNumber;
@@ -22,27 +22,38 @@ namespace dotNet5781_01_9047_4960
                 }
                 private set 
                 {
-                    if (startOfActivity.Year<2018)
+                    bool flag = true;
+                    while (flag)
                     {
-                        if (value.Length == 7)
+                        if (startOfActivity.Year<2018)
                         {
-                            licenseNumber = value[0] + ""+ value [1]+"-"+value[2]+value[3] + value[4] + "-"+value[5] + value[6];
+                            if (value.Length == 7)
+                            {
+                                flag = false;
+                                licenseNumber = value[0] + ""+ value [1]+"-"+value[2]+value[3] + value[4] + "-"+value[5] + value[6];
+                            }
+                            else
+                            {
+                                Console.WriteLine("license number is not compatible with the year of departure");
+                                Console.Write("Please Enter The License Number No Spaces Or - :");
+                                value = Console.ReadLine();
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("license number is not compatible with the year of departure");
+                            if (value.Length == 8)
+                            {
+                                flag = false;
+                                licenseNumber = value[0]+"" + value[1]+"" + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; ;
+                            }
+                            else
+                            {
+                                Console.WriteLine("license number is not compatible with the year of departure");
+                                Console.Write("Please Enter The License Number No Spaces Or - :");
+                                value = Console.ReadLine();
+                            }
                         }
-                    }
-                    else
-                    {
-                        if (value.Length == 8)
-                        {
-                            licenseNumber = value[0]+"" + value[1]+"" + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; ;
-                        }
-                        else
-                        {
-                            Console.WriteLine("license number is not compatible with the year of departure");
-                        }
+
                     }
                 } 
             }
@@ -58,8 +69,8 @@ namespace dotNet5781_01_9047_4960
                     startOfActivity = value;
                 }
             }
-            private DateTime LastCheckup = new DateTime();
-            public DateTime lastCheckup
+            private DateTime lastCheckup = new DateTime();
+            public DateTime LastCheckup
             {
                 get
                 {
@@ -95,7 +106,14 @@ namespace dotNet5781_01_9047_4960
                 }
                 set 
                 {
-                    killFromLastCheckup = value;
+                    if (value >= 0)
+                    {
+                        killFromLastCheckup = value;
+                    }
+                    else
+                    {
+                        Console.WriteLine("kilometrage sould be positive");
+                    }
                 }
             }
             private int killFromRefueling=0;
@@ -107,31 +125,62 @@ namespace dotNet5781_01_9047_4960
                 }
                  set
                 {
-                    killFromRefueling = value;
+                    if(value>=0)
+                    {
+                       killFromRefueling = value;
+                    }
+                    else
+                    {
+                        Console.WriteLine("kilometrage sould be positive");
+                    }
+                    
                 }
             }
 
-            public bus()
+            public Bus()
             {
-                try
+                bool flag = true;
+                while(flag)
                 {
-                    Console.WriteLine("Please Enter The Starting Date Of Activity");
-                    Console.Write("year:");
-                    int yearSA = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("mounth:");
-                    int mounthSA = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("day:");
-                    int daySA = Convert.ToInt32(Console.ReadLine());
-                    startOfActivity = new DateTime(yearSA, mounthSA, daySA);
+                    try
+                    {
+                        Console.WriteLine("Please Enter The Starting Date Of Activity");
+                        Console.Write("year:");
+                        int yearSA;
+                        while(!Int32.TryParse(Console.ReadLine(),out yearSA))
+                        {
+                            Console.WriteLine("only enter numbers\n"+ "year:");
+                        }
+                        Console.Write("mounth:");
+                        int mounthSA; 
+                        while(!Int32.TryParse(Console.ReadLine(), out mounthSA))
+                        {
+                            Console.WriteLine("only enter numbers\n" + "mounth:");
+                        }
+                        Console.Write("day:");
+                        int daySA;
+                        while(!Int32.TryParse(Console.ReadLine(), out daySA))
+                        {
+                            Console.WriteLine("only enter numbers\n" + "day:");
+                        }
+                   
+                        startOfActivity = new DateTime(yearSA, mounthSA, daySA);
+                        flag = false;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.WriteLine("ERROR:start activity date invalid, please try again");
+                    }
                 }
-                catch (ArgumentOutOfRangeException outOfRange)
-                {
-                    Console.WriteLine("ERROR: {0} in the start activity date", outOfRange.Message);
-                }
+                flag = true;
                 Console.Write("Please Enter The License Number No Spaces Or - :");
                 LicenseNumber = Console.ReadLine();
-                Console.WriteLine("If You Would Like To Tell Us More About The Vehicle Please Enter 1. else press any key to continue");
-                int decison = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("If You Would Like To Tell Us More About The Vehicle Please Enter 1. else press any other number to continue");
+                int decison;
+                while(!Int32.TryParse(Console.ReadLine(),out decison))
+                {
+                    Console.WriteLine("only enter numbers");
+                }
                 if(decison==1)
                 {
                     int op;
@@ -143,39 +192,71 @@ namespace dotNet5781_01_9047_4960
                         +"enter 2 to add the amount of all the killometers from last checkup\n"
                         +"enter 3 to add the amount of all the killometers the car has from last refuel\n"
                         +"press 4 to end");
-                        op= Convert.ToInt32(Console.ReadLine());
+                        while(!Int32.TryParse(Console.ReadLine(),out op))
+                        {
+                            Console.WriteLine("only enter numbers");
+                        }
                         switch (op)
                             {
                             case 0:
-                                try
+                                while (flag)
                                 {
-                                    Console.WriteLine("Please Enter The Last Checkup Date");
-                                    Console.Write("year:");
-                                    int yearC = Convert.ToInt32(Console.ReadLine());
-                                    Console.Write("mounth:");
-                                    int mounthC = Convert.ToInt32(Console.ReadLine());
-                                    Console.Write("day:");
-                                    int dayC = Convert.ToInt32(Console.ReadLine());
-                                    LastCheckup = new DateTime(yearC, mounthC, dayC);
+                                    try
+                                    {
+                                        Console.WriteLine("Please Enter The Last Checkup Date");
+                                        Console.Write("year:");
+                                        int yearC;
+                                        while(!Int32.TryParse(Console.ReadLine(), out yearC))
+                                        {
+                                            Console.WriteLine("only enter numbers\n"+ "year:");
+                                        }
+                                        Console.Write("mounth:");
+                                        int mounthC;
+                                        while (!Int32.TryParse(Console.ReadLine(), out mounthC))
+                                        {
+                                            Console.WriteLine("only enter numbers\n" + "mounth:");
+                                        }
+                                        Console.Write("day:");
+                                        int dayC;
+                                        while (!Int32.TryParse(Console.ReadLine(), out dayC))
+                                        {
+                                            Console.WriteLine("only enter numbers\n" + "day:");
+                                        }
+                                        LastCheckup = new DateTime(yearC, mounthC, dayC);
+                                        flag = false;
+                                    }
+                                    catch (ArgumentOutOfRangeException)
+                                    {
+                                        Console.WriteLine("Error: last checkup date invalid, please try again");
+                                    }
                                 }
-                                catch (ArgumentOutOfRangeException outOfRange)
-                                {
-                                    Console.WriteLine("Error: {0} in the last checkup date", outOfRange.Message);
-                                }
+                                
                                 break;
                             case 1:
                                 Console.WriteLine("Please Enter The total kl amount");
-                                int allk = Convert.ToInt32(Console.ReadLine());
+                                int allk;
+                                while (!Int32.TryParse(Console.ReadLine(), out allk))
+                                {
+                                    Console.WriteLine("only enter numbers\n" + "total kl:");
+                                }
                                 AllKilometrage = allk;
                                 break;
                             case 2:
                                 Console.WriteLine("Please Enter The  kl amount from last checkup");
-                                int kilometersC = Convert.ToInt32(Console.ReadLine());
+                                int kilometersC;
+                                while (!Int32.TryParse(Console.ReadLine(), out kilometersC))
+                                {
+                                    Console.WriteLine("only enter numbers\n" + "kl amount from last checkup:");
+                                }
                                 KillFromLastCheckup = kilometersC;
                                 break;
                             case 3:
                                 Console.WriteLine("Please Enter The  kl amount from last refuel");
-                                int kilometersR = Convert.ToInt32(Console.ReadLine());
+                                int kilometersR;
+                                while (!Int32.TryParse(Console.ReadLine(), out kilometersR))
+                                {
+                                    Console.WriteLine("only enter numbers\n" + "kl amount from last refuel:");
+                                }
                                 KillFromRefueling = kilometersR;
                                 break;
                             case 4:
@@ -210,7 +291,7 @@ namespace dotNet5781_01_9047_4960
         static void Main(string[] args)
         {
             Random r = new Random(DateTime.Now.Millisecond);
-            List<bus> busList = new List<bus>();
+            List<Bus> busList = new List<Bus>();
             Opitions op;
             do
             {
@@ -220,22 +301,27 @@ namespace dotNet5781_01_9047_4960
                     "plese enter 2 to refuel or treat bus\n" +
                     "plese enter 3 to view the number of killometers each bus has traveled since the last treatment\n" +
                     "plese enter 4 to exit\n");
-                op = (Opitions)Convert.ToInt32(Console.ReadLine());
+                int optionC;
+                while (!Int32.TryParse(Console.ReadLine(), out optionC))
+                {
+                    Console.WriteLine("only enter numbers");
+                }
+                op = (Opitions)optionC;
                 switch (op)
                 {
                     case Opitions.addBus:
                         {
-                            bus b=new bus();
+                            Bus b=new Bus();
                             busList.Add(b);
                         }
                         ;
                         break;
                     case Opitions.chooseBus:
                         {
-                            Console.WriteLine("plese enter a bus license number\n");
+                            Console.WriteLine("plese enter a Bus license number\n");
                             string Lnumber = Console.ReadLine();
                             int random= r.Next(0,1200);
-                            IEnumerator<bus> t = busList.GetEnumerator();
+                            IEnumerator<Bus> t = busList.GetEnumerator();
                             bool check = false;
                             while((t.MoveNext()))
                             {
@@ -259,6 +345,7 @@ namespace dotNet5781_01_9047_4960
                                     {
                                         t.Current.AddKilometrage(random);
                                         check = true;
+                                        Console.WriteLine("the drive is successful");
                                         break;
                                     }
                                 }
@@ -266,22 +353,26 @@ namespace dotNet5781_01_9047_4960
                             }
                             if (check == false)
                             {
-                                Console.WriteLine("this bus license number is not exists\n ");
+                                Console.WriteLine("this Bus license number is not exists\n ");
                             }
                             break;
                         }
                     case Opitions.busTreatment:
                         {
-                            Console.WriteLine("plese enter a bus license number\n");
+                            Console.WriteLine("plese enter a Bus license number");
                             string Lnumber = Console.ReadLine();
-                            IEnumerator<bus> t = busList.GetEnumerator();
+                            IEnumerator<Bus> t = busList.GetEnumerator();
                             bool check = false;
                             while ((t.MoveNext()))
                             {
                                 if (t.Current.LicenseNumber == Lnumber)
                                 {
-                                    Console.WriteLine("plese enter 1 for refuel and 2 treat\n");
-                                    int help = Convert.ToInt32(Console.ReadLine());
+                                    Console.WriteLine("plese enter 1 for refuel and 2 treat");
+                                    int help;
+                                    while (!Int32.TryParse(Console.ReadLine(), out help))
+                                    {
+                                        Console.WriteLine("only enter numbers\n" + "plese enter 1 for refuel and 2 treat");
+                                    }
                                     if (help==1)
                                     {
                                         t.Current.KillFromRefueling = 0;
@@ -290,21 +381,21 @@ namespace dotNet5781_01_9047_4960
                                     else if(help==2)
                                     {
                                         t.Current.KillFromLastCheckup = 0;
-                                        t.Current.lastCheckup= DateTime.Now;
+                                        t.Current.LastCheckup= DateTime.Now;
                                         check = true;
 
                                     }
                                     else
                                     {
-                                        Console.WriteLine("you not enter 1 or 2 :( plese try again\n");
+                                        Console.WriteLine("you not enter 1 or 2 :( plese try again");
                                         check = true;
                                         break;
                                     }
                                 }
                             }
-                            if (! check == true)
+                            if (check != true)
                             {
-                                Console.WriteLine("this bus license number is not exists\n");
+                                Console.WriteLine("this Bus license number does not exists");
                             }
 
 
@@ -312,7 +403,7 @@ namespace dotNet5781_01_9047_4960
                         }
                     case Opitions.showKillFromLastCheckup:
                         {
-                           foreach(bus abus in busList)
+                           foreach(Bus abus in busList)
                             {
                                 Console.WriteLine(abus);
                             }
@@ -322,7 +413,7 @@ namespace dotNet5781_01_9047_4960
                         break;
                     default:
                         {
-                            Console.WriteLine("you enter a wrong number :( , plese try again or enter 4 to exit\n");
+                            Console.WriteLine("you enter a wrong number :( , plese try again or enter 4 to exit");
                             break;
                         }
                 }
