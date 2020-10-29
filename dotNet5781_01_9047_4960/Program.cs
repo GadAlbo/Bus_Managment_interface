@@ -275,6 +275,7 @@ namespace dotNet5781_01_9047_4960
                             Console.WriteLine("plese enter a bus license number\n");
                             string Lnumber = Console.ReadLine();
                             IEnumerator<bus> t = busList.GetEnumerator();
+                            bool check = false;
                             while ((t.MoveNext()))
                             {
                                 if (t.Current.LicenseNumber == Lnumber)
@@ -284,20 +285,27 @@ namespace dotNet5781_01_9047_4960
                                     if (help==1)
                                     {
                                         t.Current.KillFromRefueling = 0;
+                                        check = true;
                                     }
                                     else if(help==2)
                                     {
                                         t.Current.KillFromLastCheckup = 0;
                                         t.Current.lastCheckup= DateTime.Now;
+                                        check = true;
+
                                     }
                                     else
                                     {
                                         Console.WriteLine("you not enter 1 or 2 :( plese try again\n");
+                                        check = true;
                                         break;
                                     }
                                 }
                             }
-                            Console.WriteLine("this bus license number is not exists\n");
+                            if (! check == true)
+                            {
+                                Console.WriteLine("this bus license number is not exists\n");
+                            }
 
 
                             break;
