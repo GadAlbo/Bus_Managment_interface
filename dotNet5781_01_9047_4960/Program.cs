@@ -37,7 +37,7 @@ namespace dotNet5781_01_9047_4960
                     {
                         if (value.Length == 8)
                         {
-                            licenseNumber = value[0] + value[1] + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; ;
+                            licenseNumber = value[0]+"" + value[1]+"" + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; ;
                         }
                         else
                         {
@@ -234,10 +234,10 @@ namespace dotNet5781_01_9047_4960
                         {
                             Console.WriteLine("plese enter a bus license number\n");
                             string Lnumber = Console.ReadLine();
-                            int random= r.Next();
+                            int random= r.Next(0,1200);
                             IEnumerator<bus> t = busList.GetEnumerator();
                             bool check = false;
-                            while((t.MoveNext()&&(check==false)))
+                            while((t.MoveNext()))
                             {
                                 if(t.Current.LicenseNumber==Lnumber)
                                 {
@@ -247,20 +247,27 @@ namespace dotNet5781_01_9047_4960
                                     {
                                         Console.WriteLine("you can not drive more than 20000 killometrs without checkup\n");
                                         check = true;
+                                        break;
                                     }
                                     else if(help1 + random > 1200)
                                     {
                                         Console.WriteLine("you can not drive more than 1200 killometrs without refuel\n");
                                         check = true;
+                                        break;
                                     }
                                     else
                                     {
                                         t.Current.AddKilometrage(random);
+                                        check = true;
+                                        break;
                                     }
                                 }
 
                             }
-                            Console.WriteLine("this bus license number is not exists\n ");
+                            if (check == false)
+                            {
+                                Console.WriteLine("this bus license number is not exists\n ");
+                            }
                             break;
                         }
                     case Opitions.busTreatment:
@@ -281,7 +288,7 @@ namespace dotNet5781_01_9047_4960
                                     else if(help==2)
                                     {
                                         t.Current.KillFromLastCheckup = 0;
-                                        t.Current.lastCheckup= DateTime.Now; ;
+                                        t.Current.lastCheckup= DateTime.Now;
                                     }
                                     else
                                     {
