@@ -284,7 +284,7 @@ namespace dotNet5781_01_9047_4960
             }
             public override string ToString() //override the toString func
             {
-                return "License Number:" + licenseNumber + "total Kilometrage from last checkup:" + killFromLastCheckup;
+                return "License Number:" + licenseNumber + " total Kilometrage from last checkup:" + killFromLastCheckup;
             }
         }
         enum Opitions { addBus, chooseBus, busTreatment, showKillFromLastCheckup, exit };   //enum definition
@@ -345,6 +345,7 @@ namespace dotNet5781_01_9047_4960
                                     }  
                                     else if (subtraction.TotalDays >365)                    //if the last cheackup was more then 1 year ago
                                     {
+                                        check = true;
                                         Console.WriteLine("please renew your license, the bus can not be on the roud without a checkup");
                                     }           
                                     else//if its non of the above, then its soutable to drive
@@ -383,13 +384,14 @@ namespace dotNet5781_01_9047_4960
                                     {
                                         t.Current.KillFromRefueling = 0;
                                         check = true;
+                                        Console.WriteLine("the refuel was sucssesul");
                                     }
                                     else if(treat == 2)                                         //if we want to checkup
                                     {
                                         t.Current.KillFromLastCheckup = 0;
                                         t.Current.LastCheckup= DateTime.Now;
                                         check = true;
-
+                                        Console.WriteLine("the checkup was sucssesul");
                                     }
                                     else
                                     {
