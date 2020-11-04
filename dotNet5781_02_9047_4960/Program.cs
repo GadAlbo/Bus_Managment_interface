@@ -100,10 +100,11 @@ namespace dotNet5781_02_9047_4960
 
         }
 
-        public class BusStationList: IEnumerable
+        public class BusStationList: IEnumerable, IEnumerator
         {
             public List<busStation> busStations;
-            public IEnumerator GetEnumerator()
+            IEnumerator<busStation> IEnumeratorBusStation;
+            /*public IEnumerator GetEnumerator()
             {
                 IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
                 while(IEnumeratorBusStation.MoveNext())
@@ -111,7 +112,27 @@ namespace dotNet5781_02_9047_4960
                     yield return IEnumeratorBusStation;
                 }
                 
+            }*/
+            public BusStationList()
+            {
+                busStations = new List<busStation>();
+                IEnumeratorBusStation = busStations.GetEnumerator();
             }
+            public IEnumerator GetEnumerator()
+            { return IEnumeratorBusStation; }
+            public object Current
+            { get { return IEnumeratorBusStation; } }
+
+            public bool MoveNext()
+            {
+                return IEnumeratorBusStation.MoveNext();
+            }
+
+            public void Reset()
+            {
+                IEnumeratorBusStation= busStations.GetEnumerator();
+            }
+
             public bool Equals(busStation bs)
             {
                 IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
@@ -404,10 +425,27 @@ namespace dotNet5781_02_9047_4960
             }
         }
 
-        class BusLine:Bus
+        enum Areas {General, North, South, Center, Jerusalem };
+        class BusLine :Bus
         {
             private int  busLineNumber;
             private static int staticBusLineNumber = 1;
+            private BusStationList stations;
+            private Areas area;
+            public object firstbusStation
+            {
+                get
+                {
+                    return stations.Current;
+                }
+            }
+            public object lastbusStation
+            {
+                get
+                {
+                    return stations.busStations.Last();
+                }
+            }
             public int BusLineNumber
             {
                 get
@@ -423,6 +461,10 @@ namespace dotNet5781_02_9047_4960
             {
                 private int busLineStationKey;
                 
+            }
+            public override string ToString()
+            {
+                return "BusLine: " + busLineNumber + " Area:" + area;
             }
         }
         static void Main(string[] args)
