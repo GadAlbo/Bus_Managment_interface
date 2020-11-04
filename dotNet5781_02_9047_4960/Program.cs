@@ -95,7 +95,7 @@ namespace dotNet5781_02_9047_4960
             }
             public override string ToString() //override the toString func
             {
-                return "Bus Station Code: " + BusStationKey + ", " + Latitude+ "°N "+Longitude+ "°E";
+                return "Bus Station Code: " + BusStationKey + ", " + Latitude+ "°N "+Longitude+ "°E\n";
             }
 
         }
@@ -462,9 +462,26 @@ namespace dotNet5781_02_9047_4960
                 private int busLineStationKey;
                 
             }
+            public BusLine(): base()
+            {
+                stations = new BusStationList();
+                busLineNumber = staticBusLineNumber;
+                staticBusLineNumber++;
+                Console.WriteLine("In what area is the bus located?\n"+ "0-General, 1-North, 2-South, 3-Center, 4-Jerusalem, enter the coresponding number");
+                int optionA;
+                while (!Int32.TryParse(Console.ReadLine(), out optionA))        //trying to get the users chosen option
+                {
+                    Console.WriteLine("only enter numbers");
+                }
+                area = (Areas)optionA;
+            }
+            public bool isBusStation(busStation bs)
+            {
+                return stations.Equals(bs);
+            }
             public override string ToString()
             {
-                return "BusLine: " + busLineNumber + " Area:" + area;
+                return "BusLine: " + busLineNumber + " Area:" + area+ "\n"+" stions:\n"+stations.ToString();
             }
         }
         static void Main(string[] args)
