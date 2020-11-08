@@ -15,7 +15,7 @@ namespace dotNet5781_02_9047_4960
         public class busStation
         {
             Random r = new Random(DateTime.Now.Millisecond);
-            private static int staticBusStationKey=1;
+            private static int staticBusStationKey = 1;
             private int busStationKey;
             public int BusStationKey
             {
@@ -28,7 +28,7 @@ namespace dotNet5781_02_9047_4960
                     busStationKey = value;
                 }
             }
-          
+
             private string address;
             private GeoCoordinate coordinates;
             public GeoCoordinate Coordinates
@@ -57,7 +57,7 @@ namespace dotNet5781_02_9047_4960
             }
             public override string ToString() //override the toString func
             {
-                return "Bus Station Code: " + BusStationKey + ", " + coordinates.Latitude + "°N "+ coordinates.Longitude + "°E\n";
+                return "Bus Station Code: " + BusStationKey + ", " + coordinates.Latitude + "°N " + coordinates.Longitude + "°E\n";
             }
             public double Distance(busStation bs)
             {
@@ -66,19 +66,19 @@ namespace dotNet5781_02_9047_4960
 
         }
 
-        public class BusStationList: IEnumerable, IEnumerator
+        public class BusStationList : IEnumerable, IEnumerator
         {
             public List<busStation> busStations;
             IEnumerator<busStation> IEnumeratorBusStation;
-           /* public IEnumerator GetEnumerator()
-            {
-                IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
-                while(IEnumeratorBusStation.MoveNext())
-                {
-                    yield return IEnumeratorBusStation;
-                }
-                
-            }*/
+            /* public IEnumerator GetEnumerator()
+             {
+                 IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
+                 while(IEnumeratorBusStation.MoveNext())
+                 {
+                     yield return IEnumeratorBusStation;
+                 }
+
+             }*/
             public BusStationList()
             {
                 busStations = new List<busStation>();
@@ -96,14 +96,14 @@ namespace dotNet5781_02_9047_4960
 
             public void Reset()
             {
-                IEnumeratorBusStation= busStations.GetEnumerator();
+                IEnumeratorBusStation = busStations.GetEnumerator();
             }
             public bool Equals(busStation bs)
             {
                 IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
                 while (IEnumeratorBusStation.MoveNext())
                 {
-                    if(IEnumeratorBusStation.Current.BusStationKey==bs.BusStationKey)
+                    if (IEnumeratorBusStation.Current.BusStationKey == bs.BusStationKey)
                     {
                         return true;
                     }
@@ -121,11 +121,12 @@ namespace dotNet5781_02_9047_4960
                     if (IEnumeratorBusStation.Current.Distance(bs) < minDistance)
                     {
                         minDistance = IEnumeratorBusStation.Current.Distance(bs);
-                        index += count;
-                  
+                        index = count;
+
                     }
+                    count++;
                 }
-                busStations.Insert(index + 1, bs);
+                busStations.Insert(index, bs);
             }
             public void Remove(busStation bs)
             {
@@ -133,25 +134,36 @@ namespace dotNet5781_02_9047_4960
             }
             public double distance(busStation first, busStation last)
             {
-                if(first.Distance(last)>-1)
+                if (last.BusStationKey == first.BusStationKey)
                 {
-                    IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
-                    double Distance = 0;
-                    while (IEnumeratorBusStation.MoveNext())
+                    return 0;
+                }
+                IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
+                double Distance = 0;
+                while (IEnumeratorBusStation.MoveNext())
+                {
+                    if (IEnumeratorBusStation.Current.BusStationKey == last.BusStationKey)
                     {
-                        if (IEnumeratorBusStation.Current.BusStationKey == first.BusStationKey)
+                        return -1;
+                    }
+                    if (IEnumeratorBusStation.Current.BusStationKey == first.BusStationKey)
+                    {
+                        IEnumerator<busStation> help = IEnumeratorBusStation;
+                        while ((help.MoveNext()) && help.Current.BusStationKey != last.BusStationKey)
                         {
-                            IEnumerator<busStation> help = IEnumeratorBusStation;
-                            help.MoveNext();
-                            while (help.Current.BusStationKey!=last.BusStationKey)
-                            {
-                                Distance += IEnumeratorBusStation.Current.Distance(help.Current);
-                            }
                             Distance += IEnumeratorBusStation.Current.Distance(help.Current);
-                            return Distance;
+                            IEnumeratorBusStation.MoveNext();
+
                         }
+                        if (help.Current == null)
+                        {
+                            return -1;
+                        }
+                        Distance += IEnumeratorBusStation.Current.Distance(help.Current);
+                        return Distance;
                     }
                 }
+
                 return -1;
             }
             public BusStationList creatNewBusStationList(busStation first, busStation last)
@@ -162,10 +174,14 @@ namespace dotNet5781_02_9047_4960
                 {
                     if (IEnumeratorBusStation.Current.BusStationKey == first.BusStationKey)
                     {
-                        while (IEnumeratorBusStation.Current.BusStationKey != last.BusStationKey)
+                        bs.Add(first);
+                        while (IEnumeratorBusStation.MoveNext() && IEnumeratorBusStation.Current.BusStationKey != last.BusStationKey)
                         {
                             bs.Add(IEnumeratorBusStation.Current);
-                            IEnumeratorBusStation.MoveNext();
+                        }
+                        if (IEnumeratorBusStation.Current == null)
+                        {
+                            return null;
                         }
                         return bs;
                     }
@@ -456,11 +472,11 @@ namespace dotNet5781_02_9047_4960
             }
         }
 
-        enum Areas {General, North, South, Center, Jerusalem };
-        class BusLine :Bus, IComparable
+        enum Areas { General, North, South, Center, Jerusalem };
+        class BusLine : Bus, IComparable
         {
             public const double TimeForMeter = 0.01;
-            private int  busLineNumber;
+            private int busLineNumber;
             private static int staticBusLineNumber = 1;
             private BusStationList stations;
             private Areas area;
@@ -486,7 +502,7 @@ namespace dotNet5781_02_9047_4960
                 }
                 private set
                 {
-                    busLineNumber =value;
+                    busLineNumber = value;
                 }
             }
             class busLineStation
@@ -496,12 +512,12 @@ namespace dotNet5781_02_9047_4960
                 private double timeFromLastStation;
 
             }
-            public BusLine(): base()
+            public BusLine() : base()
             {
                 stations = new BusStationList();
                 busLineNumber = staticBusLineNumber;
                 staticBusLineNumber++;
-                Console.WriteLine("In what area is the bus located?\n"+ "0-General, 1-North, 2-South, 3-Center, 4-Jerusalem, enter the coresponding number");
+                Console.WriteLine("In what area is the bus located?\n" + "0-General, 1-North, 2-South, 3-Center, 4-Jerusalem, enter the coresponding number");
                 int optionA;
                 while (!Int32.TryParse(Console.ReadLine(), out optionA))        //trying to get the users chosen option
                 {
@@ -509,8 +525,9 @@ namespace dotNet5781_02_9047_4960
                 }
                 area = (Areas)optionA;
             }
-            public BusLine(BusStationList bs, Areas a) : base()
+            public BusLine(BusLine original,BusStationList bs, Areas a)
             {
+                
                 stations = bs;
                 area = a;
             }
@@ -520,7 +537,7 @@ namespace dotNet5781_02_9047_4960
             }
             public override string ToString()
             {
-                return "BusLine: " + busLineNumber + " Area:" + area+ "\n"+" stions:\n"+stations.ToString();
+                return "BusLine: " + busLineNumber + " Area:" + area + "\n" + " stions:\n" + stations.ToString();
             }
             public void addStition(busStation bs)
             {
@@ -532,40 +549,28 @@ namespace dotNet5781_02_9047_4960
             }
             public double distance(busStation first, busStation last)
             {
-                if( isBusStation(first))
+              double distanceBetweenFiratAndLast=  stations.distance(first, last);
+                if(distanceBetweenFiratAndLast!=-1)
                 {
-                    if(isBusStation(last))
-                    {
-                        return first.Distance(last);
-                    }
-                    Console.WriteLine(last.BusStationKey + " is not exsist");
+                    return distanceBetweenFiratAndLast;
                 }
-                Console.WriteLine(first.BusStationKey+" is not exsist");
+                Console.WriteLine("last is before first or one of the stations does not exist");
                 return -1;
             }
             public double time(busStation first, busStation last)
             {
-                double time = 0;
-                if (isBusStation(first))
-                {
-                    if (isBusStation(last))
-                    {
-                        time += stations.distance(first, last) * TimeForMeter;
-                    }
-                    Console.WriteLine(last.BusStationKey + " is not exsist");
-                }
-                Console.WriteLine(first.BusStationKey + " is not exsist");
-                if (time > -1)
+                double time = distance(first, last) * TimeForMeter;
+                if (time >=0)
                     return time;
                 return -1;
             }
-            public BusLine subBusLine(busStation first,busStation last)
+            public BusLine subBusLine(busStation first, busStation last)
             {
                 if (isBusStation(first))
                 {
                     if (isBusStation(last))
                     {
-                        return (new BusLine(stations.creatNewBusStationList(first, last),area));
+                        return (new BusLine(this,stations.creatNewBusStationList(first, last), area));
                     }
                     Console.WriteLine(last.BusStationKey + " is not exsist");
                 }
@@ -575,11 +580,11 @@ namespace dotNet5781_02_9047_4960
             public int CompareTo(object obj)
             {
                 BusLine b = (BusLine)obj;
-                if (this.stations.distanceWholeLine()==b.stations.distanceWholeLine())
+                if (this.stations.distanceWholeLine() == b.stations.distanceWholeLine())
                 {
                     return 0;
                 }
-                if(this.stations.distanceWholeLine() > b.stations.distanceWholeLine())
+                if (this.stations.distanceWholeLine() > b.stations.distanceWholeLine())
                 {
                     return 1;
                 }
