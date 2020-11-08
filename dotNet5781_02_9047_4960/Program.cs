@@ -66,7 +66,7 @@ namespace dotNet5781_02_9047_4960
 
         }
 
-        public class BusStationList : IEnumerable, IEnumerator
+        public class BusStationCollention : IEnumerable, IEnumerator
         {
             public List<busStation> busStations;
             IEnumerator<busStation> IEnumeratorBusStation;
@@ -79,7 +79,7 @@ namespace dotNet5781_02_9047_4960
                  }
 
              }*/
-            public BusStationList()
+            public BusStationCollention()
             {
                 busStations = new List<busStation>();
                 IEnumeratorBusStation = busStations.GetEnumerator();
@@ -166,9 +166,9 @@ namespace dotNet5781_02_9047_4960
 
                 return -1;
             }
-            public BusStationList creatNewBusStationList(busStation first, busStation last)
+            public BusStationCollention creatNewBusStationCollention(busStation first, busStation last)
             {
-                BusStationList bs = new BusStationList();
+                BusStationCollention bs = new BusStationCollention();
                 IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
                 while (IEnumeratorBusStation.MoveNext())
                 {
@@ -478,7 +478,7 @@ namespace dotNet5781_02_9047_4960
             public const double TimeForMeter = 0.01;
             private int busLineNumber;
             private static int staticBusLineNumber = 1;
-            private BusStationList stations;
+            private BusStationCollention stations;
             private Areas area;
             public object firstbusStation
             {
@@ -514,7 +514,7 @@ namespace dotNet5781_02_9047_4960
             }
             public BusLine() : base()
             {
-                stations = new BusStationList();
+                stations = new BusStationCollention();
                 busLineNumber = staticBusLineNumber;
                 staticBusLineNumber++;
                 Console.WriteLine("In what area is the bus located?\n" + "0-General, 1-North, 2-South, 3-Center, 4-Jerusalem, enter the coresponding number");
@@ -525,7 +525,7 @@ namespace dotNet5781_02_9047_4960
                 }
                 area = (Areas)optionA;
             }
-            public BusLine(BusLine original,BusStationList bs, Areas a)
+            public BusLine(BusLine original,BusStationCollention bs, Areas a)
             {
                 this.BusLineNumber = original.BusLineNumber;
                 this.StartOfActivity = original.StartOfActivity;
@@ -577,7 +577,7 @@ namespace dotNet5781_02_9047_4960
                 {
                     if (isBusStation(last))
                     {
-                        return (new BusLine(this,stations.creatNewBusStationList(first, last), area));
+                        return (new BusLine(this,stations.creatNewBusStationCollention(first, last), area));
                     }
                     Console.WriteLine(last.BusStationKey + " is not exsist");
                 }
