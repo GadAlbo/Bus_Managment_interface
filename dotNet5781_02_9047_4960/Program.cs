@@ -203,7 +203,7 @@ namespace dotNet5781_02_9047_4960
                 {
                     return licenseNumber;
                 }
-                private set
+                protected set
                 {
                     bool flag = true;
                     while (flag)                                //while the license Number is not corect
@@ -247,7 +247,7 @@ namespace dotNet5781_02_9047_4960
                 {
                     return startOfActivity;
                 }
-                private set
+                protected set
                 {
                     startOfActivity = value;
                 }
@@ -527,7 +527,14 @@ namespace dotNet5781_02_9047_4960
             }
             public BusLine(BusLine original,BusStationList bs, Areas a)
             {
-                
+                this.BusLineNumber = original.BusLineNumber;
+                this.StartOfActivity = original.StartOfActivity;
+                this.LicenseNumber = original.LicenseNumber;
+                this.LastCheckup = original.LastCheckup;
+                this.KillFromRefueling = original.KillFromRefueling;
+                this.KillFromLastCheckup = original.KillFromLastCheckup;
+                this.AllKilometrage = original.AllKilometrage;
+                this.busLineNumber = original.BusLineNumber;
                 stations = bs;
                 area = a;
             }
@@ -591,7 +598,7 @@ namespace dotNet5781_02_9047_4960
                 return -1;
             }
         }
-        class BusLineCollection : IEnumerable
+        class BusLineCollection : IEnumerable, IEnumerator
         {
             private List<BusLine> busLines;
             IEnumerator<List<BusLine>> IEnumeratorBusStation;
@@ -602,14 +609,30 @@ namespace dotNet5781_02_9047_4960
                     return busLines;
                 }
             }
+
+            public object Current => throw new NotImplementedException();
+
             public void add(BusLine bus)
             {
-                IEnumerator<List<BusLine>> enumerator = busLines.GetEnumerator();
                 busLines.Add(bus);
+            }
+            public void Remove(BusLine bus)
+            {
+                busLines.Remove(bus);
             }
             public IEnumerator GetEnumerator()
             {
                 return IEnumeratorBusStation;
+            }
+
+            public bool MoveNext()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Reset()
+            {
+                throw new NotImplementedException();
             }
         }
         static void Main(string[] args)
