@@ -91,7 +91,7 @@ namespace dotNet5781_02_9047_4960
             }
             public IEnumerator GetEnumerator()
             { return IEnumeratorBusStation; }
-            public busStation Current
+            public object Current
             { get { return IEnumeratorBusStation.Current; } }
 
            
@@ -808,4 +808,4 @@ namespace dotNet5781_02_9047_4960
             } while ( op!= (Opitions)4);
         }
     }
-}
+
