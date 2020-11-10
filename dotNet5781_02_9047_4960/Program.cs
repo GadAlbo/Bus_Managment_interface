@@ -601,7 +601,7 @@ namespace dotNet5781_02_9047_4960
         class BusLineCollection : IEnumerable, IEnumerator
         {
             private List<BusLine> busLines;
-            IEnumerator<List<BusLine>> IEnumeratorBusStation;
+            IEnumerator<BusLine> IEnumeratorBusStation;
             public List<BusLine> BusLines
             {
                 get
@@ -609,8 +609,14 @@ namespace dotNet5781_02_9047_4960
                     return busLines;
                 }
             }
-
-            public object Current => throw new NotImplementedException();
+           
+            public object Current
+            {
+                get
+                {
+                    return IEnumeratorBusStation.Current;
+                }
+            }
 
             public void add(BusLine bus)
             {
@@ -627,12 +633,12 @@ namespace dotNet5781_02_9047_4960
 
             public bool MoveNext()
             {
-                throw new NotImplementedException();
+                return IEnumeratorBusStation.MoveNext();
             }
 
             public void Reset()
             {
-                throw new NotImplementedException();
+                IEnumeratorBusStation.Reset();
             }
         }
         static void Main(string[] args)
