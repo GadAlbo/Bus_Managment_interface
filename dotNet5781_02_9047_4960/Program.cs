@@ -106,7 +106,7 @@ namespace dotNet5781_02_9047_4960
                 IEnumerator<busStation> prevIEnumerator = IEnumeratorBusStation;
                 while (IEnumeratorBusStation.MoveNext())
                 {
-                    if (IEnumeratorBusStation.Current.BusStationKey == Current.BusStationKey)
+                    if (IEnumeratorBusStation.Current.BusStationKey)
                         return prevIEnumerator.Current;
                     prevIEnumerator = IEnumeratorBusStation;
                 }
@@ -213,7 +213,7 @@ namespace dotNet5781_02_9047_4960
                 return distance(busStations.First<busStation>(), busStations.Last<busStation>());
             }
         }
-        class Bus
+        public class Bus
         {
             private string licenseNumber;
             public string LicenseNumber //property
@@ -492,7 +492,7 @@ namespace dotNet5781_02_9047_4960
         }
 
         enum Areas { General, North, South, Center, Jerusalem };
-        class BusLine : Bus, IComparable
+        public class BusLine : Bus, IComparable
         {
             public const double TimeForMeter = 0.01;
             private int busLineNumber;
