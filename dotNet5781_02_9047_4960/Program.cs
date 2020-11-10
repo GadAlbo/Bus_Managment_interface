@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Device.Location;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -640,23 +641,30 @@ namespace dotNet5781_02_9047_4960
                 List<BusLine> lines = new List<BusLine>();
                 IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
                 busStation station = new busStation(StationNumber);
-                while(IEnumeratorBusLines.MoveNext())
+                while (IEnumeratorBusLines.MoveNext())
                 {
-                    if(IEnumeratorBusLines.Current.isBusStation(station))
-                    {
-                        lines.Add(IEnumeratorBusLines.Current);
-                        flag = true;
-                    }
-                }
-                if(flag==false)
-                {
+                    try
 
+                    {
+                        if (IEnumeratorBusLines.Current.isBusStation(station))
+                        {
+                            lines.Add(IEnumeratorBusLines.Current);
+                            flag = true;
+                        }
+                        if (flag == false)
+                        {
+                            throw new Exception();                       }
+                    }
+                    catch(Exception)
+                    {
+                        Console.WriteLine("there is no lines in this station");
+                    }
                 }
                 return lines;
             }
             public IEnumerator GetEnumerator()
             {
-                return IEnumeratorBusLines;
+                return IEnumeratorBusStation;
             }
 
             public bool MoveNext()
@@ -669,8 +677,68 @@ namespace dotNet5781_02_9047_4960
                 IEnumeratorBusStation.Reset();
             }
         }
+        enum Opitions { add=0, delete, search, print, exit};   //enum definition
         static void Main(string[] args)
         {
+            BusLineCollection busLines = new BusLineCollection();
+            for(int i=0; i<10; i++)
+            {
+                BusLine bus = new BusLine();
+                for(int j=0;j<4;j++)
+                {
+                    busStation station = new busStation();
+                    bus.addStition(station);
+                }
+                busLines.add(bus);
+            }
+                Opitions op;
+            int optionC;
+            do
+               {
+                Console.WriteLine(
+                   "plese enter 0 to add a bus line or a station\n" +
+                   "plese enter 1 to remove a bus line or a station\n" +
+                   "plese enter 2 to search \n" +
+                   "plese enter 3 to print\n" +
+                   "plese enter 4 to exit");
+                while (!Int32.TryParse(Console.ReadLine(), out optionC))        //trying to get the users chosen option
+                {
+                    Console.WriteLine("only enter numbers");
+                }
+                op = (Opitions)optionC;
+                switch (op)
+                {
+                    case Opitions.add:
+                        {
+                            Console.WriteLine("enter one for add a bus line, and 2 for add a station");
+                            int opitions = Int32.TryParse(Console.ReadLine()); 
+                                break;
+                        }
+                    case Opitions.delete:             //refuel or checkup bus
+                        {
+                            break;
+                        }
+                    case Opitions.print:          //to view the number of killometers each bus has traveled since the last treatment
+                        {
+                            break;
+                        }
+                    case Opitions.search:
+                        {
+                            break;
+                        }
+                    case Opitions.exit:
+                        {
+                            Console.WriteLine("have a nice day");
+                        }
+                        break;
+                    default:
+                        {
+                            Console.WriteLine("you enter a wrong number :( , plese try again or enter 4 to exit");
+                            break;
+                        }
+                }
+
+            } while ( op!= (Opitions)4);
         }
     }
 }
