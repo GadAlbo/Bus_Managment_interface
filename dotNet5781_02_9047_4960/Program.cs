@@ -13,8 +13,8 @@ namespace dotNet5781_02_9047_4960
     class Program
     {
         public class busStation
-        {
-            Random r = new Random(DateTime.Now.Millisecond);
+        { 
+            readonly Random r = new Random(DateTime.Now.Millisecond);
             private static int staticBusStationKey = 1;
             private int busStationKey;
             public int BusStationKey
@@ -54,6 +54,10 @@ namespace dotNet5781_02_9047_4960
                 address = Console.ReadLine();
                 Console.WriteLine("the bus station that was created is");
                 Console.WriteLine(this);
+            }
+            public busStation(int key)
+            {
+                BusStationKey = key;
             }
             public override string ToString() //override the toString func
             {
@@ -510,6 +514,10 @@ namespace dotNet5781_02_9047_4960
                 private int busLineStationKey;
                 private double distanceFromLastStation;
                 private double timeFromLastStation;
+                public busLineStation(int Key)
+                {
+                    busLineStationKey = Key;
+                }
 
             }
             public BusLine() : base()
@@ -626,9 +634,29 @@ namespace dotNet5781_02_9047_4960
             {
                 busLines.Remove(bus);
             }
+            public List<BusLine> linesAtStation(int StationNumber)
+            {
+                bool flag = false;
+                List<BusLine> lines = new List<BusLine>();
+                IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
+                busStation station = new busStation(StationNumber);
+                while(IEnumeratorBusLines.MoveNext())
+                {
+                    if(IEnumeratorBusLines.Current.isBusStation(station))
+                    {
+                        lines.Add(IEnumeratorBusLines.Current);
+                        flag = true;
+                    }
+                }
+                if(flag==false)
+                {
+
+                }
+                return lines;
+            }
             public IEnumerator GetEnumerator()
             {
-                return IEnumeratorBusStation;
+                return IEnumeratorBusLines;
             }
 
             public bool MoveNext()
