@@ -91,12 +91,28 @@ namespace dotNet5781_02_9047_4960
             }
             public IEnumerator GetEnumerator()
             { return IEnumeratorBusStation; }
-            public object Current
-            { get { return IEnumeratorBusStation; } }
+            public busStation Current
+            { get { return IEnumeratorBusStation.Current; } }
 
+           
             public bool MoveNext()
             {
                 return IEnumeratorBusStation.MoveNext();
+            }
+       
+            public busStation ReturnPrev()//if first return first
+            {
+                IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
+                IEnumerator<busStation> prevIEnumerator = IEnumeratorBusStation;
+                while(IEnumeratorBusStation.MoveNext())
+                {
+                    if (IEnumeratorBusStation.Current.BusStationKey == Current.BusStationKey)
+                        return prevIEnumerator.Current;
+                    prevIEnumerator = IEnumeratorBusStation;
+                }
+                return prevIEnumerator.Current;
+
+
             }
 
             public void Reset()
@@ -489,7 +505,7 @@ namespace dotNet5781_02_9047_4960
             {
                 get
                 {
-                    return stations.Current;
+                    return stations.busStations[1];
                 }
             }
             public object lastbusStation
@@ -512,12 +528,12 @@ namespace dotNet5781_02_9047_4960
             }
             class busLineStation
             {
-                private int busLineStationKey;
-                private double distanceFromLastStation;
-                private double timeFromLastStation;
-                public busLineStation(int Key)
+                public double disFromPrev
                 {
-                    busLineStationKey = Key;
+                    get
+                    {
+                        busStation prevBusStation = stations.ReturnPrev();
+                    }
                 }
 
             }
@@ -588,9 +604,9 @@ namespace dotNet5781_02_9047_4960
                     {
                         return (new BusLine(this,stations.creatNewBusStationCollention(first, last), area));
                     }
-                    Console.WriteLine(last.BusStationKey + " is not exsist");
+                    Console.WriteLine(last.BusStationKey + " does not exsist");
                 }
-                Console.WriteLine(first.BusStationKey + " is not exsist");
+                Console.WriteLine(first.BusStationKey + " does not exsist");
                 return null;
             }
             public int CompareTo(object obj)
@@ -688,6 +704,27 @@ namespace dotNet5781_02_9047_4960
 
                 }
                 return -1;
+            }
+        }
+            public List<BusLine> sort()
+            {
+                busLines.Sort();
+                return busLines;
+            }
+            public BusLine this[int i]
+            {
+                get
+                {
+                    IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
+                    while(IEnumeratorBusLines.MoveNext())
+                    {
+                        if (IEnumeratorBusLines.Current.BusLineNumber == i)
+                            return IEnumeratorBusLines.Current;
+                    }
+
+                    throw new ArgumentException();
+                }
+
             }
         }
         enum Opitions { add=0, delete, search, print, exit};   //enum definition
