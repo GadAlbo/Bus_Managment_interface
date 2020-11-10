@@ -111,8 +111,6 @@ namespace dotNet5781_02_9047_4960
                     prevIEnumerator = IEnumeratorBusStation;
                 }
                 return prevIEnumerator.Current;
-
-
             }
 
             public void Reset()
