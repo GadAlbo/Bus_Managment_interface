@@ -676,6 +676,19 @@ namespace dotNet5781_02_9047_4960
             {
                 IEnumeratorBusStation.Reset();
             }
+            public int findAline(int number)
+            {
+                int count = 0;
+                IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
+                while (IEnumeratorBusLines.MoveNext())
+                {
+                    if (IEnumeratorBusLines.Current.BusLineNumber == number)
+                        return count;
+                    count++;
+
+                }
+                return -1;
+            }
         }
         enum Opitions { add=0, delete, search, print, exit};   //enum definition
         static void Main(string[] args)
@@ -710,8 +723,25 @@ namespace dotNet5781_02_9047_4960
                 {
                     case Opitions.add:
                         {
+                            int opitions;
                             Console.WriteLine("enter one for add a bus line, and 2 for add a station");
-                            int opitions = Int32.TryParse(Console.ReadLine()); 
+                            while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
+                            {
+                                Console.WriteLine("only enter numbers");
+                            }
+                            if(opitions==1)
+                            {
+                                busLines.add(new BusLine());
+                            }
+                            if(opitions==2)
+                            { 
+                                Console.WriteLine("please enter a bus line number");
+                                int help = Console.Read();
+                                
+
+
+
+                            }
                                 break;
                         }
                     case Opitions.delete:             //refuel or checkup bus
