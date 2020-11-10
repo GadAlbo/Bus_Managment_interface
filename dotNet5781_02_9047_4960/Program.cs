@@ -91,7 +91,7 @@ namespace dotNet5781_02_9047_4960
             }
             public IEnumerator GetEnumerator()
             { return IEnumeratorBusStation; }
-            public busStation Current
+            public object Current
             { get { return IEnumeratorBusStation.Current; } }
 
            
@@ -531,6 +531,7 @@ namespace dotNet5781_02_9047_4960
                     get
                     {
                         busStation prevBusStation = stations.ReturnPrev();
+                        return prevBusStation.Distance(stations.Current) ;
                     }
                 }
 
@@ -621,7 +622,7 @@ namespace dotNet5781_02_9047_4960
                 return -1;
             }
         }
-        class BusLineCollection : IEnumerable, IEnumerator
+        public class BusLineCollection : IEnumerable, IEnumerator
         {
             private List<BusLine> busLines;
             IEnumerator<BusLine> IEnumeratorBusStation;
@@ -667,7 +668,8 @@ namespace dotNet5781_02_9047_4960
                         }
                         if (flag == false)
                         {
-                            throw new Exception();                       }
+                            throw new Exception();          
+                        }
                     }
                     catch(Exception)
                     {
@@ -703,7 +705,6 @@ namespace dotNet5781_02_9047_4960
                 }
                 return -1;
             }
-        }
             public List<BusLine> sort()
             {
                 busLines.Sort();
@@ -714,7 +715,7 @@ namespace dotNet5781_02_9047_4960
                 get
                 {
                     IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
-                    while(IEnumeratorBusLines.MoveNext())
+                    while (IEnumeratorBusLines.MoveNext())
                     {
                         if (IEnumeratorBusLines.Current.BusLineNumber == i)
                             return IEnumeratorBusLines.Current;
@@ -725,6 +726,8 @@ namespace dotNet5781_02_9047_4960
 
             }
         }
+    
+            
         enum Opitions { add=0, delete, search, print, exit};   //enum definition
         static void Main(string[] args)
         {
