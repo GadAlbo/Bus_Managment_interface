@@ -14,7 +14,7 @@ namespace dotNet5781_02_9047_4960
     class Program
     {
         public class busStation
-        { 
+        {
             readonly Random r = new Random(DateTime.Now.Millisecond);
             private static int staticBusStationKey = 1;
             private int busStationKey;
@@ -94,17 +94,17 @@ namespace dotNet5781_02_9047_4960
             public object Current
             { get { return IEnumeratorBusStation.Current; } }
 
-           
+
             public bool MoveNext()
             {
                 return IEnumeratorBusStation.MoveNext();
             }
-       
+
             public busStation ReturnPrev()//if first return first
             {
                 IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
                 IEnumerator<busStation> prevIEnumerator = IEnumeratorBusStation;
-                while(IEnumeratorBusStation.MoveNext())
+                while (IEnumeratorBusStation.MoveNext())
                 {
                     if (IEnumeratorBusStation.Current.BusStationKey == Current.BusStationKey)
                         return prevIEnumerator.Current;
@@ -531,7 +531,7 @@ namespace dotNet5781_02_9047_4960
                     get
                     {
                         busStation prevBusStation = stations.ReturnPrev();
-                        return prevBusStation.Distance(stations.Current) ;
+                        return prevBusStation.Distance(stations.Current);
                     }
                 }
 
@@ -549,7 +549,7 @@ namespace dotNet5781_02_9047_4960
                 }
                 area = (Areas)optionA;
             }
-            public BusLine(BusLine original,BusStationCollention bs, Areas a)
+            public BusLine(BusLine original, BusStationCollention bs, Areas a)
             {
                 this.BusLineNumber = original.BusLineNumber;
                 this.StartOfActivity = original.StartOfActivity;
@@ -580,8 +580,8 @@ namespace dotNet5781_02_9047_4960
             }
             public double distance(busStation first, busStation last)
             {
-              double distanceBetweenFiratAndLast=  stations.distance(first, last);
-                if(distanceBetweenFiratAndLast!=-1)
+                double distanceBetweenFiratAndLast = stations.distance(first, last);
+                if (distanceBetweenFiratAndLast != -1)
                 {
                     return distanceBetweenFiratAndLast;
                 }
@@ -591,7 +591,7 @@ namespace dotNet5781_02_9047_4960
             public double time(busStation first, busStation last)
             {
                 double time = distance(first, last) * TimeForMeter;
-                if (time >=0)
+                if (time >= 0)
                     return time;
                 return -1;
             }
@@ -601,7 +601,7 @@ namespace dotNet5781_02_9047_4960
                 {
                     if (isBusStation(last))
                     {
-                        return (new BusLine(this,stations.creatNewBusStationCollention(first, last), area));
+                        return (new BusLine(this, stations.creatNewBusStationCollention(first, last), area));
                     }
                     Console.WriteLine(last.BusStationKey + " does not exsist");
                 }
@@ -626,14 +626,6 @@ namespace dotNet5781_02_9047_4960
         {
             private List<BusLine> busLines;
             IEnumerator<BusLine> IEnumeratorBusStation;
-            public List<BusLine> BusLines
-            {
-                get
-                {
-                    return busLines;
-                }
-            }
-           
             public object Current
             {
                 get
@@ -668,10 +660,10 @@ namespace dotNet5781_02_9047_4960
                         }
                         if (flag == false)
                         {
-                            throw new Exception();          
+                            throw new Exception();
                         }
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         Console.WriteLine("there is no lines in this station");
                     }
@@ -726,26 +718,26 @@ namespace dotNet5781_02_9047_4960
 
             }
         }
-    
-            
-        enum Opitions { add=0, delete, search, print, exit};   //enum definition
+
+
+        enum Opitions { add = 0, delete, search, print, exit };   //enum definition
         static void Main(string[] args)
         {
             BusLineCollection busLines = new BusLineCollection();
-            for(int i=0; i<10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 BusLine bus = new BusLine();
-                for(int j=0;j<4;j++)
+                for (int j = 0; j < 4; j++)
                 {
                     busStation station = new busStation();
                     bus.addStition(station);
                 }
                 busLines.add(bus);
             }
-                Opitions op;
+            Opitions op;
             int optionC;
             do
-               {
+            {
                 Console.WriteLine(
                    "plese enter 0 to add a bus line or a station\n" +
                    "plese enter 1 to remove a bus line or a station\n" +
@@ -767,20 +759,20 @@ namespace dotNet5781_02_9047_4960
                             {
                                 Console.WriteLine("only enter numbers");
                             }
-                            if(opitions==1)
+                            if (opitions == 1)
                             {
                                 busLines.add(new BusLine());
                             }
-                            if(opitions==2)
-                            { 
+                            if (opitions == 2)
+                            {
                                 Console.WriteLine("please enter a bus line number");
                                 int help = Console.Read();
-                                
+
 
 
 
                             }
-                                break;
+                            break;
                         }
                     case Opitions.delete:             //refuel or checkup bus
                         {
@@ -806,7 +798,8 @@ namespace dotNet5781_02_9047_4960
                         }
                 }
 
-            } while ( op!= (Opitions)4);
+            } while (op != (Opitions)4);
         }
     }
+}
 
