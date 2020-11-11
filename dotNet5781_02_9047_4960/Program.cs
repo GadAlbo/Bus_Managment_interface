@@ -46,9 +46,7 @@ namespace dotNet5781_02_9047_4960
             {
                 BusStationKey = staticBusStationKey;
                 staticBusStationKey++;
-                Console.WriteLine("Please give us the latitude of the station");
                 double latitude = r.NextDouble() * (33.3 - 31) + 31;
-                Console.WriteLine("Please give us the longitude of the station");
                 double longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;
                 coordinates.Latitude = latitude;
                 coordinates.Longitude = longitude;
@@ -86,19 +84,10 @@ namespace dotNet5781_02_9047_4960
             }
         }
 
-        public class BusStationCollention : IEnumerable, IEnumerator
+        public class BusStationCollention : IEnumerable, IEnumerator<BusLineStation>
         {
             public List<BusLineStation> stations;
             IEnumerator<BusLineStation> IEnumeratorBusStation;
-            /* public IEnumerator GetEnumerator()
-             {
-                 IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
-                 while(IEnumeratorBusStation.MoveNext())
-                 {
-                     yield return IEnumeratorBusStation;
-                 }
-
-             }*/
             public BusStationCollention()
             {
                 stations = new List<BusLineStation>();
@@ -106,30 +95,17 @@ namespace dotNet5781_02_9047_4960
             }
             public IEnumerator GetEnumerator()
             { return IEnumeratorBusStation; }
-            public object Current
+            public BusLineStation Current
             { get
                 { return IEnumeratorBusStation.Current; } 
             }
 
+            object IEnumerator.Current => IEnumeratorBusStation.Current;
 
             public bool MoveNext()
             {
                 return IEnumeratorBusStation.MoveNext();
             }
-
-          /*  public busStation ReturnPrev()//if first return first
-            {
-                IEnumerator<busStation> IEnumeratorBusStation = busStations.GetEnumerator();
-                IEnumerator<busStation> prevIEnumerator = IEnumeratorBusStation;
-                while (IEnumeratorBusStation.MoveNext())
-                {
-                    if (IEnumeratorBusStation.Current == Current)
-                        return prevIEnumerator.Current;
-                    prevIEnumerator = IEnumeratorBusStation;
-                }
-                return prevIEnumerator.Current;
-            }*/
-
             public void Reset()
             {
                 IEnumeratorBusStation = stations.GetEnumerator();
@@ -146,23 +122,26 @@ namespace dotNet5781_02_9047_4960
                 }
                 return false;
             }
-            public void Add(BusLineStation bs)
+            public void Add(BusLineStation bs)//adds the new station to the nearest station
             {
                 int count = 0;
                 int index = 0;
                 IEnumerator<BusLineStation> IEnumeratorBusStation = stations.GetEnumerator();
-                double minDistance = IEnumeratorBusStation.Current.Distance(bs);
-                while (IEnumeratorBusStation.MoveNext())
+                if (IEnumeratorBusStation.MoveNext())//moves to the first element
                 {
-                    if (IEnumeratorBusStation.Current.Distance(bs) < minDistance)
+                    double minDistance = IEnumeratorBusStation.Current.Distance(bs);    //set initial minimum distance to the distance
+                    while (IEnumeratorBusStation.MoveNext())
                     {
-                        minDistance = IEnumeratorBusStation.Current.Distance(bs);
-                        index = count;
+                        if (IEnumeratorBusStation.Current.Distance(bs) < minDistance)
+                        {
+                            minDistance = IEnumeratorBusStation.Current.Distance(bs);
+                            index = count;
 
+                        }
+                        count++;
                     }
-                    count++;
+                    bs.DistanceFromLastStation = minDistance;
                 }
-                bs.DistanceFromLastStation = minDistance;
                 stations.Insert(index, bs);
             }
             public void Remove(BusLineStation bs)
@@ -230,6 +209,9 @@ namespace dotNet5781_02_9047_4960
             {
                 return Distance(stations.First<BusLineStation>(), stations.Last<BusLineStation>());
             }
+
+            public void Dispose()
+            { }//IEnumerator<t> requires me to have this func but i dont need it
         }
         public class Bus
         {
@@ -579,9 +561,9 @@ namespace dotNet5781_02_9047_4960
             {
                 stations.Add(bs);
             }
-            public void DeleteStition(BusLineStation bs)
+            public void DeleteStition(int key)
             {
-                stations.Remove(bs);
+                stations.Remove(new BusLineStation(key));
             }
             public double Distance(BusLineStation first, BusLineStation last)
             {
