@@ -84,10 +84,6 @@ namespace dotNet5781_02_9047_4960
             {
                 DistanceFromLastStation = 0;
             }
-
-
-
-
         }
 
         public class BusStationCollention : IEnumerable, IEnumerator
