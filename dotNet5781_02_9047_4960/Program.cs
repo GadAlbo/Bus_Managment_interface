@@ -786,10 +786,10 @@ namespace dotNet5781_02_9047_4960
                                     {
                                         Console.WriteLine("only enter numbers");
                                     }
-                                    busLineStation st = new busLineStation();
-                                    if (busLines.findAline(input) != -1)
+                                    BusLineStation st = new BusLineStation();
+                                    if (busLines.FindAline(input) != -1)
                                     {
-                                        busLines[busLines.findAline(input)].addStition(st);
+                                        busLines[busLines.FindAline(input)].AddStition(st);
                                     }
                                     else
                                     {
@@ -811,60 +811,75 @@ namespace dotNet5781_02_9047_4960
                             {
                                 Console.WriteLine("only enter numbers");
                             }
-                            if (opitions == 1)
+                            try
                             {
-                                try
-                                {
+                                if (opitions == 1)
+                               {
                                     Console.WriteLine("please enter a bus line number");
                                     int input;
                                     while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
                                     {
                                         Console.WriteLine("only enter numbers");
                                     }
-                                    if (busLines.findAline(input) != -1)
+                                    if (busLines.FindAline(input) != -1)
                                     {
-                                        busLines.Remove(busLines[busLines.findAline(input)]);
+                                        busLines.Remove(busLines[busLines.FindAline(input)]);
                                     }
                                     else
                                     {
                                         throw new Exception();
                                     }
-                                }
-                                catch(Exception)
-                                {
+                                    }
+                                    if (opitions == 2)
+                                    {
+                                        Console.WriteLine("please enter a bus line number");
+                                        int input1;
+                                        while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
+                                        {
+                                            Console.WriteLine("only enter numbers");
+                                        }
+                                        if (busLines.FindAline(input1) != -1)
+                                        {
+                                            Console.WriteLine("please enter a station number number");
+                                            int input2;
+                                            while (!Int32.TryParse(Console.ReadLine(), out input2))        //trying to get the users chosen option
+                                            {
+                                                Console.WriteLine("only enter numbers");
+                                            }
+                                            if (busLines[busLines.FindAline(input2)].Equals(input2))
+                                            {
+                                                busLines[busLines.FindAline(input2)].DeleteStition(new BusLineStation(input2));
+                                            }
+                                            else
+                                            {
+                                                throw new Exception();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            throw new Exception();
+                                        }
+                                    }
+                            }
+                            catch (Exception)
+                            {
                                     Console.WriteLine("this bus line is not exsist");
-                                }
-                            }
-                            if (opitions == 2)
-                            {
-                                try
-                                {
-                                    Console.WriteLine("please enter a bus line number");
-                                    int input;
-                                    while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
-                                    {
-                                        Console.WriteLine("only enter numbers");
-                                    }
-                                    busLineStation st = new busLineStation();
-                                    if (busLines.findAline(input) != -1)
-                                    {
-                                        busLines[busLines.findAline(input)].addStition(st);
-                                    }
-                                    else
-                                    {
-                                        throw new Exception();
-                                    }
-                                }
-                                catch (Exception)
-                                {
-                                    Console.WriteLine("this bus line is not exist");
-                                }
-                            }
-
+                            }          
                             break;
                         }
                     case Opitions.print:          //to view the number of killometers each bus has traveled since the last treatment
                         {
+                            int opitions;
+                            Console.WriteLine("enter one for serch bus line, and 2 for search a route between two stations");
+                            while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
+                            {
+                                Console.WriteLine("only enter numbers");
+                            }
+                            if (opitions == 1)
+                            {
+                    
+                            
+                            }
                             break;
                         }
                     case Opitions.search:
