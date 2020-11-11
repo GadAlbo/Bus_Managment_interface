@@ -126,7 +126,7 @@ namespace dotNet5781_02_9047_4960
                 IEnumerator<busStation> prevIEnumerator = IEnumeratorBusStation;
                 while (IEnumeratorBusStation.MoveNext())
                 {
-                    if (IEnumeratorBusStation.Current.BusStationKey)
+                    if (IEnumeratorBusStation.Current == Current)
                         return prevIEnumerator.Current;
                     prevIEnumerator = IEnumeratorBusStation;
                 }
@@ -634,6 +634,14 @@ namespace dotNet5781_02_9047_4960
         {
             private List<BusLine> busLines;
             IEnumerator<BusLine> IEnumeratorBusStation;
+            public List<BusLine> BusLines
+            {
+                get
+                {
+                    return busLines;
+                }
+            }
+
             public object Current
             {
                 get
