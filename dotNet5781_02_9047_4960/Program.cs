@@ -760,21 +760,108 @@ namespace dotNet5781_02_9047_4960
                             }
                             if (opitions == 2)
                             {
-                                Console.WriteLine("please enter a bus line number");
-                                int help = Console.Read();
-
-
-
-
+                                try
+                                {
+                                    Console.WriteLine("please enter a bus line number");
+                                    int input;
+                                    while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
+                                    {
+                                        Console.WriteLine("only enter numbers");
+                                    }
+                                    BusLineStation st = new BusLineStation();
+                                    if (busLines.FindAline(input) != -1)
+                                    {
+                                        busLines[busLines.FindAline(input)].AddStition(st);
+                                    }
+                                    else
+                                    {
+                                        throw new Exception();
+                                     }
+                                }
+                                catch(Exception)
+                                {
+                                    Console.WriteLine("this bus line is not exist");
+                                }
                             }
                             break;
                         }
                     case Opitions.delete:             //refuel or checkup bus
                         {
+                            int opitions;
+                            Console.WriteLine("enter one for delete a bus line, and 2 for delete a station");
+                            while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
+                            {
+                                Console.WriteLine("only enter numbers");
+                            }
+                            try
+                            {
+                                if (opitions == 1)
+                               {
+                                    Console.WriteLine("please enter a bus line number");
+                                    int input;
+                                    while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
+                                    {
+                                        Console.WriteLine("only enter numbers");
+                                    }
+                                    if (busLines.FindAline(input) != -1)
+                                    {
+                                        busLines.Remove(busLines[busLines.FindAline(input)]);
+                                    }
+                                    else
+                                    {
+                                        throw new Exception();
+                                    }
+                                    }
+                                    if (opitions == 2)
+                                    {
+                                        Console.WriteLine("please enter a bus line number");
+                                        int input1;
+                                        while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
+                                        {
+                                            Console.WriteLine("only enter numbers");
+                                        }
+                                        if (busLines.FindAline(input1) != -1)
+                                        {
+                                            Console.WriteLine("please enter a station number number");
+                                            int input2;
+                                            while (!Int32.TryParse(Console.ReadLine(), out input2))        //trying to get the users chosen option
+                                            {
+                                                Console.WriteLine("only enter numbers");
+                                            }
+                                            if (busLines[busLines.FindAline(input2)].Equals(input2))
+                                            {
+                                                busLines[busLines.FindAline(input2)].DeleteStition(new BusLineStation(input2));
+                                            }
+                                            else
+                                            {
+                                                throw new Exception();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            throw new Exception();
+                                        }
+                                    }
+                            }
+                            catch (Exception)
+                            {
+                                    Console.WriteLine("this bus line is not exsist");
+                            }          
                             break;
                         }
                     case Opitions.print:          //to view the number of killometers each bus has traveled since the last treatment
                         {
+                            int opitions;
+                            Console.WriteLine("enter one for serch bus line, and 2 for search a route between two stations");
+                            while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
+                            {
+                                Console.WriteLine("only enter numbers");
+                            }
+                            if (opitions == 1)
+                            {
+                    
+                            
+                            }
                             break;
                         }
                     case Opitions.search:
