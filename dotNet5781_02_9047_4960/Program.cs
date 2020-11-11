@@ -71,7 +71,7 @@ namespace dotNet5781_02_9047_4960
             }
 
         }
-        class busLineStation : busStation
+        public class busLineStation : busStation
         {
             private double distanceFromLastStation;
             private double timeFromLastStation;
@@ -157,6 +157,7 @@ namespace dotNet5781_02_9047_4960
                     }
                     count++;
                 }
+                bs.DistanceFromLastStation = minDistance;
                 stations.Insert(index, bs);
             }
             public void Remove(busLineStation bs)
