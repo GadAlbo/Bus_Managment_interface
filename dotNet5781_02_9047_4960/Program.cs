@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace dotNet5781_02_9047_4960
 {
     class Program
-    {    
+    {  
         const double TimeForMeter = 0.01;
         public class BusStation
         {
@@ -83,7 +83,6 @@ namespace dotNet5781_02_9047_4960
                 DistanceFromLastStation = 0;
             }
         }
-
         public class BusStationCollention : IEnumerable, IEnumerator<BusLineStation>
         {
             public List<BusLineStation> stations;
@@ -509,7 +508,6 @@ namespace dotNet5781_02_9047_4960
                 return "License Number:" + licenseNumber + " total Kilometrage from last checkup:" + killFromLastCheckup;
             }
         }
-
         public enum Areas { General, North, South, Center, Jerusalem };
         public class BusLine : Bus, IComparable
         {
@@ -529,6 +527,10 @@ namespace dotNet5781_02_9047_4960
                 get
                 {
                     return stations.stations.Last();
+                }
+                set
+                {
+                    
                 }
             }
             public int BusLineNumber
@@ -679,7 +681,7 @@ namespace dotNet5781_02_9047_4960
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("there is no lines in this station");
+                        Console.WriteLine("there is no lines in this station or this station is not exist");
                     }
                 }
                 return lines;
@@ -732,8 +734,6 @@ namespace dotNet5781_02_9047_4960
 
             }
         }
-
-
         enum Opitions { add = 0, delete, search, print, exit };   //enum definition
         static void Main(string[] args)
         {
@@ -849,7 +849,7 @@ namespace dotNet5781_02_9047_4960
                                             }
                                             if (busLines[busLines.FindAline(input2)].Equals(input2))
                                             {
-                                                busLines[busLines.FindAline(input2)].DeleteStition(new BusLineStation(input2));
+                                                busLines[busLines.FindAline(input2)].DeleteStition(input2);
                                             }
                                             else
                                             {
@@ -868,23 +868,54 @@ namespace dotNet5781_02_9047_4960
                             }          
                             break;
                         }
-                    case Opitions.print:          //to view the number of killometers each bus has traveled since the last treatment
+                    case Opitions.search:          //to view the number of killometers each bus has traveled since the last treatment
                         {
                             int opitions;
-                            Console.WriteLine("enter one for serch bus line, and 2 for search a route between two stations");
+                            Console.WriteLine("enter one for serch a statuon's bus lines, and 2 for search a route between two stations");
                             while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
                             {
                                 Console.WriteLine("only enter numbers");
                             }
                             if (opitions == 1)
                             {
-                    
-                            
+                                Console.WriteLine("please enter a bus station munber");
+                                int input1;
+                                while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
+                                {
+                                    Console.WriteLine("only enter numbers");
+                                }
+                                List<BusLine> buses=(busLines.LinesAtStation(input1));
                             }
-                            break;
+                            if (opitions == 2)
+                            {
+                                Console.WriteLine("please enter a  sorce bus station munber and a destination bus station munber");
+                                int input1;
+                                while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
+                                {
+                                    Console.WriteLine("only enter numbers");
+                                }
+                                int input2;
+                                while (!Int32.TryParse(Console.ReadLine(), out input2))        //trying to get the users chosen option
+                                {
+                                    Console.WriteLine("only enter numbers");
+                                }
+                                BusLineCollection lineCollection = new BusLineCollection();
+                                List<BusLine> buses1 = busLines.LinesAtStation(input1);
+                                    for(int i=0; i<buses1.Count;i++)
+                                    {
+                                        if(buses1[i].IsBusStation(new BusLineStation(input2)))
+                                        {
+                                            buses1[i].LastbusStation = new BusLineStation(input2);
+                                            lineCollection.Add(buses1[i]);
+                                        }
+                                    }
+                                    lineCollection.Sort();
+                            }
+                                break;
                         }
-                    case Opitions.search:
+                    case Opitions.print:
                         {
+
                             break;
                         }
                     case Opitions.exit:
