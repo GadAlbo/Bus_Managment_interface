@@ -77,7 +77,19 @@ namespace dotNet5781_02_9047_4960
             private double timeFromLastStation;
             public double DistanceFromLastStation { get; set; }
             public double TimeFromLastStation { get { return timeFromLastStation; } set { value = DistanceFromLastStation * TimeForMeter; }}
-            public busLineStation() { }
+            public busLineStation()
+            {
+                DistanceFromLastStation = 0;
+                TimeFromLastStation = 0;
+            }
+            public busLineStation(int key): base(key)
+            {
+                DistanceFromLastStation = 0;
+                TimeFromLastStation = 0;
+            }
+
+
+
 
         }
 
