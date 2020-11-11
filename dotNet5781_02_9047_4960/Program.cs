@@ -124,24 +124,43 @@ namespace dotNet5781_02_9047_4960
             }
             public void Add(BusLineStation bs)//adds the new station to the nearest station
             {
-                int count = 0;
+               
                 int index = 0;
+                double minDistance=0;
                 IEnumerator<BusLineStation> IEnumeratorBusStation = stations.GetEnumerator();
                 if (IEnumeratorBusStation.MoveNext())//moves to the first element
                 {
-                    double minDistance = IEnumeratorBusStation.Current.Distance(bs);    //set initial minimum distance to the distance
-                    while (IEnumeratorBusStation.MoveNext())
+                    IEnumerator<BusLineStation> IEnumeratorBusStationNext = IEnumeratorBusStation;
+                    int count = 1;
+                    minDistance = IEnumeratorBusStation.Current.Distance(bs);    //set initial minimum distance to the distance
+                    while (IEnumeratorBusStationNext.MoveNext())
                     {
-                        if (IEnumeratorBusStation.Current.Distance(bs) < minDistance)
+                        
+                        if (IEnumeratorBusStation.Current.Distance(bs) <= minDistance)
                         {
                             minDistance = IEnumeratorBusStation.Current.Distance(bs);
-                            index = count;
-
+                            if (IEnumeratorBusStation.Current.Distance(bs) <= IEnumeratorBusStation.Current.Distance(IEnumeratorBusStationNext.Current))
+                            {
+                                if (IEnumeratorBusStationNext.Current.Distance(bs) <= IEnumeratorBusStation.Current.Distance(IEnumeratorBusStationNext.Current))
+                                {
+                                    index = count;
+                                }
+                                else
+                                {
+                                    index = count - 1;
+                                }
+                            }
+                            else
+                            {
+                                index = count + 1;
+                            }
                         }
                         count++;
-                    }
-                    bs.DistanceFromLastStation = minDistance;
+                        IEnumeratorBusStation.MoveNext();
+                    } 
+                    
                 }
+                bs.DistanceFromLastStation = minDistance;
                 stations.Insert(index, bs);
             }
             public void Remove(BusLineStation bs)
