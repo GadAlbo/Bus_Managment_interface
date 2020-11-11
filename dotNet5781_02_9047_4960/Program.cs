@@ -678,7 +678,7 @@ namespace dotNet5781_02_9047_4960
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("there is no lines in this station");
+                        Console.WriteLine("there is no lines in this station or this station is not exist");
                     }
                 }
                 return lines;
@@ -870,15 +870,20 @@ namespace dotNet5781_02_9047_4960
                     case Opitions.print:          //to view the number of killometers each bus has traveled since the last treatment
                         {
                             int opitions;
-                            Console.WriteLine("enter one for serch bus line, and 2 for search a route between two stations");
+                            Console.WriteLine("enter one for serch a statuon's bus lines, and 2 for search a route between two stations");
                             while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
                             {
                                 Console.WriteLine("only enter numbers");
                             }
                             if (opitions == 1)
                             {
-                    
-                            
+                                Console.WriteLine("please enter a bus station munber");
+                                int input1;
+                                while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
+                                {
+                                    Console.WriteLine("only enter numbers");
+                                }
+                                Console.WriteLine(busLines.LinesAtStation(input1));
                             }
                             break;
                         }
