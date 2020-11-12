@@ -93,7 +93,7 @@ namespace dotNet5781_02_9047_4960
                 IEnumeratorBusStation =stations.GetEnumerator();
             }
             public IEnumerator GetEnumerator()
-            { return IEnumeratorBusStation; }
+            { return stations.GetEnumerator(); }
             public BusLineStation Current
             { get
                 { return IEnumeratorBusStation.Current; } 
@@ -689,7 +689,7 @@ namespace dotNet5781_02_9047_4960
             }
             public IEnumerator GetEnumerator()
             {
-                return IEnumeratorBusStation;
+                return busLines.GetEnumerator();
             }
 
             public bool MoveNext()
