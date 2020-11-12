@@ -14,7 +14,10 @@ using System.Xml;
 namespace dotNet5781_02_9047_4960
 {
     class Program
-    {  
+    {
+        /* foreach (BusLineStation busS in stations)
+                {
+                }*/
         const double TimeForMeter = 0.01; // the time who take us to move a meter
         public class BusStation
         {
@@ -85,7 +88,7 @@ namespace dotNet5781_02_9047_4960
                 DistanceFromLastStation = 0;
             }
         }
-        public class BusStationCollention : IEnumerable, IEnumerator<BusLineStation>
+        public class BusStationCollention : IEnumerable
         {
             public List<BusLineStation> stations;
             IEnumerator<BusLineStation> IEnumeratorBusStation;
@@ -96,31 +99,16 @@ namespace dotNet5781_02_9047_4960
             }
             public IEnumerator GetEnumerator()
             { return stations.GetEnumerator(); }
-            public BusLineStation Current
-            { get
-                { return IEnumeratorBusStation.Current; } 
-            }
-
-            object IEnumerator.Current => IEnumeratorBusStation.Current;
-
-            public bool MoveNext()
-            {
-                return IEnumeratorBusStation.MoveNext();
-            }
-            public void Reset()
-            {
-                IEnumeratorBusStation = stations.GetEnumerator();
-            }
             public bool Equals(BusLineStation bs)
             {
-                IEnumerator<BusLineStation> IEnumeratorBusStation = stations.GetEnumerator();
-                while (IEnumeratorBusStation.MoveNext())
+                foreach (BusLineStation busS in stations)
                 {
-                    if (IEnumeratorBusStation.Current.BusStationKey == bs.BusStationKey)
+                    if (busS.BusStationKey == bs.BusStationKey)
                     {
                         return true;
                     }
                 }
+
                 return false;
             }
             public void Add(BusLineStation bs)//adds the new station to the nearest station
@@ -229,9 +217,6 @@ namespace dotNet5781_02_9047_4960
             {
                 return Distance(stations.First<BusLineStation>(), stations.Last<BusLineStation>());
             }
-
-            public void Dispose()
-            { }//IEnumerator<t> requires me to have this func but i dont need it
         }
         public class Bus
         {
@@ -632,7 +617,7 @@ namespace dotNet5781_02_9047_4960
                 return -1;
             }
         }
-        public class BusLineCollection : IEnumerable, IEnumerator<BusLine>
+        public class BusLineCollection : IEnumerable
         {
             private readonly List<BusLine> busLines;
             public IEnumerator<BusLine> IEnumeratorBusStation;
@@ -643,15 +628,6 @@ namespace dotNet5781_02_9047_4960
                     return busLines;
                 }
             }
-
-            public BusLine Current
-            {
-                get
-                {
-                    return IEnumeratorBusStation.Current;
-                }
-            }
-            object IEnumerator.Current => IEnumeratorBusStation.Current;
 
             public void Add(BusLine bus)
             {
@@ -693,26 +669,15 @@ namespace dotNet5781_02_9047_4960
             {
                 return busLines.GetEnumerator();
             }
-
-            public bool MoveNext()
-            {
-                return IEnumeratorBusStation.MoveNext();
-            }
-
-            public void Reset()
-            {
-                IEnumeratorBusStation.Reset();
-            }
             public int FindAline(int number)
             {
                 int count = 0;
                 IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
-                while (IEnumeratorBusLines.MoveNext())
+                foreach(BusLine busL in busLines)
                 {
-                    if (IEnumeratorBusLines.Current.BusLineNumber == number)
+                    if (busL.BusLineNumber == number)
                         return count;
                     count++;
-
                 }
                 return -1;
             }
@@ -721,10 +686,6 @@ namespace dotNet5781_02_9047_4960
                 busLines.Sort();
                 return busLines;
             }
-
-            public void Dispose()
-            { }//IEnumerator<t> requires me to have this func but i dont need it
-
             public BusLine this[int i]
             {
                 get
@@ -745,7 +706,6 @@ namespace dotNet5781_02_9047_4960
         static void Main(string[] args)
         {
             BusLineCollection busLines = new BusLineCollection();
-            
             for (int i = 0; i < 10; i++)
             {
                 BusLine bus = new BusLine();
@@ -941,7 +901,7 @@ namespace dotNet5781_02_9047_4960
                                 foreach (BusLine bus in busLines)
                                 {
                                     Console.WriteLine(bus);
-                                    Console.WriteLine(bus.);
+                                    Console.WriteLine(bus);
                                 }
                             }
                             break;
