@@ -97,9 +97,9 @@ namespace dotNet5781_02_9047_4960
                 stations = new List<BusLineStation>();
                 IEnumeratorBusStation =stations.GetEnumerator();
             }
-            public IEnumerator GetEnumerator()
+            public IEnumerator GetEnumerator()// return iterator
             { return stations.GetEnumerator(); }
-            public bool Equals(BusLineStation bs)
+            public bool Equals(BusLineStation bs)// check if bs and this are the same
             {
                 foreach (BusLineStation busS in stations)
                 {
@@ -152,49 +152,48 @@ namespace dotNet5781_02_9047_4960
                 bs.DistanceFromLastStation = minDistance;
                 stations.Insert(index, bs);
             }
-            public void Remove(BusLineStation bs)
+            public void Remove(BusLineStation bs) //delete elemet
             {
                 stations.Remove(bs);
             }
-            public double Distance(BusLineStation first, BusLineStation last)
+            public double Distance(BusLineStation first, BusLineStation last)// returm the distance between two stations
             {
-                if (last.BusStationKey == first.BusStationKey)
+                if (last.BusStationKey == first.BusStationKey)// if the first and the last station are same
                 {
                     return 0;
                 }
                 IEnumerator<BusLineStation> IEnumeratorBusStation = stations.GetEnumerator();
                 double Distance = 0;
-                while (IEnumeratorBusStation.MoveNext())
+                while (IEnumeratorBusStation.MoveNext())// while the list not end
                 {
-                    if (IEnumeratorBusStation.Current.BusStationKey == last.BusStationKey)
+                    if (IEnumeratorBusStation.Current.BusStationKey == last.BusStationKey)// if the last station is before the first
                     {
                         return -1;
                     }
-                    if (IEnumeratorBusStation.Current.BusStationKey == first.BusStationKey)
+                    if (IEnumeratorBusStation.Current.BusStationKey == first.BusStationKey)// we in the first station
                     {
                         IEnumerator<BusLineStation> help = IEnumeratorBusStation;
-                        while ((help.MoveNext()) && help.Current.BusStationKey != last.BusStationKey)
+                        while ((help.MoveNext()) && help.Current.BusStationKey != last.BusStationKey)// while we are not at last, and ir is not the end of the list 
                         {
-                            Distance += IEnumeratorBusStation.Current.Distance(help.Current);
+                            Distance += IEnumeratorBusStation.Current.Distance(help.Current);// add the distance between the close stations
                             IEnumeratorBusStation.MoveNext();
 
                         }
-                        if (help.Current == null)
+                        if (help.Current == null)// if last is not in the list
                         {
                             return -1;
                         }
-                        Distance += IEnumeratorBusStation.Current.Distance(help.Current);
+                        Distance += IEnumeratorBusStation.Current.Distance(help.Current);// add the distance between the privios and last station
                         return Distance;
                     }
                 }
-
                 return -1;
             }
-            public BusStationCollention CreatNewBusStationCollention(BusLineStation first, BusLineStation last)
+            public BusStationCollention CreatNewBusStationCollention(BusLineStation first, BusLineStation last)// creat a BusStationCollention while first is the first station and last is the last
             {
                 BusStationCollention bs = new BusStationCollention();
                 IEnumerator<BusLineStation> IEnumeratorBusStation = stations.GetEnumerator();
-                while (IEnumeratorBusStation.MoveNext())
+                while (IEnumeratorBusStation.MoveNext())// while the list not end
                 {
                     if (IEnumeratorBusStation.Current.BusStationKey == first.BusStationKey)
                     {
