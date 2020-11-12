@@ -124,8 +124,7 @@ namespace dotNet5781_02_9047_4960
                 return false;
             }
             public void Add(BusLineStation bs)//adds the new station to the nearest station
-            {
-               
+            { 
                 int index = 0;
                 double minDistance=0;
                 IEnumerator<BusLineStation> IEnumeratorBusStation = stations.GetEnumerator();
@@ -133,6 +132,7 @@ namespace dotNet5781_02_9047_4960
                 {
                     IEnumerator<BusLineStation> IEnumeratorBusStationNext = IEnumeratorBusStation;
                     int count = 1;
+                    index = count;
                     minDistance = IEnumeratorBusStation.Current.Distance(bs);    //set initial minimum distance to the distance
                     while (IEnumeratorBusStationNext.MoveNext())
                     {
@@ -632,7 +632,7 @@ namespace dotNet5781_02_9047_4960
                 return -1;
             }
         }
-        public class BusLineCollection : IEnumerable, IEnumerator
+        public class BusLineCollection : IEnumerable, IEnumerator<BusLine>
         {
             private readonly List<BusLine> busLines;
             public IEnumerator<BusLine> IEnumeratorBusStation;
@@ -644,13 +644,14 @@ namespace dotNet5781_02_9047_4960
                 }
             }
 
-            public object Current
+            public BusLine Current
             {
                 get
                 {
                     return IEnumeratorBusStation.Current;
                 }
             }
+            object IEnumerator.Current => IEnumeratorBusStation.Current;
 
             public void Add(BusLine bus)
             {
@@ -720,6 +721,10 @@ namespace dotNet5781_02_9047_4960
                 busLines.Sort();
                 return busLines;
             }
+
+            public void Dispose()
+            { }//IEnumerator<t> requires me to have this func but i dont need it
+
             public BusLine this[int i]
             {
                 get
