@@ -19,9 +19,9 @@ namespace dotNet5781_02_9047_4960
         public class BusStation
         {
             readonly Random r = new Random(DateTime.Now.Millisecond);// random number for the cordinate
-            private static int staticBusStationKey = 1; // the key number- make sure that is no 
+            private static int staticBusStationKey = 1; // the key number- make sure that is no two stations with the same number  
             private int busStationKey;
-            public int BusStationKey
+            public int BusStationKey// the station number
             {
                 get
                 {
@@ -33,9 +33,9 @@ namespace dotNet5781_02_9047_4960
                 }
             }
 
-            private readonly string address;
+            private readonly string address; // the station adress
             private readonly GeoCoordinate coordinates;
-            public GeoCoordinate Coordinates
+            public GeoCoordinate Coordinates// the station cordinats
             {
                 get
                 {
@@ -44,20 +44,20 @@ namespace dotNet5781_02_9047_4960
             }
 
 
-            public BusStation()
+            public BusStation()//constractor
             {
-                BusStationKey = staticBusStationKey;
+                BusStationKey = staticBusStationKey; // add the station number
                 staticBusStationKey++;
-                double latitude = r.NextDouble() * (33.3 - 31) + 31;
-                double longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;
-                coordinates.Latitude = latitude;
-                coordinates.Longitude = longitude;
+                double latitude = r.NextDouble() * (33.3 - 31) + 31;// random latitude
+                double longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;// random longitude
+                coordinates.Latitude = latitude;//add latitude
+                coordinates.Longitude = longitude;//add longitude
                 Console.WriteLine("Please give us the address of the station or enter");
-                address = Console.ReadLine();
+                address = Console.ReadLine();// add adress
                 Console.WriteLine("the bus station that was created is");
                 Console.WriteLine(this);
             }
-            public BusStation(int key)
+            public BusStation(int key) // create a station with key
             {
                 BusStationKey = key;
             }
@@ -65,7 +65,7 @@ namespace dotNet5781_02_9047_4960
             {
                 return "Bus Station Code: " + BusStationKey + ", " + coordinates.Latitude + "°N " + coordinates.Longitude + "°E\n";
             }
-            public double Distance(BusStation bs)
+            public double Distance(BusStation bs)// distance between this stations and bs
             {
                 return ((coordinates.GetDistanceTo(bs.coordinates)));
             }
@@ -74,27 +74,27 @@ namespace dotNet5781_02_9047_4960
         public class BusLineStation : BusStation
         {
             private double distanceFromLastStation;
-            public double DistanceFromLastStation { get { return distanceFromLastStation; } set { distanceFromLastStation = value; } }
-            public double TimeFromLastStation { get { return distanceFromLastStation*TimeForMeter; }}
-            public BusLineStation()
+            public double DistanceFromLastStation { get { return distanceFromLastStation; } set { distanceFromLastStation = value; } } // diatance from privious station
+            public double TimeFromLastStation { get { return distanceFromLastStation*TimeForMeter; } } // time is take to move between privious station
+            public BusLineStation()// constractor
             {
                 DistanceFromLastStation = 0;
             }
-            public BusLineStation(int key): base(key)
+            public BusLineStation(int key): base(key)// constractor with key
             {
                 DistanceFromLastStation = 0;
             }
         }
         public class BusStationCollention : IEnumerable, IEnumerator<BusLineStation>
         {
-            public List<BusLineStation> stations;
+            public List<BusLineStation> stations;// the list of the stations
             IEnumerator<BusLineStation> IEnumeratorBusStation;
-            public BusStationCollention()
+            public BusStationCollention()// constractor
             {
                 stations = new List<BusLineStation>();
                 IEnumeratorBusStation =stations.GetEnumerator();
             }
-            public IEnumerator GetEnumerator()
+            public IEnumerator GetEnumerator()// get iterator
             { return IEnumeratorBusStation; }
             public BusLineStation Current
             { get
@@ -938,10 +938,10 @@ namespace dotNet5781_02_9047_4960
                             }
                             if(opitions==2)
                             {
-                                foreach (BusLine bus in busLines)
+                                foreach (BusLineCollection bus in busLines)
                                 {
-                                    Console.WriteLine(bus);
-                                    Console.WriteLine(bus.);
+                                    Console.WriteLine(bus.Current);
+                                  
                                 }
                             }
                             break;
