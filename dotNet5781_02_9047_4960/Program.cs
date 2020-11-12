@@ -639,21 +639,18 @@ namespace dotNet5781_02_9047_4960
             }
             public List<BusLine> LinesAtStation(int StationNumber)
             {
-                bool flag = false;
                 List<BusLine> lines = new List<BusLine>();
-                IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
                 BusLineStation station = new BusLineStation(StationNumber);
-                while (IEnumeratorBusLines.MoveNext())
+                foreach (BusLine bs in busLines)
                 {
                     try
-
                     {
-                        if (IEnumeratorBusLines.Current.IsBusStation(station))
+                        
+                        if (bs.IsBusStation(station))
                         {
-                            lines.Add(IEnumeratorBusLines.Current);
-                            flag = true;
+                            lines.Add(bs);
                         }
-                        if (flag == false)
+                        else
                         {
                             throw new Exception();
                         }
@@ -691,12 +688,11 @@ namespace dotNet5781_02_9047_4960
                 get
                 {
                     IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
-                    while (IEnumeratorBusLines.MoveNext())
+                    foreach  (BusLine bs in busLines)
                     {
-                        if (IEnumeratorBusLines.Current.BusLineNumber == i)
-                            return IEnumeratorBusLines.Current;
+                        if (bs.BusLineNumber == i)
+                            return bs;
                     }
-
                     throw new ArgumentException();
                 }
 
