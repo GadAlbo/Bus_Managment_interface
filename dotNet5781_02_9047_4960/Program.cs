@@ -5,19 +5,21 @@ using System.Device.Location;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace dotNet5781_02_9047_4960
 {
     class Program
     {  
-        const double TimeForMeter = 0.01;
+        const double TimeForMeter = 0.01; // the time who take us to move a meter
         public class BusStation
         {
-            readonly Random r = new Random(DateTime.Now.Millisecond);
-            private static int staticBusStationKey = 1;
+            readonly Random r = new Random(DateTime.Now.Millisecond);// random number for the cordinate
+            private static int staticBusStationKey = 1; // the key number- make sure that is no 
             private int busStationKey;
             public int BusStationKey
             {
@@ -743,6 +745,7 @@ namespace dotNet5781_02_9047_4960
         static void Main(string[] args)
         {
             BusLineCollection busLines = new BusLineCollection();
+            
             for (int i = 0; i < 10; i++)
             {
                 BusLine bus = new BusLine();
@@ -920,7 +923,27 @@ namespace dotNet5781_02_9047_4960
                         }
                     case Opitions.print:
                         {
-
+                            Console.WriteLine("if you want to print all of the lines- enter one, if you want to print all of the stations- enter 2");
+                            int opitions;
+                            while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
+                            {
+                                Console.WriteLine("only enter numbers");
+                            }
+                            if (opitions == 1) 
+                            { 
+                            foreach (BusLine bus in busLines)
+                            {
+                                Console.WriteLine(bus.BusLineNumber);
+                            }
+                            }
+                            if(opitions==2)
+                            {
+                                foreach (BusLine bus in busLines)
+                                {
+                                    Console.WriteLine(bus);
+                                    Console.WriteLine(bus.);
+                                }
+                            }
                             break;
                         }
                     case Opitions.exit:
