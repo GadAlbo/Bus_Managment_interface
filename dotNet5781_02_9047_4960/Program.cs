@@ -37,12 +37,16 @@ namespace dotNet5781_02_9047_4960
             }
 
             private readonly string address; // the station adress
-            private readonly GeoCoordinate coordinates;
+            private GeoCoordinate coordinates;
             public GeoCoordinate Coordinates// the station cordinats
             {
                 get
                 {
                     return coordinates;
+                }    
+                set
+                {
+                    coordinates = value;
                 }
             }
 
@@ -53,8 +57,8 @@ namespace dotNet5781_02_9047_4960
                 staticBusStationKey++;
                 double latitude = r.NextDouble() * (33.3 - 31) + 31;// random latitude
                 double longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;// random longitude
-                coordinates.Latitude = latitude;//add latitude
-                coordinates.Longitude = longitude;//add longitude
+                Coordinates.Latitude = latitude;//add latitude
+                Coordinates.Longitude = longitude;//add longitude
                 Console.WriteLine("Please give us the address of the station or enter");
                 address = Console.ReadLine();// add adress
                 Console.WriteLine("the bus station that was created is");
@@ -895,8 +899,12 @@ namespace dotNet5781_02_9047_4960
                             {
                                 foreach (BusLineCollection bus in busLines)
                                 {
-                                    Console.WriteLine(bus);
-                                    Console.WriteLine(bus.);
+                                    foreach(BusLine line in bus.BusLines)
+                                    {
+                                        
+                                    }
+
+                                   
                                 }
                             }
                             break;
