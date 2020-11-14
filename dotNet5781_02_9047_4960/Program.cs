@@ -53,6 +53,7 @@ namespace dotNet5781_02_9047_4960
                 staticBusStationKey++;
                 double latitude = r.NextDouble() * (33.3 - 31) + 31;// random latitude
                 double longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;// random longitude
+                coordinates = new GeoCoordinate();
                 coordinates.Latitude = latitude;//add latitude
                 coordinates.Longitude = longitude;//add longitude
                 Console.WriteLine("Please give us the address of the station or enter");
@@ -79,7 +80,7 @@ namespace dotNet5781_02_9047_4960
             private double distanceFromLastStation;
             public double DistanceFromLastStation { get { return distanceFromLastStation; } set { distanceFromLastStation = value; } } // diatance from privious station
             public double TimeFromLastStation { get { return distanceFromLastStation*TimeForMeter; } } // time is take to move between privious station
-            public BusLineStation()// constractor
+            public BusLineStation():base()// constractor
             {
                 DistanceFromLastStation = 0;
             }
@@ -620,6 +621,11 @@ namespace dotNet5781_02_9047_4960
         {
             private readonly List<BusLine> busLines;
             public IEnumerator<BusLine> IEnumeratorBusStation;
+            public BusLineCollection()
+            {
+                busLines = new List<BusLine>();
+                IEnumeratorBusStation = busLines.GetEnumerator();
+            }
             public List<BusLine> BusLines
             {
                 get
@@ -778,7 +784,7 @@ namespace dotNet5781_02_9047_4960
                             try
                             {
                                 if (opitions == 1)
-                               {
+                                {
                                     Console.WriteLine("please enter a bus line number");
                                     int input;
                                     while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
@@ -793,38 +799,39 @@ namespace dotNet5781_02_9047_4960
                                     {
                                         throw new Exception();
                                     }
-                                    }
-                                    if (opitions == 2)
+                                }
+                                if (opitions == 2)
+                                {
+                                    Console.WriteLine("please enter a bus line number");
+                                    int input1;
+                                    while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
                                     {
-                                        Console.WriteLine("please enter a bus line number");
-                                        int input1;
-                                        while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
+                                        Console.WriteLine("only enter numbers");
+                                    }
+                                    if (busLines.FindAline(input1) != -1)
+                                    {
+                                        Console.WriteLine("please enter a station number number");
+                                        int input2;
+                                        while (!Int32.TryParse(Console.ReadLine(), out input2))        //trying to get the users chosen option
                                         {
                                             Console.WriteLine("only enter numbers");
                                         }
-                                        if (busLines.FindAline(input1) != -1)
+                                        if (busLines[busLines.FindAline(input2)].Equals(input2))
                                         {
-                                            Console.WriteLine("please enter a station number number");
-                                            int input2;
-                                            while (!Int32.TryParse(Console.ReadLine(), out input2))        //trying to get the users chosen option
-                                            {
-                                                Console.WriteLine("only enter numbers");
-                                            }
-                                            if (busLines[busLines.FindAline(input2)].Equals(input2))
-                                            {
-                                                busLines[busLines.FindAline(input2)].DeleteStition(input2);
-                                            }
-                                            else
-                                            {
-                                                throw new Exception();
-                                            }
+                                            busLines[busLines.FindAline(input2)].DeleteStition(input2);
                                         }
                                         else
                                         {
                                             throw new Exception();
                                         }
                                     }
+                                    else
+                                    {
+                                        throw new Exception();
+                                    }
+                                }
                             }
+                            
                             catch (Exception)
                             {
                                     Console.WriteLine("this bus line is not exsist");
@@ -896,7 +903,7 @@ namespace dotNet5781_02_9047_4960
                                 foreach (BusLineCollection bus in busLines)
                                 {
                                     Console.WriteLine(bus);
-                                    Console.WriteLine(bus.);
+                                    Console.WriteLine(bus);
                                 }
                             }
                             break;
