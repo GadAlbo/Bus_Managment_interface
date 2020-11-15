@@ -22,7 +22,7 @@ namespace dotNet5781_02_9047_4960
         public class BusStation
         {
             readonly Random r = new Random(DateTime.Now.Millisecond);// random number for the cordinate
-            private static int staticBusStationKey = 1; // the key number- make sure that is no two stations with the same number  
+            public static readonly int staticBusStationKey = 1; // the key number- make sure that is no two stations with the same number  
             private int busStationKey;
             public int BusStationKey// the station number
             {
