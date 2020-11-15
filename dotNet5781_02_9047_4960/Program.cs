@@ -22,7 +22,7 @@ namespace dotNet5781_02_9047_4960
         public class BusStation
         {
             readonly Random r = new Random(DateTime.Now.Millisecond);// random number for the cordinate
-            public static readonly int staticBusStationKey = 1; // the key number- make sure that is no two stations with the same number  
+            public static int staticBusStationKey = 1; // the key number- make sure that is no two stations with the same number  
             private int busStationKey;
             public int BusStationKey// the station number
             {
@@ -681,9 +681,9 @@ namespace dotNet5781_02_9047_4960
                 IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
                 foreach(BusLine busL in busLines)
                 {
+                    count++;
                     if (busL.BusLineNumber == number)
                         return count;
-                    count++;
                 }
                 return -1;
             }
@@ -780,7 +780,7 @@ namespace dotNet5781_02_9047_4960
                     case Opitions.delete:             //refuel or checkup bus
                         {
                             int opitions;
-                            Console.WriteLine("enter one for delete a bus line, and 2 for delete a station");
+                            Console.WriteLine("enter one to delete a bus line, and 2 to delete a station");
                             while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
                             {
                                 Console.WriteLine("only enter numbers");
@@ -804,7 +804,7 @@ namespace dotNet5781_02_9047_4960
                                         throw new Exception();
                                     }
                                 }
-                                if (opitions == 2)
+                                else if (opitions == 2)
                                 {
                                     Console.WriteLine("please enter a bus line number");
                                     int input1;
@@ -834,11 +834,15 @@ namespace dotNet5781_02_9047_4960
                                         throw new Exception();
                                     }
                                 }
+                                else
+                                {
+                                    Console.WriteLine("Can not translate the desired result base on the input, please try again");
+                                }
                             }
                             
                             catch (Exception)
                             {
-                                    Console.WriteLine("this bus line is not exsist");
+                                    Console.WriteLine("this bus line does not exsist");
                             }          
                             break;
                         }
@@ -907,7 +911,7 @@ namespace dotNet5781_02_9047_4960
                                 foreach (BusLineCollection bus in busLines)
                                 {
                                     Console.WriteLine(bus);
-                                    Console.WriteLine(bus.);
+                                    Console.WriteLine(bus);
                                 }
                             }
                             break;
