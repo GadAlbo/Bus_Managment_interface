@@ -22,7 +22,7 @@ namespace dotNet5781_02_9047_4960
         public class BusStation
         {
             readonly Random r = new Random(DateTime.Now.Millisecond);// random number for the cordinate
-            private static int staticBusStationKey = 1; // the key number- make sure that is no two stations with the same number  
+            public static int staticBusStationKey = 1; // the key number- make sure that is no two stations with the same number  
             private int busStationKey;
             public int BusStationKey// the station number
             {
@@ -886,7 +886,7 @@ namespace dotNet5781_02_9047_4960
                                     lineCollection.Sort();
                             }
                                 break;
-                        }
+                        
                     case Opitions.print:
                         {
                             Console.WriteLine("if you want to print all of the lines- enter one, if you want to print all of the stations- enter 2");
@@ -895,22 +895,23 @@ namespace dotNet5781_02_9047_4960
                             {
                                 Console.WriteLine("only enter numbers");
                             }
-                            if (opitions == 1) 
-                            { 
-                            foreach (BusLine bus in busLines)
+                            if (opitions == 1)
                             {
-                                Console.WriteLine(bus.BusLineNumber);
-                            }
-                            }
-                            if(opitions==2)
-                            {
-                                foreach (BusLineCollection bus in busLines)
+                                foreach (BusLine bus in busLines)
                                 {
-                                    Console.WriteLine(bus);
-                                    Console.WriteLine(bus.);
+                                    Console.WriteLine(bus.BusLineNumber);
                                 }
                             }
-                            break;
+                            if (opitions == 2)
+                            {
+                                for (int i = 0; i < BusStation.staticBusStationKey; i++)
+                                {
+                                    Console.WriteLine("the station number is" + i);
+                                    Console.WriteLine(busLines.LinesAtStation(i));
+
+                                }
+                                break;
+                            }
                         }
                     case Opitions.exit:
                         {
