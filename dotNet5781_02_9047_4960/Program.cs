@@ -37,12 +37,16 @@ namespace dotNet5781_02_9047_4960
             }
 
             private readonly string address; // the station adress
-            private readonly GeoCoordinate coordinates;
+            private GeoCoordinate coordinates;
             public GeoCoordinate Coordinates// the station cordinats
             {
                 get
                 {
                     return coordinates;
+                }    
+                set
+                {
+                    coordinates = value;
                 }
             }
 
@@ -903,7 +907,7 @@ namespace dotNet5781_02_9047_4960
                                 foreach (BusLineCollection bus in busLines)
                                 {
                                     Console.WriteLine(bus);
-                                    Console.WriteLine(bus);
+                                    Console.WriteLine(bus.);
                                 }
                             }
                             break;
