@@ -620,6 +620,19 @@ namespace dotNet5781_02_9047_4960
                 }
                 return -1;
             }
+            public BusLineStation this[int i]
+            {
+                get
+                {
+                    foreach (BusLineStation bs in stations)
+                    {
+                        if (bs.BusStationKey==i)
+                            return bs;
+                    }
+                    throw new ArgumentException();
+                }
+
+            }
         }
         public class BusLineCollection : IEnumerable
         {
@@ -760,10 +773,27 @@ namespace dotNet5781_02_9047_4960
                                     {
                                         Console.WriteLine("only enter numbers");
                                     }
-                                    BusLineStation st = new BusLineStation();
                                     if (busLines.FindAline(input) != -1)
                                     {
-                                        busLines[busLines.FindAline(input)].AddStition(st);
+                                        Console.WriteLine("1 for a new station 2 for an existing satation");
+                                        int option;
+                                        while ((!Int32.TryParse(Console.ReadLine(), out option)) && ((option == 1) || (option == 2)))       //trying to get the users chosen option
+                                        {
+                                            Console.WriteLine("only enter numbers 1 or 2");
+                                        }
+                                        if (option == 1)
+                                        {
+                                            busLines[busLines.FindAline(input)].AddStition(new BusLineStation());
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("enter the existing bus station number that you want to add");
+                                            while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
+                                            {
+                                                Console.WriteLine("only enter numbers");
+                                            }
+                                            busLines[busLines.FindAline(input)].AddStition(busLines[busLines.FindAline(input)][input]);
+                                        }
                                     }
                                     else
                                     {
