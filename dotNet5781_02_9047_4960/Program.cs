@@ -764,6 +764,55 @@ namespace dotNet5781_02_9047_4960
                 }
                 busLines.Add(bus);
             }
+
+            Console.WriteLine("add 10 existing station to your choosen bus line");
+            for(int i=0;i<10;i++)
+            {
+                Console.WriteLine("please enter the bus line number");
+                int input;
+                while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
+                {
+                    Console.WriteLine("only enter numbers");
+                }
+                if (busLines.FindAline(input) != -1)
+                {
+                    Console.WriteLine("enter the existing bus station number that you want to add");
+                    int stationInput;
+                    while (!Int32.TryParse(Console.ReadLine(), out stationInput))        //trying to get the users chosen option
+                    {
+                        Console.WriteLine("only enter numbers");
+                    }
+                    BusLineStation theWantedStation = null;
+                    bool flage = false;
+                    foreach (BusLine bs in busLines)
+                    {
+                        if (bs.BusLineNumber != input)
+                        {
+                            try
+                            {
+                                theWantedStation = new BusLineStation(bs[stationInput]);
+                                flage = true;
+                            }
+                            catch { }
+                        }
+                    }
+                    if (flage)
+                    {
+                        busLines[busLines.FindAline(input)].AddStition(theWantedStation);
+                        Console.WriteLine("the add was sucsesful");
+                    }
+                    else
+                    {
+                        Console.WriteLine("the station number does not exist, please try again");
+                        i--;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("the bus line number you entered does not exist");
+                    i--;
+                }
+            }
             Opitions op;
             int optionC;
             do
@@ -1159,4 +1208,25 @@ Addres1_10
 Addres2_10
 Addres3_10
 Addres4_10
+2
+12
+3
+5
+2
+22
+7
+14
+7
+2
+8
+1
+1
+35
+10
+10
+4
+4
+1
+38
+
 */
