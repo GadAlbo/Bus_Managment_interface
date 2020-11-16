@@ -567,7 +567,13 @@ namespace dotNet5781_02_9047_4960
             }
             public override string ToString()// override tostring
             {
-                return "BusLine: " + busLineNumber + " Area:" + area + "\n" + " stions:\n" + stations.ToString();
+                string help = " ";
+                foreach(BusLineStation station in stations)
+                {
+                    help += station.BusStationKey;
+                    help += " ";
+                }
+                return "BusLine: " + busLineNumber + " Area:" + area + "\n" + " stions:\n" + help;
             }
             public void AddStition(BusLineStation bs)// add a station to the line
             {
@@ -683,6 +689,7 @@ namespace dotNet5781_02_9047_4960
                 catch (Exception)
                 {
                     Console.WriteLine("there is no lines in this station or this station is not exist");
+                    return null;
                 }
                 return lines;
             }
@@ -949,7 +956,11 @@ namespace dotNet5781_02_9047_4960
                                     if (busLines.LinesAtStation(i) != null)// if i not deleted
                                     {
                                         Console.WriteLine("the station number is" + i);
-                                        Console.WriteLine(busLines.LinesAtStation(i));
+                                       List<BusLine> buses=(busLines.LinesAtStation(i));
+                                        foreach(BusLine bus in buses)
+                                        {
+                                            Console.WriteLine(bus);
+                                        }
                                     }
                                 }
                                 break;
