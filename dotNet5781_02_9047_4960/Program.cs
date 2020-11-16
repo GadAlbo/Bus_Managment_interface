@@ -910,9 +910,11 @@ namespace dotNet5781_02_9047_4960
                             {
                                 for (int i = 0; i < BusStation.staticBusStationKey; i++)
                                 {
-                                    Console.WriteLine("the station number is" + i);
-                                    Console.WriteLine(busLines.LinesAtStation(i));
-
+                                    if (busLines.LinesAtStation(i) != null)
+                                    {
+                                        Console.WriteLine("the station number is" + i);
+                                        Console.WriteLine(busLines.LinesAtStation(i));
+                                    }
                                 }
                                 break;
                             }
