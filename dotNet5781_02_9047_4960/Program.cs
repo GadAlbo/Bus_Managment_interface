@@ -221,6 +221,16 @@ namespace dotNet5781_02_9047_4960
             {
                 return Distance(stations.First<BusLineStation>(), stations.Last<BusLineStation>());// send the first and the last station to distance
             }
+            public BusLineStation find(int index)// find a station by index
+            {
+                foreach(BusLineStation lineStation in stations)
+                {
+                    if (lineStation.BusStationKey == index)
+                        return lineStation;
+                }
+                Console.WriteLine("this station not found");
+                return null;
+            }
         }
         public class Bus
         {
@@ -581,7 +591,7 @@ namespace dotNet5781_02_9047_4960
             }
             public void DeleteStition(int key)// delete a station from the line
             {
-                stations.Remove(new BusLineStation(key));
+                stations.Remove(stations.find(key));
             }
             public double Distance(BusLineStation first, BusLineStation last)// return the diistance between two stations
             {
@@ -860,9 +870,9 @@ namespace dotNet5781_02_9047_4960
                                         {
                                             Console.WriteLine("only enter numbers");
                                         }
-                                        if (busLines[busLines.FindAline(input2)].Equals(input2))// id the station exsist
+                                        if (busLines[busLines.FindAline(input1)].IsBusStation(new BusLineStation(input2)))// id the station exsist
                                         {
-                                            busLines[busLines.FindAline(input2)].DeleteStition(input2);// delelet
+                                            busLines[busLines.FindAline(input1)].DeleteStition(input2);// delelet
                                         }
                                         else
                                         {
