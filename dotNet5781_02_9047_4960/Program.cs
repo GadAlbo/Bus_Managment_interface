@@ -768,9 +768,9 @@ namespace dotNet5781_02_9047_4960
                                     else
                                     {
                                         throw new Exception();
-                                     }
+                                    }
                                 }
-                                catch(Exception)
+                                catch (Exception)
                                 {
                                     Console.WriteLine("this bus line is not exist");
                                 }
@@ -839,11 +839,11 @@ namespace dotNet5781_02_9047_4960
                                     Console.WriteLine("Can not translate the desired result base on the input, please try again");
                                 }
                             }
-                            
+
                             catch (Exception)
                             {
-                                    Console.WriteLine("this bus line does not exsist");
-                            }          
+                                Console.WriteLine("this bus line does not exsist");
+                            }
                             break;
                         }
                     case Opitions.search:          //to view the number of killometers each bus has traveled since the last treatment
