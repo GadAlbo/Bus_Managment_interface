@@ -1045,7 +1045,7 @@ namespace dotNet5781_02_9047_4960
                             }
                             if (opitions == 2)// print the stations
                             {
-                                for (int i = 0; i < BusStation.staticBusStationKey; i++)
+                                for (int i = 1; i <= BusStation.staticBusStationKey; i++)
                                 {
                                     if (busLines.LinesAtStation(i) != null)// if i not deleted
                                     {
