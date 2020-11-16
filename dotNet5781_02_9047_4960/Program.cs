@@ -807,7 +807,7 @@ namespace dotNet5781_02_9047_4960
                                     {
                                         Console.WriteLine("1 for a new station 2 for an existing satation");
                                         int option;
-                                        while ((!Int32.TryParse(Console.ReadLine(), out option)) && ((option != 1) && (option != 2)))       //trying to get the users chosen option
+                                        while (!Int32.TryParse(Console.ReadLine(), out option))       //trying to get the users chosen option
                                         {
                                             Console.WriteLine("only enter numbers 1 or 2");
                                         }
@@ -820,7 +820,8 @@ namespace dotNet5781_02_9047_4960
                                         else
                                         {
                                             Console.WriteLine("enter the existing bus station number that you want to add");
-                                            while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
+                                            int stationInput;
+                                            while (!Int32.TryParse(Console.ReadLine(), out stationInput))        //trying to get the users chosen option
                                             {
                                                 Console.WriteLine("only enter numbers");
                                             }
@@ -832,7 +833,7 @@ namespace dotNet5781_02_9047_4960
                                                 {
                                                     try
                                                     {
-                                                        theWantedStation =new BusLineStation (bs[input]);
+                                                        theWantedStation =new BusLineStation (bs[stationInput]);
                                                         flage = true;
                                                     }
                                                     catch { }
