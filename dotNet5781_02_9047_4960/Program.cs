@@ -133,9 +133,9 @@ namespace dotNet5781_02_9047_4960
                         if (IEnumeratorBusStation.Current.Distance(bs) <= minDistance)
                         {
                             minDistance = IEnumeratorBusStation.Current.Distance(bs);
-                            if (IEnumeratorBusStation.Current.Distance(bs) <= IEnumeratorBusStation.Current.Distance(IEnumeratorBusStationNext.Current))
+                            if (IEnumeratorBusStation.Current.Distance(bs) <= IEnumeratorBusStation.Current.Distance(IEnumeratorBusStationNext.Current))// if bs clother to the next
                             {
-                                if (IEnumeratorBusStationNext.Current.Distance(bs) <= IEnumeratorBusStation.Current.Distance(IEnumeratorBusStationNext.Current))
+                                if (IEnumeratorBusStationNext.Current.Distance(bs) <= IEnumeratorBusStation.Current.Distance(IEnumeratorBusStationNext.Current))// if next closer to the first (and not to bs)
                                 {
                                     index = count;
                                 }
@@ -207,7 +207,7 @@ namespace dotNet5781_02_9047_4960
                         {
                             bs.Add(IEnumeratorBusStation.Current);
                         }
-                        if (IEnumeratorBusStation.Current == null)
+                        if (IEnumeratorBusStation.Current == null)// if last is not un the line
                         {
                             return null;
                         }
@@ -217,9 +217,9 @@ namespace dotNet5781_02_9047_4960
                 }
                 return null;
             }
-            public double DistanceWholeLine()
+            public double DistanceWholeLine()// distance from the first to the last station
             {
-                return Distance(stations.First<BusLineStation>(), stations.Last<BusLineStation>());
+                return Distance(stations.First<BusLineStation>(), stations.Last<BusLineStation>());// send the first and the last station to distance
             }
         }
         public class Bus
@@ -499,21 +499,21 @@ namespace dotNet5781_02_9047_4960
                 return "License Number:" + licenseNumber + " total Kilometrage from last checkup:" + killFromLastCheckup;
             }
         }
-        public enum Areas { General, North, South, Center, Jerusalem };
+        public enum Areas { General, North, South, Center, Jerusalem };// the opsional areas
         public class BusLine : Bus, IComparable
         {
             private int busLineNumber;
-            private static int staticBusLineNumber = 1;
-            private readonly BusStationCollention stations;
-            private readonly Areas area;
-            public object FirstbusStation
+            private static int staticBusLineNumber = 1;// static bus line number, make sure there is no two same
+            private readonly BusStationCollention stations;// stations
+            private readonly Areas area;// area
+            public object FirstbusStation// first station
             {
                 get
                 {
                    return stations.stations[1];
                 }
             }
-            public object LastbusStation
+            public object LastbusStation// last atation
             {
                 get
                 {
@@ -524,7 +524,7 @@ namespace dotNet5781_02_9047_4960
                     
                 }
             }
-            public int BusLineNumber
+            public int BusLineNumber// bus number
             {
                 get
                 {
@@ -535,7 +535,7 @@ namespace dotNet5781_02_9047_4960
                     busLineNumber = value;
                 }
             }
-            public BusLine() : base()
+            public BusLine() : base()// constractor
             {
                 stations = new BusStationCollention();
                 busLineNumber = staticBusLineNumber;
@@ -548,7 +548,7 @@ namespace dotNet5781_02_9047_4960
                 }
                 area = (Areas)optionA;
             }
-            public BusLine(BusLine original, BusStationCollention bs, Areas a)
+            public BusLine(BusLine original, BusStationCollention bs, Areas a)// create a sub bus line
             {
                 this.BusLineNumber = original.BusLineNumber;
                 this.StartOfActivity = original.StartOfActivity;
@@ -561,60 +561,60 @@ namespace dotNet5781_02_9047_4960
                 stations = bs;
                 area = a;
             }
-            public bool IsBusStation(BusLineStation bs)
+            public bool IsBusStation(BusLineStation bs)// check if the station exsist in the line
             {
                 return stations.Equals(bs);
             }
-            public override string ToString()
+            public override string ToString()// override tostring
             {
                 return "BusLine: " + busLineNumber + " Area:" + area + "\n" + " stions:\n" + stations.ToString();
             }
-            public void AddStition(BusLineStation bs)
+            public void AddStition(BusLineStation bs)// add a station to the line
             {
                 stations.Add(bs);
             }
-            public void DeleteStition(int key)
+            public void DeleteStition(int key)// delete a station from the line
             {
                 stations.Remove(new BusLineStation(key));
             }
-            public double Distance(BusLineStation first, BusLineStation last)
+            public double Distance(BusLineStation first, BusLineStation last)// return the diistance between two stations
             {
-                double distanceBetweenFiratAndLast = stations.Distance(first, last);
-                if (distanceBetweenFiratAndLast != -1)
+                double distanceBetweenFiratAndLast = stations.Distance(first, last);// return the distance between first and last
+                if (distanceBetweenFiratAndLast != -1)// if first before last
                 {
                     return distanceBetweenFiratAndLast;
                 }
                 Console.WriteLine("last is before first or one of the stations does not exist");
                 return -1;
             }
-            public double Time(BusLineStation first, BusLineStation last)
+            public double Time(BusLineStation first, BusLineStation last)// return the time to drive between first and last 
             {
-                double time = Distance(first, last) * TimeForMeter;
-                if (time >= 0)
+                double time = Distance(first, last) * TimeForMeter;// time*distance
+                if (time >= 0)// if first is before last
                     return time;
                 return -1;
             }
-            public BusLine SubBusLine(BusLineStation first, BusLineStation last)
+            public BusLine SubBusLine(BusLineStation first, BusLineStation last)// return a sub line
             {
-                if (IsBusStation(first))
+                if (IsBusStation(first))// if first exsist
                 {
-                    if (IsBusStation(last))
+                    if (IsBusStation(last))// if last exsist
                     {
-                        return (new BusLine(this, stations.CreatNewBusStationCollention(first, last), area));
+                        return (new BusLine(this, stations.CreatNewBusStationCollention(first, last), area));// return the bus line between first and last
                     }
                     Console.WriteLine(last.BusStationKey + " does not exsist");
                 }
                 Console.WriteLine(first.BusStationKey + " does not exsist");
                 return null;
             }
-            public int CompareTo(object obj)
+            public int CompareTo(object obj)// conpare, ovveride compare to
             {
-                BusLine b = (BusLine)obj;
-                if (this.stations.DistanceWholeLine() == b.stations.DistanceWholeLine())
+                BusLine b = (BusLine)obj;// casting- obj to busLine
+                if (this.stations.DistanceWholeLine() == b.stations.DistanceWholeLine())// the distances are equals
                 {
                     return 0;
                 }
-                if (this.stations.DistanceWholeLine() > b.stations.DistanceWholeLine())
+                if (this.stations.DistanceWholeLine() > b.stations.DistanceWholeLine())// station distance is bigest
                 {
                     return 1;
                 }
