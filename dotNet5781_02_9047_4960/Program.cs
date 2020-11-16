@@ -768,9 +768,9 @@ namespace dotNet5781_02_9047_4960
                                     else
                                     {
                                         throw new Exception();
-                                     }
+                                    }
                                 }
-                                catch(Exception)
+                                catch (Exception)
                                 {
                                     Console.WriteLine("this bus line is not exist");
                                 }
@@ -839,11 +839,11 @@ namespace dotNet5781_02_9047_4960
                                     Console.WriteLine("Can not translate the desired result base on the input, please try again");
                                 }
                             }
-                            
+
                             catch (Exception)
                             {
-                                    Console.WriteLine("this bus line does not exsist");
-                            }          
+                                Console.WriteLine("this bus line does not exsist");
+                            }
                             break;
                         }
                     case Opitions.search:          //to view the number of killometers each bus has traveled since the last treatment
@@ -862,7 +862,7 @@ namespace dotNet5781_02_9047_4960
                                 {
                                     Console.WriteLine("only enter numbers");
                                 }
-                                List<BusLine> buses=(busLines.LinesAtStation(input1));
+                                List<BusLine> buses = (busLines.LinesAtStation(input1));
                             }
                             if (opitions == 2)
                             {
@@ -879,18 +879,18 @@ namespace dotNet5781_02_9047_4960
                                 }
                                 BusLineCollection lineCollection = new BusLineCollection();
                                 List<BusLine> buses1 = busLines.LinesAtStation(input1);
-                                    for(int i=0; i<buses1.Count;i++)
+                                for (int i = 0; i < buses1.Count; i++)
+                                {
+                                    if (buses1[i].IsBusStation(new BusLineStation(input2)))
                                     {
-                                        if(buses1[i].IsBusStation(new BusLineStation(input2)))
-                                        {
-                                            buses1[i].LastbusStation = new BusLineStation(input2);
-                                            lineCollection.Add(buses1[i]);
-                                        }
+                                        buses1[i].LastbusStation = new BusLineStation(input2);
+                                        lineCollection.Add(buses1[i]);
                                     }
-                                    lineCollection.Sort();
+                                }
+                                lineCollection.Sort();
                             }
-                                break;
-                        
+                            break;
+                        }
                     case Opitions.print:
                         {
                             Console.WriteLine("if you want to print all of the lines- enter one, if you want to print all of the stations- enter 2");
@@ -916,6 +916,7 @@ namespace dotNet5781_02_9047_4960
                                 }
                                 break;
                             }
+                            break;
                         }
                     case Opitions.exit:
                         {
