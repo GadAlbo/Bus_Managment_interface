@@ -603,6 +603,10 @@ namespace dotNet5781_02_9047_4960
             {
                 stations.Remove(stations.find(key));
             }
+            public BusLineStation find(int key)
+            {
+                return stations.find(key);
+            }
             public double Distance(BusLineStation first, BusLineStation last)// return the diistance between two stations
             {
                 double distanceBetweenFiratAndLast = stations.Distance(first, last);// return the distance between first and last
@@ -1019,9 +1023,9 @@ namespace dotNet5781_02_9047_4960
                                 List<BusLine> buses1 = busLines.LinesAtStation(input1);// creat list with the lines in station input 1
                                 for (int i = 0; i < buses1.Count; i++)
                                 {
-                                    if (buses1[i].IsBusStation(new BusLineStation(input2)))// if input2 exsist in this line
+                                    if (buses1[i].IsBusStation(buses1[i].find(input2)))// if input2 exsist in this line
                                     {
-                                        if (buses1[i].Distance(new BusLineStation(input1), new BusLineStation(input2)) > -1)// if input 1 is before input2
+                                        if (buses1[i].Distance(buses1[i].find(input1), buses1[i].find(input2)) > -1)// if input 1 is before input2
                                         { 
                                             buses1[i].LastbusStation = new BusLineStation(input2);// add input 2 to the lat station
                                             lineCollection.Add(buses1[i]);// add bus[i] to the coleection
@@ -1029,6 +1033,10 @@ namespace dotNet5781_02_9047_4960
                                     }
                                 }
                                 lineCollection.Sort();// sort
+                                foreach(BusLine bus in lineCollection)
+                                {
+                                    Console.WriteLine(bus);
+                                }
                                 
                             }
                             break;
