@@ -231,6 +231,16 @@ namespace dotNet5781_02_9047_4960
             {
                 return Distance(stations.First<BusLineStation>(), stations.Last<BusLineStation>());// send the first and the last station to distance
             }
+            public BusLineStation find(int index)// find a station by index
+            {
+                foreach(BusLineStation lineStation in stations)
+                {
+                    if (lineStation.BusStationKey == index)
+                        return lineStation;
+                }
+                Console.WriteLine("this station not found");
+                return null;
+            }
         }
         public class Bus
         {
@@ -577,7 +587,13 @@ namespace dotNet5781_02_9047_4960
             }
             public override string ToString()// override tostring
             {
-                return "BusLine: " + busLineNumber + " Area:" + area + "\n" + " stions:\n" + stations.ToString();
+                string help = " ";
+                foreach(BusLineStation station in stations)
+                {
+                    help += station.BusStationKey;
+                    help += " ";
+                }
+                return "BusLine: " + busLineNumber + " Area:" + area + "\n" + " stions:\n" + help;
             }
             public void AddStition(BusLineStation bs)// add a station to the line
             {
@@ -585,7 +601,7 @@ namespace dotNet5781_02_9047_4960
             }
             public void DeleteStition(int key)// delete a station from the line
             {
-                stations.Remove(new BusLineStation(key));
+                stations.Remove(stations.find(key));
             }
             public double Distance(BusLineStation first, BusLineStation last)// return the diistance between two stations
             {
@@ -646,14 +662,14 @@ namespace dotNet5781_02_9047_4960
         }
         public class BusLineCollection : IEnumerable
         {
-            private readonly List<BusLine> busLines;
+            private readonly List<BusLine> busLines;//  line buses collection
             public IEnumerator<BusLine> IEnumeratorBusStation;
-            public BusLineCollection()
+            public BusLineCollection()// constractor
             {
                 busLines = new List<BusLine>();
                 IEnumeratorBusStation = busLines.GetEnumerator();
             }
-            public List<BusLine> BusLines
+            public List<BusLine> BusLines// property
             {
                 get
                 {
@@ -661,36 +677,39 @@ namespace dotNet5781_02_9047_4960
                 }
             }
 
-            public void Add(BusLine bus)
+            public void Add(BusLine bus)// add busline
             {
                 busLines.Add(bus);
             }
-            public void Remove(BusLine bus)
+            public void Remove(BusLine bus)// remove busline
             {
                 busLines.Remove(bus);
             }
-            public List<BusLine> LinesAtStation(int StationNumber)
+            public List<BusLine> LinesAtStation(int StationNumber)// return list of the lines who moved in this station
             {
                 List<BusLine> lines = new List<BusLine>();
                 BusLineStation station = new BusLineStation(StationNumber);
-                foreach (BusLine bs in busLines)
+                bool flag = false;
+                try
                 {
-                    try
+                    foreach (BusLine bs in busLines)
                     {
-                        
-                        if (bs.IsBusStation(station))
+
+                        if (bs.IsBusStation(station))// this station exsist in the line
                         {
-                            lines.Add(bs);
-                        }
-                        else
-                        {
-                            throw new Exception();
+                            lines.Add(bs);// add to the lise
+                            flag = true;
                         }
                     }
-                    catch (Exception)
+                    if(flag==false)// if no line move in this station
                     {
-                        Console.WriteLine("there is no lines in this station or this station is not exist");
+                        throw new Exception();
                     }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("there is no lines in this station or this station is not exist");
+                    return null;
                 }
                 return lines;
             }
@@ -698,24 +717,24 @@ namespace dotNet5781_02_9047_4960
             {
                 return busLines.GetEnumerator();
             }
-            public int FindAline(int number)
+            public int FindAline(int number)// fnd a line and return his index
             {
                 int count = 0;
                 IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
                 foreach(BusLine busL in busLines)
                 {
                     count++;
-                    if (busL.BusLineNumber == number)
+                    if (busL.BusLineNumber == number)// if we find the line
                         return count;
                 }
-                return -1;
+                return -1;// this line not found
             }
-            public List<BusLine> Sort()
+            public List<BusLine> Sort()// sort by distance
             {
                 busLines.Sort();
                 return busLines;
             }
-            public BusLine this[int i]
+            public BusLine this[int i]// indexer
             {
                 get
                 {
@@ -733,6 +752,7 @@ namespace dotNet5781_02_9047_4960
         enum Opitions { add = 0, delete, search, print, exit };   //enum definition
         static void Main(string[] args)
         {
+            // creat 40 stations
             BusLineCollection busLines = new BusLineCollection();
             for (int i = 0; i < 10; i++)
             {
@@ -758,22 +778,22 @@ namespace dotNet5781_02_9047_4960
                 {
                     Console.WriteLine("only enter numbers");
                 }
-                op = (Opitions)optionC;
+                op = (Opitions)optionC;// choose un opstion
                 switch (op)
                 {
-                    case Opitions.add:
+                    case Opitions.add:// add
                         {
                             int opitions;
                             Console.WriteLine("enter one for add a bus line, and 2 for add a station");
                             while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
                             {
                                 Console.WriteLine("only enter numbers");
-                            }
-                            if (opitions == 1)
+                            }//choose 1 or 2
+                            if (opitions == 1)// add a bus line
                             {
                                 busLines.Add(new BusLine());
                             }
-                            if (opitions == 2)
+                            if (opitions == 2)// add a station
                             {
                                 try
                                 {
@@ -841,7 +861,7 @@ namespace dotNet5781_02_9047_4960
                             }
                             break;
                         }
-                    case Opitions.delete:             //refuel or checkup bus
+                    case Opitions.delete:             //delete
                         {
                             int opitions;
                             Console.WriteLine("enter one to delete a bus line, and 2 to delete a station");
@@ -859,16 +879,16 @@ namespace dotNet5781_02_9047_4960
                                     {
                                         Console.WriteLine("only enter numbers");
                                     }
-                                    if (busLines.FindAline(input) != -1)
+                                    if (busLines.FindAline(input) != -1)// is the line exsist
                                     {
-                                        busLines.Remove(busLines[busLines.FindAline(input)]);
+                                        busLines.Remove(busLines[busLines.FindAline(input)]);// delete the line
                                     }
                                     else
                                     {
                                         throw new Exception();
                                     }
                                 }
-                                else if (opitions == 2)
+                                else if (opitions == 2)// delete a station
                                 {
                                     Console.WriteLine("please enter a bus line number");
                                     int input1;
@@ -876,7 +896,7 @@ namespace dotNet5781_02_9047_4960
                                     {
                                         Console.WriteLine("only enter numbers");
                                     }
-                                    if (busLines.FindAline(input1) != -1)
+                                    if (busLines.FindAline(input1) != -1)// if the line exsist
                                     {
                                         Console.WriteLine("please enter a station number number");
                                         int input2;
@@ -884,9 +904,9 @@ namespace dotNet5781_02_9047_4960
                                         {
                                             Console.WriteLine("only enter numbers");
                                         }
-                                        if (busLines[busLines.FindAline(input2)].Equals(input2))
+                                        if (busLines[busLines.FindAline(input1)].IsBusStation(new BusLineStation(input2)))// id the station exsist
                                         {
-                                            busLines[busLines.FindAline(input2)].DeleteStition(input2);
+                                            busLines[busLines.FindAline(input1)].DeleteStition(input2);// delelet
                                         }
                                         else
                                         {
@@ -910,7 +930,7 @@ namespace dotNet5781_02_9047_4960
                             }
                             break;
                         }
-                    case Opitions.search:          //to view the number of killometers each bus has traveled since the last treatment
+                    case Opitions.search:          //to search a line
                         {
                             int opitions;
                             Console.WriteLine("enter one for serch a statuon's bus lines, and 2 for search a route between two stations");
@@ -918,7 +938,7 @@ namespace dotNet5781_02_9047_4960
                             {
                                 Console.WriteLine("only enter numbers");
                             }
-                            if (opitions == 1)
+                            if (opitions == 1)// search lines on a station
                             {
                                 Console.WriteLine("please enter a bus station munber");
                                 int input1;
@@ -926,9 +946,9 @@ namespace dotNet5781_02_9047_4960
                                 {
                                     Console.WriteLine("only enter numbers");
                                 }
-                                List<BusLine> buses = (busLines.LinesAtStation(input1));
+                                List<BusLine> buses = (busLines.LinesAtStation(input1));// creat list of the lines
                             }
-                            if (opitions == 2)
+                            if (opitions == 2)// to search a route between two stations
                             {
                                 Console.WriteLine("please enter a  sorce bus station munber and a destination bus station munber");
                                 int input1;
@@ -941,21 +961,24 @@ namespace dotNet5781_02_9047_4960
                                 {
                                     Console.WriteLine("only enter numbers");
                                 }
-                                BusLineCollection lineCollection = new BusLineCollection();
-                                List<BusLine> buses1 = busLines.LinesAtStation(input1);
+                                BusLineCollection lineCollection = new BusLineCollection();// creat a helper
+                                List<BusLine> buses1 = busLines.LinesAtStation(input1);// creat list with the lines in station input 1
                                 for (int i = 0; i < buses1.Count; i++)
                                 {
-                                    if (buses1[i].IsBusStation(new BusLineStation(input2)))
+                                    if (buses1[i].IsBusStation(new BusLineStation(input2)))// if input2 exsist in this line
                                     {
-                                        buses1[i].LastbusStation = new BusLineStation(input2);
-                                        lineCollection.Add(buses1[i]);
+                                        if (buses1[i].Distance(new BusLineStation(input1), new BusLineStation(input2)) > -1)// if input 1 is before input2
+                                        { 
+                                            buses1[i].LastbusStation = new BusLineStation(input2);// add input 2 to the lat station
+                                            lineCollection.Add(buses1[i]);// add bus[i] to the coleection
+                                        }
                                     }
                                 }
-                                lineCollection.Sort();
+                                lineCollection.Sort();// sort
                             }
                             break;
                         }
-                    case Opitions.print:
+                    case Opitions.print:// print all of the lines or all of the stations
                         {
                             Console.WriteLine("if you want to print all of the lines- enter one, if you want to print all of the stations- enter 2");
                             int opitions;
@@ -963,21 +986,25 @@ namespace dotNet5781_02_9047_4960
                             {
                                 Console.WriteLine("only enter numbers");
                             }
-                            if (opitions == 1)
+                            if (opitions == 1)// print the lines
                             {
                                 foreach (BusLine bus in busLines)
                                 {
                                     Console.WriteLine(bus);
                                 }
                             }
-                            if (opitions == 2)
+                            if (opitions == 2)// print the stations
                             {
                                 for (int i = 0; i < BusStation.staticBusStationKey; i++)
                                 {
-                                    if (busLines.LinesAtStation(i) != null)
+                                    if (busLines.LinesAtStation(i) != null)// if i not deleted
                                     {
                                         Console.WriteLine("the station number is" + i);
-                                        Console.WriteLine(busLines.LinesAtStation(i));
+                                       List<BusLine> buses=(busLines.LinesAtStation(i));
+                                        foreach(BusLine bus in buses)
+                                        {
+                                            Console.WriteLine(bus);
+                                        }
                                     }
                                 }
                                 break;
