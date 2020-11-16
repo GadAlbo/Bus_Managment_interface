@@ -77,6 +77,12 @@ namespace dotNet5781_02_9047_4960
             {
                 return ((coordinates.GetDistanceTo(bs.coordinates)));
             }
+            public BusStation(BusStation original)
+            {
+                BusStationKey = original.busStationKey; // add the station number
+                coordinates = original.Coordinates;
+                address = original.address;
+            }
 
         }
         public class BusLineStation : BusStation
@@ -91,6 +97,10 @@ namespace dotNet5781_02_9047_4960
             public BusLineStation(int key): base(key)// constractor with key
             {
                 DistanceFromLastStation = 0;
+            }
+            public BusLineStation(BusLineStation original):base(original)
+            {
+                distanceFromLastStation = original.distanceFromLastStation;
             }
         }
         public class BusStationCollention : IEnumerable
@@ -777,13 +787,15 @@ namespace dotNet5781_02_9047_4960
                                     {
                                         Console.WriteLine("1 for a new station 2 for an existing satation");
                                         int option;
-                                        while ((!Int32.TryParse(Console.ReadLine(), out option)) && ((option == 1) || (option == 2)))       //trying to get the users chosen option
+                                        while ((!Int32.TryParse(Console.ReadLine(), out option)) && ((option != 1) && (option != 2)))       //trying to get the users chosen option
                                         {
                                             Console.WriteLine("only enter numbers 1 or 2");
                                         }
                                         if (option == 1)
                                         {
                                             busLines[busLines.FindAline(input)].AddStition(new BusLineStation());
+                                            Console.WriteLine("the add was sucsesful");
+                                            break;
                                         }
                                         else
                                         {
@@ -792,7 +804,29 @@ namespace dotNet5781_02_9047_4960
                                             {
                                                 Console.WriteLine("only enter numbers");
                                             }
-                                            busLines[busLines.FindAline(input)].AddStition(busLines[busLines.FindAline(input)][input]);
+                                            BusLineStation theWantedStation=null;
+                                            bool flage = false;
+                                            foreach (BusLine bs in busLines)
+                                            {
+                                                if(bs.BusLineNumber!= input)
+                                                {
+                                                    try
+                                                    {
+                                                        theWantedStation =new BusLineStation (bs[input]);
+                                                        flage = true;
+                                                    }
+                                                    catch { }
+                                                }
+                                            }
+                                            if(flage)
+                                            {
+                                                busLines[busLines.FindAline(input)].AddStition(theWantedStation);
+                                                Console.WriteLine("the add was sucsesful");
+                                            }
+                                            else
+                                            {
+                                                throw new Exception();//the station was never found
+                                            }
                                         }
                                     }
                                     else
@@ -802,7 +836,7 @@ namespace dotNet5781_02_9047_4960
                                 }
                                 catch (Exception)
                                 {
-                                    Console.WriteLine("this bus line is not exist");
+                                    Console.WriteLine("this bus line does not exist");
                                 }
                             }
                             break;
