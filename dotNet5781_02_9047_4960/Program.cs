@@ -983,7 +983,7 @@ namespace dotNet5781_02_9047_4960
                     case Opitions.search:          //to search a line
                         {
                             int opitions;
-                            Console.WriteLine("enter one for serch a statuon's bus lines, and 2 for search a route between two stations");
+                            Console.WriteLine("enter one to serch a statuon's bus lines, and 2 to search a route between two stations");
                             while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
                             {
                                 Console.WriteLine("only enter numbers");
@@ -997,6 +997,10 @@ namespace dotNet5781_02_9047_4960
                                     Console.WriteLine("only enter numbers");
                                 }
                                 List<BusLine> buses = (busLines.LinesAtStation(input1));// creat list of the lines
+                                foreach (BusLine bs in buses)
+                                {
+                                    Console.WriteLine(bs);
+                                }
                             }
                             if (opitions == 2)// to search a route between two stations
                             {
@@ -1025,6 +1029,7 @@ namespace dotNet5781_02_9047_4960
                                     }
                                 }
                                 lineCollection.Sort();// sort
+                                
                             }
                             break;
                         }
