@@ -10,11 +10,26 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Runtime.Serialization;
+
 
 namespace dotNet5781_02_9047_4960
 {
     class Program
     {
+        [Serializable]
+        public class NotExsist:Exception
+        {
+            public NotExsist() : base() { }
+            public NotExsist(string massege) : base(massege) { }
+            public NotExsist(string massege, Exception inner):base (massege, inner) { }
+            protected NotExsist(SerializationInfo info, StreamingContext context) : base( info, context) { }
+            public override string ToString()
+            {
+                return base.Message;
+            }
+
+        }
         /* foreach (BusLineStation busS in stations)
                 {
                 }*/
@@ -707,12 +722,12 @@ namespace dotNet5781_02_9047_4960
                     }
                     if(flag==false)// if no line move in this station
                     {
-                        throw new Exception();
+                        throw new NotExsist("there is no lines in this station or this station is not exist");
                     }
                 }
-                catch (Exception)
+                catch (NotExsist x)
                 {
-                    Console.WriteLine("there is no lines in this station or this station is not exist");
+                    Console.WriteLine(x);
                     return null;
                 }
                 return lines;
@@ -899,18 +914,18 @@ namespace dotNet5781_02_9047_4960
                                             }
                                             else
                                             {
-                                                throw new Exception();//the station was never found
+                                                throw new NotExsist("this bus station does not exist");//the station was never found
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        throw new Exception();
+                                        throw new NotExsist("this bus line does not exist");
                                     }
                                 }
-                                catch (Exception)
+                                catch (NotExsist x)
                                 {
-                                    Console.WriteLine("this bus line does not exist");
+                                    Console.WriteLine(x);
                                 }
                             }
                             break;
@@ -939,7 +954,7 @@ namespace dotNet5781_02_9047_4960
                                     }
                                     else
                                     {
-                                        throw new Exception();
+                                        throw new NotExsist("this line bus not exsist");
                                     }
                                 }
                                 else if (opitions == 2)// delete a station
@@ -964,12 +979,12 @@ namespace dotNet5781_02_9047_4960
                                         }
                                         else
                                         {
-                                            throw new Exception();
+                                            throw new NotExsist("this bus station is not exsist");
                                         }
                                     }
                                     else
                                     {
-                                        throw new Exception();
+                                        throw new NotExsist("this bus line is not exsist");
                                     }
                                 }
                                 else
@@ -978,9 +993,9 @@ namespace dotNet5781_02_9047_4960
                                 }
                             }
 
-                            catch (Exception)
+                            catch (NotExsist x)
                             {
-                                Console.WriteLine("this bus line does not exsist");
+                                Console.WriteLine(x);
                             }
                             break;
                         }
@@ -1023,7 +1038,7 @@ namespace dotNet5781_02_9047_4960
                                 List<BusLine> buses1 = busLines.LinesAtStation(input1);// creat list with the lines in station input 1
                                 for (int i = 0; i < buses1.Count; i++)
                                 {
-                                    if (buses1[i].IsBusStation(buses1[i].find(input2)))// if input2 exsist in this line
+                                    if ((buses1[i].find(input2) !=null ))// if input2 exsist in this line
                                     {
                                         if (buses1[i].Distance(buses1[i].find(input1), buses1[i].find(input2)) > -1)// if input 1 is before input2
                                         { 
