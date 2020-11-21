@@ -11,20 +11,17 @@
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-VerticalAlignment="Stretch" Width="auto">
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="cbBusLines" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch"         Grid.Column="1"/>
-            <TextBox x:Name ="tbArea" HorizontalAlignment= "Stretch" TextWrapping="Wrap" Text="{Binding Path=Area}" VerticalAlignment="Stretch" Grid.Column="3"/>
-            <Label x:Name="label" HorizontalAlignment="Left" Margin="272,0,0,0" VerticalAlignment="Top">
-                <Label x:Name="label1" Content="Label" Height="48" Width="56" RenderTransformOrigin="-3.255,0.522"/>
-            </Label>
-            <Label x:Name="label2" Content="Label" HorizontalAlignment="Left" Margin="659,-5,0,0" VerticalAlignment="Top" Height="63" Width="58"/>
+            <ComboBox x:Name="cbBusLines" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" FontFamily="SimSun" FontSize="24"/>
+            <TextBox x:Name ="tbArea" HorizontalAlignment= "Stretch" TextWrapping="Wrap" Text="{Binding Path=Area}" VerticalAlignment="Stretch" Grid.Column="3" FontFamily="SimSun" FontSize="24"/>
+            <Label x:Name="bsNumber" Content="Bus Line Number:" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="0" FontFamily="SimSun" FontSize="24"/>
+            <Label x:Name="Area" Content="Area:" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="2" FontFamily="SimSun" FontSize="24"/>
         </Grid>
         <ListBox x:Name="lbBusLineStations" HorizontalAlignment= "Stretch" Margin="37,47,579.333,63.667" Grid.Row="1" VerticalAlignment="Stretch" ItemsSource="{Binding}"/>
     </Grid>
