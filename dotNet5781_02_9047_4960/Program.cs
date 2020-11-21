@@ -15,7 +15,7 @@ using System.Runtime.Serialization;
 
 namespace dotNet5781_02_9047_4960
 {
-    class Program
+    public class Program
     {
         [Serializable]
         public class NotExsist:Exception
