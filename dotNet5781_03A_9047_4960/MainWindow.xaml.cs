@@ -31,7 +31,7 @@ namespace dotNet5781_03A_9047_4960
                 busLineCollection.Add(busLine);
                 for(int j=0;j<2;j++)
                 {
-
+                    busLineCollection[i].AddStition(new dotNet5781_02_9047_4960.Program.BusLineStation());
                 }
             }
             InitializeComponent();
