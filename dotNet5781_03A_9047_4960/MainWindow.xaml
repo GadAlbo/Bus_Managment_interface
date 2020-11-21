@@ -26,5 +26,6 @@ VerticalAlignment="Stretch" Width="auto">
             </Label>
             <Label x:Name="label2" Content="Label" HorizontalAlignment="Left" Margin="659,-5,0,0" VerticalAlignment="Top" Height="63" Width="58"/>
         </Grid>
+        <ListBox x:Name="lbBusLineStations" HorizontalAlignment= "Stretch" Margin="37,47,579.333,63.667" Grid.Row="1" VerticalAlignment="Stretch" ItemsSource="{Binding}"/>
     </Grid>
 </Window>
