@@ -753,6 +753,12 @@ namespace dotNet5781_02_9047_4960
                 busLines.Sort();
                 return busLines;
             }
+
+            public void Add(BusLineStation busLineStation)
+            {
+                throw new NotImplementedException();
+            }
+
             public BusLine this[int i]// indexer
             {
                 get
