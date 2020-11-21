@@ -26,6 +26,7 @@ namespace dotNet5781_03A_9047_4960
         {
             dotNet5781_02_9047_4960.Program.BusLineCollection busLineCollection = new dotNet5781_02_9047_4960.Program.BusLineCollection();
             InitializeComponent();
+
         }
     }
 }
