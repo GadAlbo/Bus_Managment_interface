@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03A_9047_4960"
         mc:Ignorable="d"
-        Title="MainWindow" Height="640" Width="800">
-    <Grid Name="MainGrid">
+        Title="myBusWindow" Height="640" Width="800">
+    <Grid Name="MainGrid" Background="#FFF689C0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
@@ -19,12 +19,12 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="cbBusLines" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" FontFamily="Hadassah Friedlaender" FontSize="24"/>
-            <TextBox x:Name ="tbArea"  HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Text="Asainged area" Grid.Column="3" FontFamily="Hadassah Friedlaender" FontSize="24"/>
+            <ComboBox x:Name="cbBusLines" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" FontFamily="Hadassah Friedlaender" FontSize="24" Background="#FFB76EBD" Foreground="#FF488AC0" BorderBrush="#FFB76EBD" OpacityMask="Black"/>
+            <TextBox x:Name ="tbArea"  HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Text="Asainged area" Grid.Column="3" FontFamily="Hadassah Friedlaender" FontSize="24" Background="#FFB76EBD"/>
             <Label x:Name="bsNumber" Content="Bus Line Number:" HorizontalAlignment= "Center" VerticalAlignment="Center" Grid.Column="0" FontFamily="Hadassah Friedlaender" FontSize="24"/>
             <Label x:Name="Area" Content="Area:" HorizontalAlignment= "Center" VerticalAlignment="Center" Grid.Column="2" FontFamily="Hadassah Friedlaender" FontSize="24"/>
         </Grid>
-        <ListBox x:Name="lbBusLineStations" HorizontalAlignment= "Stretch" Margin="37,47,579.333,63.667" Grid.Row="1" VerticalAlignment="Stretch" ItemsSource="{Binding}"/>
+        <ListBox x:Name="lbBusLineStations" HorizontalAlignment= "Stretch" Margin="37,47,579.333,63.667" Grid.Row="1" VerticalAlignment="Stretch" ItemsSource="{Binding}" Background="#FFB76EBD"/>
     </Grid>
 </Window>
 
