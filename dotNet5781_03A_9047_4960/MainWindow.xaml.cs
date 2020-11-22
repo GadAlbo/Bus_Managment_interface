@@ -40,6 +40,7 @@ namespace dotNet5781_03A_9047_4960
             cbBusLines.SelectedIndex = 0;
             ShowBusLine();
             private dotNet5781_02_9047_4960.Program.BusLine currentDisplayBusLine;
+ 
         private void ShowBusLine(int index)
         {
             currentDisplayBusLine = busLineCollection[index];
