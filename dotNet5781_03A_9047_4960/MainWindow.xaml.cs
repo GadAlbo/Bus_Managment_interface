@@ -37,16 +37,18 @@ namespace dotNet5781_03A_9047_4960
             }
             InitializeComponent();
             cbBusLines.ItemsSource = busLineCollection;
-            cbBusLines.DisplayMemberPath = " BusLineNum ";
-            cbBusLines.SelectedIndex = 1;
-            //ShowBusLine(cbBusLines.SelectedIndex);
+            cbBusLines.DisplayMemberPath = "BusLineNumber";
+            //cbBusLines.SelectedIndex = 0;
+
+
+           // ShowBusLine(cbBusLines.SelectedIndex+1);
         }
         private void ShowBusLine(int index)
         {
             currentDisplayBusLine = busLineCollection[index];
             UpGrid.DataContext = currentDisplayBusLine;
             lbBusLineStations.DataContext = currentDisplayBusLine.stations;
-           // tbArea.Text= busLineCollection[index].
+            tbArea.Text = busLineCollection[index].area.ToString();
         }
         private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
