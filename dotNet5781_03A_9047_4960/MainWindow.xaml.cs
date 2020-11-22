@@ -1,7 +1,6 @@
 ﻿using System;
 using dotNet5781_02_9047_4960;
 using System.Collections.Generic;
-using dotNet5781_02_9047_4960;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +24,7 @@ namespace dotNet5781_03A_9047_4960
         public MainWindow()
         {
             dotNet5781_02_9047_4960.Program.BusLineCollection busLineCollection = new dotNet5781_02_9047_4960.Program.BusLineCollection();
-            for(int i=0;i<10;i++)
+            for(int i=1;i<11;i++)
             {
                 dotNet5781_02_9047_4960.Program.BusLine busLine = new dotNet5781_02_9047_4960.Program.BusLine();
                 busLineCollection.Add(busLine);
