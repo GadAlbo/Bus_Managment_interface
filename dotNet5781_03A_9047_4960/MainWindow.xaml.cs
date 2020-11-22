@@ -46,6 +46,7 @@ namespace dotNet5781_03A_9047_4960
             currentDisplayBusLine = busLineCollection[index];
             UpGrid.DataContext = currentDisplayBusLine;
             lbBusLineStations.DataContext = currentDisplayBusLine.stations;
+           // tbArea.Text= busLineCollection[index].
         }
         private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
