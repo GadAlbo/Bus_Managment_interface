@@ -37,10 +37,10 @@ namespace dotNet5781_03A_9047_4960
             InitializeComponent();
             cbBusLines.ItemsSource = busLineCollection;
             cbBusLines.DisplayMemberPath = " BusLineNum ";
-            cbBusLines.SelectedIndex = ;
-            ShowBusLine();
-            private dotNet5781_02_9047_4960.Program.BusLine currentDisplayBusLine;
- 
+            cbBusLines.SelectedIndex = 1;
+            ShowBusLine(cbBusLines.SelectedIndex);
+        }
+           private dotNet5781_02_9047_4960.Program.BusLine currentDisplayBusLine;
         private void ShowBusLine(int index)
         {
             currentDisplayBusLine = busLineCollection[index];
