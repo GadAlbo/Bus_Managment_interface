@@ -22,6 +22,7 @@ namespace dotNet5781_03A_9047_4960
     public partial class MainWindow : Window
     {
         dotNet5781_02_9047_4960.Program.BusLineCollection busLineCollection = new dotNet5781_02_9047_4960.Program.BusLineCollection();
+        private dotNet5781_02_9047_4960.Program.BusLine currentDisplayBusLine;
         public MainWindow()
         {
             for (int i = 1; i < 11; i++)
@@ -40,7 +41,6 @@ namespace dotNet5781_03A_9047_4960
             cbBusLines.SelectedIndex = 1;
             ShowBusLine(cbBusLines.SelectedIndex);
         }
-           private dotNet5781_02_9047_4960.Program.BusLine currentDisplayBusLine;
         private void ShowBusLine(int index)
         {
             currentDisplayBusLine = busLineCollection[index];
