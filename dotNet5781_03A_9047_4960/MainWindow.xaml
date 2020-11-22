@@ -19,7 +19,7 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="cbBusLines" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" FontFamily="SimSun" FontSize="24"/>
+            <ComboBox x:Name="cbBusLines" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" FontFamily="SimSun" FontSize="24" SelectionChanged="cbBusLines_SelectionChanged"/>
             <TextBox x:Name ="tbArea" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Text="{Binding Path=Area}" Grid.Column="3" FontFamily="SimSun" FontSize="24"/>
             <Label x:Name="bsNumber" Content="Bus Line Number:" HorizontalAlignment= "Center" VerticalAlignment="Center" Grid.Column="0" FontFamily="SimSun" FontSize="24"/>
             <Label x:Name="Area" Content="Area:" HorizontalAlignment= "Center" VerticalAlignment="Center" Grid.Column="2" FontFamily="SimSun" FontSize="24"/>

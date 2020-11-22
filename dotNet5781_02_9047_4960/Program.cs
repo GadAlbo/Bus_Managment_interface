@@ -18,12 +18,12 @@ namespace dotNet5781_02_9047_4960
     public class Program
     {
         [Serializable]
-        public class NotExsist:Exception
+        public class NotExsist : Exception
         {
             public NotExsist() : base() { }
             public NotExsist(string massege) : base(massege) { }
-            public NotExsist(string massege, Exception inner):base (massege, inner) { }
-            protected NotExsist(SerializationInfo info, StreamingContext context) : base( info, context) { }
+            public NotExsist(string massege, Exception inner) : base(massege, inner) { }
+            protected NotExsist(SerializationInfo info, StreamingContext context) : base(info, context) { }
             public override string ToString()
             {
                 return base.Message;
@@ -58,7 +58,7 @@ namespace dotNet5781_02_9047_4960
                 get
                 {
                     return coordinates;
-                }    
+                }
                 set
                 {
                     coordinates = value;
@@ -115,16 +115,16 @@ namespace dotNet5781_02_9047_4960
         {
             private double distanceFromLastStation;
             public double DistanceFromLastStation { get { return distanceFromLastStation; } set { distanceFromLastStation = value; } } // diatance from privious station
-            public double TimeFromLastStation { get { return distanceFromLastStation*TimeForMeter; } } // time is take to move between privious station
-            public BusLineStation():base()// constractor
+            public double TimeFromLastStation { get { return distanceFromLastStation * TimeForMeter; } } // time is take to move between privious station
+            public BusLineStation() : base()// constractor
             {
                 DistanceFromLastStation = 0;
             }
-            public BusLineStation(int key): base(key)// constractor with key
+            public BusLineStation(int key) : base(key)// constractor with key
             {
                 DistanceFromLastStation = 0;
             }
-            public BusLineStation(BusLineStation original):base(original)
+            public BusLineStation(BusLineStation original) : base(original)
             {
                 distanceFromLastStation = original.distanceFromLastStation;
             }
@@ -136,7 +136,7 @@ namespace dotNet5781_02_9047_4960
             public BusStationCollention()// constractor
             {
                 stations = new List<BusLineStation>();
-                IEnumeratorBusStation =stations.GetEnumerator();
+                IEnumeratorBusStation = stations.GetEnumerator();
             }
             public IEnumerator GetEnumerator()// return iterator
             { return stations.GetEnumerator(); }
@@ -153,9 +153,9 @@ namespace dotNet5781_02_9047_4960
                 return false;
             }
             public void Add(BusLineStation bs)//adds the new station to the nearest station
-            { 
+            {
                 int index = 0;
-                double minDistance=0;
+                double minDistance = 0;
                 IEnumerator<BusLineStation> IEnumeratorBusStation = stations.GetEnumerator();
                 if (IEnumeratorBusStation.MoveNext())//moves to the first element
                 {
@@ -165,7 +165,7 @@ namespace dotNet5781_02_9047_4960
                     minDistance = IEnumeratorBusStation.Current.Distance(bs);    //set initial minimum distance to the distance
                     while (IEnumeratorBusStationNext.MoveNext())
                     {
-                        
+
                         if (IEnumeratorBusStation.Current.Distance(bs) <= minDistance)
                         {
                             minDistance = IEnumeratorBusStation.Current.Distance(bs);
@@ -187,8 +187,8 @@ namespace dotNet5781_02_9047_4960
                         }
                         count++;
                         IEnumeratorBusStation.MoveNext();
-                    } 
-                    
+                    }
+
                 }
                 bs.DistanceFromLastStation = minDistance;
                 stations.Insert(index, bs);
@@ -259,7 +259,7 @@ namespace dotNet5781_02_9047_4960
             }
             public BusLineStation find(int index)// find a station by index
             {
-                foreach(BusLineStation lineStation in stations)
+                foreach (BusLineStation lineStation in stations)
                 {
                     if (lineStation.BusStationKey == index)
                         return lineStation;
@@ -531,9 +531,9 @@ namespace dotNet5781_02_9047_4960
             {
                 Random w = new Random();
                 int y = w.Next(1, 2050);
-                startOfActivity = new DateTime(y, w.Next(1, 12),w.Next(1, 28) ); // trys to cunstract a datetime, if it doesnt work sends an exsseption
+                startOfActivity = new DateTime(y, w.Next(1, 12), w.Next(1, 28)); // trys to cunstract a datetime, if it doesnt work sends an exsseption
                 if (y < 2018)
-                    LicenseNumber = w.Next(1111111,9999999).ToString();
+                    LicenseNumber = w.Next(1111111, 9999999).ToString();
                 else
                 {
                     licenseNumber = w.Next(11111111, 99999999).ToString();
@@ -563,13 +563,13 @@ namespace dotNet5781_02_9047_4960
         {
             private int busLineNumber;
             private static int staticBusLineNumber = 1;// static bus line number, make sure there is no two same
-            private readonly BusStationCollention stations;// stations
+            public readonly BusStationCollention stations;// stations
             private readonly Areas area;// area
             public object FirstbusStation// first station
             {
                 get
                 {
-                   return stations.stations[1];
+                    return stations.stations[1];
                 }
             }
             public object LastbusStation// last atation
@@ -580,7 +580,7 @@ namespace dotNet5781_02_9047_4960
                 }
                 set
                 {
-                    
+
                 }
             }
             public int BusLineNumber// bus number
@@ -600,7 +600,7 @@ namespace dotNet5781_02_9047_4960
                 busLineNumber = staticBusLineNumber;
                 staticBusLineNumber++;
                 Random r = new Random();
-                area = (Areas)r.Next(0,4);
+                area = (Areas)r.Next(0, 4);
             }
             public BusLine(BusLine original, BusStationCollention bs, Areas a)// create a sub bus line
             {
@@ -622,7 +622,7 @@ namespace dotNet5781_02_9047_4960
             public override string ToString()// override tostring
             {
                 string help = " ";
-                foreach(BusLineStation station in stations)
+                foreach (BusLineStation station in stations)
                 {
                     help += station.BusStationKey;
                     help += " ";
@@ -690,7 +690,7 @@ namespace dotNet5781_02_9047_4960
                 {
                     foreach (BusLineStation bs in stations)
                     {
-                        if (bs.BusStationKey==i)
+                        if (bs.BusStationKey == i)
                             return bs;
                     }
                     throw new ArgumentException();
@@ -739,7 +739,7 @@ namespace dotNet5781_02_9047_4960
                             flag = true;
                         }
                     }
-                    if(flag==false)// if no line move in this station
+                    if (flag == false)// if no line move in this station
                     {
                         throw new NotExsist("there is no lines in this station or this station is not exist");
                     }
@@ -759,7 +759,7 @@ namespace dotNet5781_02_9047_4960
             {
                 int count = 0;
                 IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
-                foreach(BusLine busL in busLines)
+                foreach (BusLine busL in busLines)
                 {
                     count++;
                     if (busL.BusLineNumber == number)// if we find the line
@@ -783,7 +783,7 @@ namespace dotNet5781_02_9047_4960
                 get
                 {
                     IEnumerator<BusLine> IEnumeratorBusLines = busLines.GetEnumerator();
-                    foreach  (BusLine bs in busLines)
+                    foreach (BusLine bs in busLines)
                     {
                         if (bs.BusLineNumber == i)
                             return bs;
@@ -793,343 +793,11 @@ namespace dotNet5781_02_9047_4960
 
             }
         }
-        enum Opitions { add = 0, delete, search, print, exit };   //enum definition
-        static void Main(string[] args)
-        {
-            // creat 40 stations
-            BusLineCollection busLines = new BusLineCollection();
-            for (int i = 0; i < 10; i++)
-            {
-                BusLine bus = new BusLine();
-                for (int j = 0; j < 4; j++)
-                {
-                    BusLineStation station = new BusLineStation();
-                    bus.AddStition(station);
-                }
-                busLines.Add(bus);
-            }
-
-            Console.WriteLine("add 10 existing station to your choosen bus line");
-            for(int i=0;i<10;i++)
-            {
-                Console.WriteLine("please enter the bus line number");
-                int input;
-                while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
-                {
-                    Console.WriteLine("only enter numbers");
-                }
-                if (busLines.FindAline(input) != -1)
-                {
-                    Console.WriteLine("enter the existing bus station number that you want to add");
-                    int stationInput;
-                    while (!Int32.TryParse(Console.ReadLine(), out stationInput))        //trying to get the users chosen option
-                    {
-                        Console.WriteLine("only enter numbers");
-                    }
-                    BusLineStation theWantedStation = null;
-                    bool flage = false;
-                    foreach (BusLine bs in busLines)
-                    {
-                        if (bs.BusLineNumber != input)
-                        {
-                            try
-                            {
-                                theWantedStation = new BusLineStation(bs[stationInput]);
-                                flage = true;
-                            }
-                            catch { }
-                        }
-                    }
-                    if (flage)
-                    {
-                        busLines[busLines.FindAline(input)].AddStition(theWantedStation);
-                        Console.WriteLine("the add was sucsesful");
-                    }
-                    else
-                    {
-                        Console.WriteLine("the station number does not exist, please try again");
-                        i--;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("the bus line number you entered does not exist");
-                    i--;
-                }
-            }
-            Opitions op;
-            int optionC;
-            do
-            {
-                Console.WriteLine(
-                   "plese enter 0 to add a bus line or a station\n" +
-                   "plese enter 1 to remove a bus line or a station\n" +
-                   "plese enter 2 to search \n" +
-                   "plese enter 3 to print\n" +
-                   "plese enter 4 to exit");
-                while (!Int32.TryParse(Console.ReadLine(), out optionC))        //trying to get the users chosen option
-                {
-                    Console.WriteLine("only enter numbers");
-                }
-                op = (Opitions)optionC;// choose un opstion
-                switch (op)
-                {
-                    case Opitions.add:// add
-                        {
-                            int opitions;
-                            Console.WriteLine("enter one for add a bus line, and 2 for add a station");
-                            while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
-                            {
-                                Console.WriteLine("only enter numbers");
-                            }//choose 1 or 2
-                            if (opitions == 1)// add a bus line
-                            {
-                                busLines.Add(new BusLine());
-                            }
-                            if (opitions == 2)// add a station
-                            {
-                                try
-                                {
-                                    Console.WriteLine("please enter a bus line number");
-                                    int input;
-                                    while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
-                                    {
-                                        Console.WriteLine("only enter numbers");
-                                    }
-                                    if (busLines.FindAline(input) != -1)
-                                    {
-                                        Console.WriteLine("1 for a new station 2 for an existing satation");
-                                        int option;
-                                        while (!Int32.TryParse(Console.ReadLine(), out option))       //trying to get the users chosen option
-                                        {
-                                            Console.WriteLine("only enter numbers 1 or 2");
-                                        }
-                                        if (option == 1)
-                                        {
-                                            busLines[busLines.FindAline(input)].AddStition(new BusLineStation());
-                                            Console.WriteLine("the add was sucsesful");
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("enter the existing bus station number that you want to add");
-                                            int stationInput;
-                                            while (!Int32.TryParse(Console.ReadLine(), out stationInput))        //trying to get the users chosen option
-                                            {
-                                                Console.WriteLine("only enter numbers");
-                                            }
-                                            BusLineStation theWantedStation=null;
-                                            bool flage = false;
-                                            foreach (BusLine bs in busLines)
-                                            {
-                                                if(bs.BusLineNumber!= input)
-                                                {
-                                                    try
-                                                    {
-                                                        theWantedStation =new BusLineStation (bs[stationInput]);
-                                                        flage = true;
-                                                    }
-                                                    catch { }
-                                                }
-                                            }
-                                            if(flage)
-                                            {
-                                                busLines[busLines.FindAline(input)].AddStition(theWantedStation);
-                                                Console.WriteLine("the add was sucsesful");
-                                            }
-                                            else
-                                            {
-                                                throw new NotExsist("this bus station does not exist");//the station was never found
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        throw new NotExsist("this bus line does not exist");
-                                    }
-                                }
-                                catch (NotExsist x)
-                                {
-                                    Console.WriteLine(x);
-                                }
-                            }
-                            break;
-                        }
-                    case Opitions.delete:             //delete
-                        {
-                            int opitions;
-                            Console.WriteLine("enter one to delete a bus line, and 2 to delete a station");
-                            while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
-                            {
-                                Console.WriteLine("only enter numbers");
-                            }
-                            try
-                            {
-                                if (opitions == 1)
-                                {
-                                    Console.WriteLine("please enter a bus line number");
-                                    int input;
-                                    while (!Int32.TryParse(Console.ReadLine(), out input))        //trying to get the users chosen option
-                                    {
-                                        Console.WriteLine("only enter numbers");
-                                    }
-                                    if (busLines.FindAline(input) != -1)// is the line exsist
-                                    {
-                                        busLines.Remove(busLines[busLines.FindAline(input)]);// delete the line
-                                    }
-                                    else
-                                    {
-                                        throw new NotExsist("this line bus not exsist");
-                                    }
-                                }
-                                else if (opitions == 2)// delete a station
-                                {
-                                    Console.WriteLine("please enter a bus line number");
-                                    int input1;
-                                    while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
-                                    {
-                                        Console.WriteLine("only enter numbers");
-                                    }
-                                    if (busLines.FindAline(input1) != -1)// if the line exsist
-                                    {
-                                        Console.WriteLine("please enter a station number number");
-                                        int input2;
-                                        while (!Int32.TryParse(Console.ReadLine(), out input2))        //trying to get the users chosen option
-                                        {
-                                            Console.WriteLine("only enter numbers");
-                                        }
-                                        if (busLines[busLines.FindAline(input1)].IsBusStation(new BusLineStation(input2)))// id the station exsist
-                                        {
-                                            busLines[busLines.FindAline(input1)].DeleteStition(input2);// delelet
-                                        }
-                                        else
-                                        {
-                                            throw new NotExsist("this bus station is not exsist");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        throw new NotExsist("this bus line is not exsist");
-                                    }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Can not translate the desired result base on the input, please try again");
-                                }
-                            }
-
-                            catch (NotExsist x)
-                            {
-                                Console.WriteLine(x);
-                            }
-                            break;
-                        }
-                    case Opitions.search:          //to search a line
-                        {
-                            int opitions;
-                            Console.WriteLine("enter one to serch a statuon's bus lines, and 2 to search a route between two stations");
-                            while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
-                            {
-                                Console.WriteLine("only enter numbers");
-                            }
-                            if (opitions == 1)// search lines on a station
-                            {
-                                Console.WriteLine("please enter a bus station munber");
-                                int input1;
-                                while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
-                                {
-                                    Console.WriteLine("only enter numbers");
-                                }
-                                List<BusLine> buses = (busLines.LinesAtStation(input1));// creat list of the lines
-                                foreach (BusLine bs in buses)
-                                {
-                                    Console.WriteLine(bs);
-                                }
-                            }
-                            if (opitions == 2)// to search a route between two stations
-                            {
-                                Console.WriteLine("please enter a  sorce bus station munber and a destination bus station munber");
-                                int input1;
-                                while (!Int32.TryParse(Console.ReadLine(), out input1))        //trying to get the users chosen option
-                                {
-                                    Console.WriteLine("only enter numbers");
-                                }
-                                int input2;
-                                while (!Int32.TryParse(Console.ReadLine(), out input2))        //trying to get the users chosen option
-                                {
-                                    Console.WriteLine("only enter numbers");
-                                }
-                                BusLineCollection lineCollection = new BusLineCollection();// creat a helper
-                                List<BusLine> buses1 = busLines.LinesAtStation(input1);// creat list with the lines in station input 1
-                                for (int i = 0; i < buses1.Count; i++)
-                                {
-                                    if ((buses1[i].find(input2) !=null ))// if input2 exsist in this line
-                                    {
-                                        if (buses1[i].Distance(buses1[i].find(input1), buses1[i].find(input2)) > -1)// if input 1 is before input2
-                                        { 
-                                            buses1[i].LastbusStation = new BusLineStation(input2);// add input 2 to the lat station
-                                            lineCollection.Add(buses1[i]);// add bus[i] to the coleection
-                                        }
-                                    }
-                                }
-                                lineCollection.Sort();// sort
-                                foreach(BusLine bus in lineCollection)
-                                {
-                                    Console.WriteLine(bus);
-                                }
-                                
-                            }
-                            break;
-                        }
-                    case Opitions.print:// print all of the lines or all of the stations
-                        {
-                            Console.WriteLine("if you want to print all of the lines- enter one, if you want to print all of the stations- enter 2");
-                            int opitions;
-                            while (!Int32.TryParse(Console.ReadLine(), out opitions))        //trying to get the users chosen option
-                            {
-                                Console.WriteLine("only enter numbers");
-                            }
-                            if (opitions == 1)// print the lines
-                            {
-                                foreach (BusLine bus in busLines)
-                                {
-                                    Console.WriteLine(bus);
-                                }
-                            }
-                            if (opitions == 2)// print the stations
-                            {
-                                for (int i = 1; i <= BusStation.staticBusStationKey; i++)
-                                {
-                                    if (busLines.LinesAtStation(i) != null)// if i not deleted
-                                    {
-                                        Console.WriteLine("the station number is" + i);
-                                       List<BusLine> buses=(busLines.LinesAtStation(i));
-                                        foreach(BusLine bus in buses)
-                                        {
-                                            Console.WriteLine(bus);
-                                        }
-                                    }
-                                }
-                                break;
-                            }
-                            break;
-                        }
-                    case Opitions.exit:
-                        {
-                            Console.WriteLine("have a nice day");
-                        }
-                        break;
-                    default:
-                        {
-                            Console.WriteLine("you enter a wrong number :( , plese try again or enter 4 to exit");
-                            break;
-                        }
-                }
-
-            } while (op != (Opitions)4);
-        }
+        enum Opitions { add = 0, delete, search, print, exit }
     }
-}
+} //enum definition
+       
+       
 
 /*
 2000

@@ -22,20 +22,35 @@ namespace dotNet5781_03A_9047_4960
     /// </summary>
     public partial class MainWindow : Window
     {
+        dotNet5781_02_9047_4960.Program.BusLineCollection busLineCollection = new dotNet5781_02_9047_4960.Program.BusLineCollection();
         public MainWindow()
         {
-            dotNet5781_02_9047_4960.Program.BusLineCollection busLineCollection = new dotNet5781_02_9047_4960.Program.BusLineCollection();
-            for(int i=0;i<10;i++)
+            for (int i = 1; i < 11; i++)
             {
                 dotNet5781_02_9047_4960.Program.BusLine busLine = new dotNet5781_02_9047_4960.Program.BusLine();
                 busLineCollection.Add(busLine);
-                for(int j=0;j<2;j++)
+                for (int j = 0; j < 2; j++)
                 {
-                    busLineCollection[i].AddStition(new dotNet5781_02_9047_4960.Program.BusLineStation());
+                    dotNet5781_02_9047_4960.Program.BusLineStation bs = new dotNet5781_02_9047_4960.Program.BusLineStation();
+                    busLineCollection[i].AddStition(bs);
                 }
             }
             InitializeComponent();
-
+            cbBusLines.ItemsSource = busLineCollection;
+            cbBusLines.DisplayMemberPath = " BusLineNum ";
+            cbBusLines.SelectedIndex = 0;
+            ShowBusLine();
+            private dotNet5781_02_9047_4960.Program.BusLine currentDisplayBusLine;
+        private void ShowBusLine(int index)
+        {
+            currentDisplayBusLine = busLineCollection[index];
+            UpGrid.DataContext = currentDisplayBusLine;
+            lbBusLineStations.DataContext = currentDisplayBusLine.stations;
+        }
+        private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowBusLine((cbBusLines.SelectedValue as dotNet5781_02_9047_4960.Program.BusLine).BusLineNumber);
         }
     }
 }
+
