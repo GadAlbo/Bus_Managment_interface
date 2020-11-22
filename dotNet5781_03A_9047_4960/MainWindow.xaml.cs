@@ -21,7 +21,7 @@ namespace dotNet5781_03A_9047_4960
     /// </summary>
     public partial class MainWindow : Window
     {
-        dotNet5781_02_9047_4960.Program.BusLineCollection busLineCollection = new dotNet5781_02_9047_4960.Program.BusLineCollection();
+        private dotNet5781_02_9047_4960.Program.BusLineCollection busLineCollection = new dotNet5781_02_9047_4960.Program.BusLineCollection();
         private dotNet5781_02_9047_4960.Program.BusLine currentDisplayBusLine;
         public MainWindow()
         {
@@ -52,7 +52,7 @@ namespace dotNet5781_03A_9047_4960
         }
         private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ShowBusLine((cbBusLines.SelectedValue as dotNet5781_02_9047_4960.Program.BusLine).BusLineNumber);
+            ShowBusLine((cbBusLines.SelectedItem as dotNet5781_02_9047_4960.Program.BusLine).BusLineNumber);
         }
     }
 }
