@@ -20,7 +20,7 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <ComboBox x:Name="cbBusLines" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" FontFamily="Hadassah Friedlaender" FontSize="24"/>
-            <TextBox x:Name ="tbArea"  HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Text="asainged area" Grid.Column="3" FontFamily="Hadassah Friedlaender" FontSize="24"/>
+            <TextBox x:Name ="tbArea"  HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Text="Asainged area" Grid.Column="3" FontFamily="Hadassah Friedlaender" FontSize="24"/>
             <Label x:Name="bsNumber" Content="Bus Line Number:" HorizontalAlignment= "Center" VerticalAlignment="Center" Grid.Column="0" FontFamily="Hadassah Friedlaender" FontSize="24"/>
             <Label x:Name="Area" Content="Area:" HorizontalAlignment= "Center" VerticalAlignment="Center" Grid.Column="2" FontFamily="Hadassah Friedlaender" FontSize="24"/>
         </Grid>
