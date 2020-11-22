@@ -564,7 +564,7 @@ namespace dotNet5781_02_9047_4960
             private int busLineNumber;
             private static int staticBusLineNumber = 1;// static bus line number, make sure there is no two same
             public BusStationCollention stations;// stations
-            private readonly Areas area;// area
+            public readonly Areas area;// area
             public object FirstbusStation// first station
             {
                 get
