@@ -29,7 +29,7 @@ namespace dotNet5781_03A_9047_4960
             {
                 dotNet5781_02_9047_4960.Program.BusLine busLine = new dotNet5781_02_9047_4960.Program.BusLine();
                 busLineCollection.Add(busLine);
-                for (int j = 0; j < 2; j++)
+                for (int j = 1; j < 2; j++)
                 {
                     dotNet5781_02_9047_4960.Program.BusLineStation bs = new dotNet5781_02_9047_4960.Program.BusLineStation();
                     busLineCollection[i].AddStition(bs);
