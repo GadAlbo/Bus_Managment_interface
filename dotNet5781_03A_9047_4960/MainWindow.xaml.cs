@@ -50,7 +50,8 @@ namespace dotNet5781_03A_9047_4960
             lbBusLineStations.DataContext = currentDisplayBusLine.stations;
             tbArea.Text = busLineCollection[index].area.ToString();
         }
-        private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void cbBusLines_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             ShowBusLine((cbBusLines.SelectedItem as dotNet5781_02_9047_4960.Program.BusLine).BusLineNumber);
         }
