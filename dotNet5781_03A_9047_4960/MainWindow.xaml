@@ -24,7 +24,7 @@ VerticalAlignment="Stretch" Width="auto" Grid.ColumnSpan="2" Margin="0,0,0.333,0
             <Label x:Name="bsNumber" Content="Bus Line Number:" HorizontalAlignment= "Center" VerticalAlignment="Center" Grid.Column="0" FontFamily="Hadassah Friedlaender" FontSize="24"/>
             <Label x:Name="Area" Content="Area:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" FontFamily="Hadassah Friedlaender" FontSize="24"/>
         </Grid>
-        <ListBox x:Name="lbBusLineStations" HorizontalAlignment= "Stretch" Margin="37,47,320.6,63.4" Grid.Row="1" VerticalAlignment="Stretch" ItemsSource="{Binding}" Background="#FFDB9DD9"/>
+        <ListBox x:Name="lbBusLineStations" HorizontalAlignment= "Stretch" Margin="37,47,320.6,63.4" Grid.Row="1" VerticalAlignment="Stretch" ItemsSource="{Binding}" Background="#FFDB9DD9" FontFamily="SimSun"/>
     </Grid>
 </Window>
 
