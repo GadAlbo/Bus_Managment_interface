@@ -25,23 +25,23 @@ namespace dotNet5781_03A_9047_4960
         private dotNet5781_02_9047_4960.Program.BusLine currentDisplayBusLine;
         public MainWindow()
         {
+            dotNet5781_02_9047_4960.Program.BusLineStation bs;
+            dotNet5781_02_9047_4960.Program.BusLine busLine;
             for (int i = 1; i < 11; i++)
             {
-                dotNet5781_02_9047_4960.Program.BusLine busLine = new dotNet5781_02_9047_4960.Program.BusLine();
+                busLine = new dotNet5781_02_9047_4960.Program.BusLine();
                 busLineCollection.Add(busLine);
-                for (int j = 1; j < 2; j++)
+                for (int j = 0; j < 2; j++)
                 {
-                    dotNet5781_02_9047_4960.Program.BusLineStation bs = new dotNet5781_02_9047_4960.Program.BusLineStation();
+                     bs = new dotNet5781_02_9047_4960.Program.BusLineStation();
                     busLineCollection[i].AddStition(bs);
                 }
             }
             InitializeComponent();
             cbBusLines.ItemsSource = busLineCollection;
             cbBusLines.DisplayMemberPath = "BusLineNumber";
-            //cbBusLines.SelectedIndex = 0;
-
-
-           // ShowBusLine(cbBusLines.SelectedIndex+1);
+            cbBusLines.SelectedIndex = 0;
+            ShowBusLine(cbBusLines.SelectedIndex+1);
         }
         private void ShowBusLine(int index)
         {
