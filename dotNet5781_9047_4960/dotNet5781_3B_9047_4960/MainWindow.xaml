@@ -8,6 +8,9 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="100" Margin="141,99,0,0" VerticalAlignment="Top" Width="100"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Window>
