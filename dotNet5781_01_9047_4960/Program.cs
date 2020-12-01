@@ -139,136 +139,16 @@ using System.Threading.Tasks;
 
             public Bus()
             {
-                bool flag = true;
-                while(flag)//true until we get a corect date 
+                Random w = new Random();
+                int y = w.Next(1, 2050);
+                startOfActivity = new DateTime(y, w.Next(1, 12), w.Next(1, 28)); // trys to cunstract a datetime, if it doesnt work sends an exsseption
+                if (y < 2018)
+                    LicenseNumber = w.Next(1111111, 9999999).ToString();
+                else
                 {
-                    try
-                    {
-                       /* Console.WriteLine("Please Enter The Starting Date Of Activity");
-                        Console.Write("year:");
-                        int yearSA;
-                        while(!Int32.TryParse(Console.ReadLine(),out yearSA))
-                        {
-                            Console.WriteLine("only enter numbers\n"+ "year:");
-                        }
-                        Console.Write("mounth:");
-                        int mounthSA; 
-                        while(!Int32.TryParse(Console.ReadLine(), out mounthSA))
-                        {
-                            Console.WriteLine("only enter numbers\n" + "mounth:");
-                        }
-                        Console.Write("day:");
-                        int daySA;
-                        while(!Int32.TryParse(Console.ReadLine(), out daySA))
-                        {
-                            Console.WriteLine("only enter numbers\n" + "day:");
-                        }*/
-                   
-                        startOfActivity = new DateTime((int)r.Next(1917,2021), mounthSA, daySA); // trys to cunstract a datetime, if it doesnt work sends an exsseption
-                        flag = false;
-                    }
-                    catch (ArgumentOutOfRangeException)//catches exsseption
-                    {
-                        Console.WriteLine("ERROR:start activity date invalid, please try again");
-                    }
-                }
-                flag = true;
-                Console.Write("Please Enter The License Number No Spaces Or - :");
-                LicenseNumber = Console.ReadLine();                                 //lisens number
-                /*Console.WriteLine("If You Would Like To Tell Us More About The Vehicle Please Enter 1. else press any other number to continue"); 
-                int decison;
-                while(!Int32.TryParse(Console.ReadLine(),out decison))
-                {
-                    Console.WriteLine("only enter numbers");
-                }
-                if(decison==1) //if the user wants to tell us more
-                {
-                    int op;
-                   
-                    do
-                    {
-                        Console.WriteLine("enter 0 to add last checkup date\n"
-                        +"enter 1 to add the amount of all the killometers the car has\n"
-                        +"enter 2 to add the amount of all the killometers from last checkup\n"
-                        +"enter 3 to add the amount of all the killometers the car has from last refuel\n"
-                        +"press 4 to end");
-                        while(!Int32.TryParse(Console.ReadLine(),out op))
-                        {
-                            Console.WriteLine("only enter numbers");
-                        }
-                        switch (op)
-                            {
-                            case 0: //adds last checkup date
-                                while (flag) //true until we get a corect date 
-                                {
-                                    try
-                                    {
-                                        Console.WriteLine("Please Enter The Last Checkup Date");
-                                        Console.Write("year:");
-                                        int yearC;
-                                        while(!Int32.TryParse(Console.ReadLine(), out yearC))
-                                        {
-                                            Console.WriteLine("only enter numbers\n"+ "year:");
-                                        }
-                                        Console.Write("mounth:");
-                                        int mounthC;
-                                        while (!Int32.TryParse(Console.ReadLine(), out mounthC))
-                                        {
-                                            Console.WriteLine("only enter numbers\n" + "mounth:");
-                                        }
-                                        Console.Write("day:");
-                                        int dayC;
-                                        while (!Int32.TryParse(Console.ReadLine(), out dayC))
-                                        {
-                                            Console.WriteLine("only enter numbers\n" + "day:");
-                                        }
-                                        LastCheckup = new DateTime(yearC, mounthC, dayC);
-                                        flag = false;
-                                    }
-                                    catch (ArgumentOutOfRangeException)
-                                    {
-                                        Console.WriteLine("Error: last checkup date invalid, please try again");
-                                    }
-                                }
-                                
-                                break;
-                            case 1: // adds the amount of all the killometers the car has
-                                Console.WriteLine("Please Enter The total kl amount");
-                                int allk;
-                                while (!Int32.TryParse(Console.ReadLine(), out allk))
-                                {
-                                    Console.WriteLine("only enter numbers\n" + "total kl:");
-                                }
-                                AllKilometrage = allk;
-                                break;
-                            case 2: //adds the amount of all the killometers from last checkup
-                                Console.WriteLine("Please Enter The  kl amount from last checkup");
-                                int kilometersC;
-                                while (!Int32.TryParse(Console.ReadLine(), out kilometersC))
-                                {
-                                    Console.WriteLine("only enter numbers\n" + "kl amount from last checkup:");
-                                }
-                                KillFromLastCheckup = kilometersC;
-                                break;
-                            case 3: //adds the amount of all the killometers the car has from last refuel
-                                Console.WriteLine("Please Enter The  kl amount from last refuel");
-                                int kilometersR;
-                                while (!Int32.TryParse(Console.ReadLine(), out kilometersR))
-                                {
-                                    Console.WriteLine("only enter numbers\n" + "kl amount from last refuel:");
-                                }
-                                KillFromRefueling = kilometersR;
-                                break;
-                            case 4:
-                                Console.WriteLine("thanks for the aditional information");
-                                break;
-                            default:
-                                Console.WriteLine("please try again:)");
-                                break;
-                            }
-
-                    } while (op!=4); //exit*/
-                }
+                    licenseNumber = w.Next(11111111, 99999999).ToString();
+                }//lisens number
+                LastCheckup = new DateTime(w.Next(1, 2050), w.Next(1, 12), w.Next(1, 28));
             }
             public void AddKilometrage(int addKill) //adds Kilometrage to all the necessary variables
             {
@@ -432,17 +312,5 @@ using System.Threading.Tasks;
     }
 }
 
-    public Bus()
-    {
-        Random w = new Random();
-        int y = w.Next(1, 2050);
-        startOfActivity = new DateTime(y, w.Next(1, 12), w.Next(1, 28)); // trys to cunstract a datetime, if it doesnt work sends an exsseption
-        if (y < 2018)
-            LicenseNumber = w.Next(1111111, 9999999).ToString();
-        else
-        {
-            licenseNumber = w.Next(11111111, 99999999).ToString();
-        }//lisens number
-        LastCheckup = new DateTime(w.Next(1, 2050), w.Next(1, 12), w.Next(1, 28));
-    }
+
   
