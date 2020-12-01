@@ -13,6 +13,7 @@ using System.Threading.Tasks;
         Random r = new Random();
         public class Bus
         {
+            public int num = 55;
             private string licenseNumber;
             public string LicenseNumber //property
             { 
