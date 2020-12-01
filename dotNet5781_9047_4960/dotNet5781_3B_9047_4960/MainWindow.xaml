@@ -7,12 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="100" Margin="141,1.4,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1"/>
-        <ListBox x:Name="busesBox" HorizontalAlignment="Left" Height="261" Margin="27,6.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="182"/>
-        <Label Content="bus managment system" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="759" FontSize="36"/>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" Height="100" Margin="141,1.4,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1"/>
+        <!--<ListBox x:Name="busesBox" HorizontalAlignment="Left" Height="261" Margin="27,6.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="182"/>-->
+        <ListBox Name="busesBox" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding LicenseNumber}" />
+                        <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding num}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="bus managment system" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Height="60" Width="759" FontSize="36"/>
     </Grid>
 </Window>
