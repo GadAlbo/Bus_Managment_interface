@@ -33,6 +33,7 @@ namespace dotNet5781_3B_9047_4960
             buses.buses[0].LastCheckup = new DateTime(2018, 12, 6);
             buses.buses[3].KillFromRefueling = 1198;
             buses.buses[6].KillFromLastCheckup=19997;
+            busesBox.ItemsSource = buses;
             InitializeComponent();
         }
     }
