@@ -30,6 +30,9 @@ namespace dotNet5781_3B_9047_4960
                  bus = new dotNet5781_01_9047_4960.Program.Bus();
                 buses.buses.Add(bus);
             }
+            buses.buses[0].LastCheckup = new DateTime(2018, 12, 6);
+            buses.buses[3].KillFromRefueling = 1198;
+            buses.buses[6].KillFromLastCheckup=19997;
             InitializeComponent();
         }
     }
