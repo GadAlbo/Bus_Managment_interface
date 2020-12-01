@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="100" Margin="141,99,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox x:Name="busesBox" HorizontalAlignment="Left" Height="261" Margin="27,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="182"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="200*"/>
             <RowDefinition Height="400*"/>
