@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 {
     public class Program
     {
+        Random r = new Random();
         public class Bus
         {
             private string licenseNumber;
@@ -143,7 +144,7 @@ using System.Threading.Tasks;
                 {
                     try
                     {
-                        Console.WriteLine("Please Enter The Starting Date Of Activity");
+                       /* Console.WriteLine("Please Enter The Starting Date Of Activity");
                         Console.Write("year:");
                         int yearSA;
                         while(!Int32.TryParse(Console.ReadLine(),out yearSA))
@@ -161,9 +162,9 @@ using System.Threading.Tasks;
                         while(!Int32.TryParse(Console.ReadLine(), out daySA))
                         {
                             Console.WriteLine("only enter numbers\n" + "day:");
-                        }
+                        }*/
                    
-                        startOfActivity = new DateTime(yearSA, mounthSA, daySA); // trys to cunstract a datetime, if it doesnt work sends an exsseption
+                        startOfActivity = new DateTime((int)r.Next(1917,2021), mounthSA, daySA); // trys to cunstract a datetime, if it doesnt work sends an exsseption
                         flag = false;
                     }
                     catch (ArgumentOutOfRangeException)//catches exsseption
@@ -174,7 +175,7 @@ using System.Threading.Tasks;
                 flag = true;
                 Console.Write("Please Enter The License Number No Spaces Or - :");
                 LicenseNumber = Console.ReadLine();                                 //lisens number
-                Console.WriteLine("If You Would Like To Tell Us More About The Vehicle Please Enter 1. else press any other number to continue"); 
+                /*Console.WriteLine("If You Would Like To Tell Us More About The Vehicle Please Enter 1. else press any other number to continue"); 
                 int decison;
                 while(!Int32.TryParse(Console.ReadLine(),out decison))
                 {
@@ -266,7 +267,7 @@ using System.Threading.Tasks;
                                 break;
                             }
 
-                    } while (op!=4); //exit
+                    } while (op!=4); //exit*/
                 }
             }
             public void AddKilometrage(int addKill) //adds Kilometrage to all the necessary variables
