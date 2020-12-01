@@ -36,7 +36,8 @@ namespace dotNet5781_02_9047_4960
         const double TimeForMeter = 0.01; // the time who take us to move a meter
         public class BusStation
         {
-            readonly Random r = new Random(DateTime.Now.Millisecond);// random number for the cordinate
+           // readonly Random r = new Random(DateTime.Now.Millisecond);// random number for the cordinate
+            public static Random r= new Random(DateTime.Now.Millisecond);
             public static int staticBusStationKey = 1; // the key number- make sure that is no two stations with the same number  
             private int busStationKey;
             public int BusStationKey// the station number
@@ -86,6 +87,7 @@ namespace dotNet5781_02_9047_4960
                 staticBusStationKey++;
                 double latitude = r.NextDouble() * (33.3 - 31) + 31;// random latitude
                 double longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;// random longitude
+                
                 coordinates = new GeoCoordinate();
                 coordinates.Latitude = latitude;//add latitude
                 coordinates.Longitude = longitude;//add longitude
@@ -562,6 +564,7 @@ namespace dotNet5781_02_9047_4960
         public class BusLine : Bus, IComparable
         {
             private int busLineNumber;
+            public static Random r = new Random();
             private static int staticBusLineNumber = 1;// static bus line number, make sure there is no two same
             public BusStationCollention stations;// stations
             public readonly Areas area;// area
@@ -599,7 +602,6 @@ namespace dotNet5781_02_9047_4960
                 stations = new BusStationCollention();
                 busLineNumber = staticBusLineNumber;
                 staticBusLineNumber++;
-                Random r = new Random();
                 area = (Areas)r.Next(0, 4);
             }
             public BusLine(BusLine original, BusStationCollention bs, Areas a)// create a sub bus line
