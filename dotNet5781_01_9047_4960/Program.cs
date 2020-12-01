@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace dotNet5781_01_9047_4960
+ namespace dotNet5781_01_9047_4960
 {
     public class Program
     {
-        class Bus
+        public class Bus
         {
             private string licenseNumber;
             public string LicenseNumber //property
