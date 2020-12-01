@@ -14,10 +14,8 @@ namespace dotNet5781_3B_9047_4960
         enbuses.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return buses.GetEnumerator();
         }
         
-
-
     }
 }
