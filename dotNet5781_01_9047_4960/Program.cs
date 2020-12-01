@@ -430,3 +430,18 @@ using System.Threading.Tasks;
         }
     }
 }
+
+    public Bus()
+    {
+        Random w = new Random();
+        int y = w.Next(1, 2050);
+        startOfActivity = new DateTime(y, w.Next(1, 12), w.Next(1, 28)); // trys to cunstract a datetime, if it doesnt work sends an exsseption
+        if (y < 2018)
+            LicenseNumber = w.Next(1111111, 9999999).ToString();
+        else
+        {
+            licenseNumber = w.Next(11111111, 99999999).ToString();
+        }//lisens number
+        LastCheckup = new DateTime(w.Next(1, 2050), w.Next(1, 12), w.Next(1, 28));
+    }
+  
