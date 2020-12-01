@@ -23,6 +23,13 @@ namespace dotNet5781_3B_9047_4960
     {
         public MainWindow()
         {
+            BusLineCollection buses = new BusLineCollection();
+            dotNet5781_01_9047_4960.Program.Bus bus;
+            for (int i=0;i<10;i++)
+            {
+                 bus = new dotNet5781_01_9047_4960.Program.Bus();
+                buses.buses.Add(bus);
+            }
             InitializeComponent();
         }
     }

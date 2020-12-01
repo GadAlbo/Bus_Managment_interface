@@ -11,13 +11,10 @@ namespace dotNet5781_3B_9047_4960
     class BusLineCollection : IEnumerable
     {
         public List<dotNet5781_01_9047_4960.Program.Bus> buses = new List<dotNet5781_01_9047_4960.Program.Bus>();
-        public IEnumerator<dotNet5781_01_9047_4960.Program.Bus> enumerator;
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return buses.GetEnumerator();
         }
         
-
-
     }
 }
