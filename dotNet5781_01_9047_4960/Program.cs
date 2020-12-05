@@ -10,28 +10,35 @@ using System.Threading.Tasks;
 {
     public class Program
     {
-        Random r = new Random();
+        static Random w = new Random();
         public class Bus
         {
-            public int num = 55;
+           public int Num //property
+            {
+                get
+                {
+                    return ((1200-KillFromRefueling)/1200)*100;
+                }
+                set { }
+            }
             private string licenseNumber;
             public string LicenseNumber //property
-            { 
+            {
                 get
                 {
                     return licenseNumber;
                 }
-                private set 
+                set
                 {
                     bool flag = true;
                     while (flag)                                //while the license Number is not corect
                     {
-                        if (startOfActivity.Year<2018)          //checks if the year is before 2018
+                        if (startOfActivity.Year < 2018)          //checks if the year is before 2018
                         {
                             if (value.Length == 7)              //checks if the Length is right
                             {
                                 flag = false;                   //the while is false now 
-                                licenseNumber = value[0] + ""+ value [1]+"-"+value[2]+value[3] + value[4] + "-"+value[5] + value[6]; //enter the right order o nums and -
+                                licenseNumber = value[0] + "" + value[1] + "-" + value[2] + value[3] + value[4] + "-" + value[5] + value[6]; //enter the right order o nums and -
                             }
                             else//if the length is not right
                             {
@@ -45,7 +52,7 @@ using System.Threading.Tasks;
                             if (value.Length == 8)//checks if the Length is right
                             {
                                 flag = false; //the while is false now 
-                                licenseNumber = value[0]+"" + value[1]+"" + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; //enter the right order o nums and -
+                                licenseNumber = ""+value[0] + "" + value[1] + "" + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; //enter the right order o nums and -
                             }
                             else//if the length is not right
                             {
@@ -54,9 +61,9 @@ using System.Threading.Tasks;
                                 value = Console.ReadLine();
                             }
                         }
-
+                        //licenseNumber = value;
                     }
-                } 
+                }
             }
             private DateTime startOfActivity;
             public DateTime StartOfActivity//property
@@ -140,14 +147,13 @@ using System.Threading.Tasks;
 
             public Bus()
             {
-                Random w = new Random();
-                int y = w.Next(1, 2050);
+                int y = w.Next(1908, 2050);
                 startOfActivity = new DateTime(y, w.Next(1, 12), w.Next(1, 28)); // trys to cunstract a datetime, if it doesnt work sends an exsseption
                 if (y < 2018)
                     LicenseNumber = w.Next(1111111, 9999999).ToString();
                 else
                 {
-                    licenseNumber = w.Next(11111111, 99999999).ToString();
+                    LicenseNumber = w.Next(11111111, 99999999).ToString();
                 }//lisens number
                 LastCheckup = new DateTime(w.Next(1, 2050), w.Next(1, 12), w.Next(1, 28));
             }

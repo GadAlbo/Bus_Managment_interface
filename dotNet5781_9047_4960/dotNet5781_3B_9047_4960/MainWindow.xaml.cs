@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using dotNet5781_01_9047_4960;
-
 namespace dotNet5781_3B_9047_4960
 {
     /// <summary>
@@ -23,18 +22,33 @@ namespace dotNet5781_3B_9047_4960
     {
         public MainWindow()
         {
-            BusLineCollection buses = new BusLineCollection();
-            dotNet5781_01_9047_4960.Program.Bus bus;
-            for (int i=0;i<10;i++)
-            {
-                 bus = new dotNet5781_01_9047_4960.Program.Bus();
-                buses.buses.Add(bus);
-            }
-            buses.buses[0].LastCheckup = new DateTime(2018, 12, 6);
-            buses.buses[3].KillFromRefueling = 1198;
-            buses.buses[6].KillFromLastCheckup=19997;
-            busesBox.ItemsSource = buses;
+            //BusLineCollection Buses = new BusLineCollection();
+            //dotNet5781_01_9047_4960.Program.Bus bus;
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    bus = new dotNet5781_01_9047_4960.Program.Bus();
+            //    Buses.buses.Add(bus);
+            //}
+            //Buses.buses[0].LastCheckup = new DateTime(2018, 12, 6);
+            //Buses.buses[3].KillFromRefueling = 1198;
+            //Buses.buses[6].KillFromLastCheckup = 19997;
+            //busesBox.ItemsSource = Buses;
+            //InitializeComponent();
             InitializeComponent();
+            List<dotNet5781_01_9047_4960.Program.Bus> buses = new List<Program.Bus>();
+            dotNet5781_01_9047_4960.Program.Bus bus;
+            for (int i = 0; i < 10; i++)
+            {
+                bus = new dotNet5781_01_9047_4960.Program.Bus();
+                buses.Add(bus);
+            }
+            buses[0].LastCheckup = new DateTime(2018, 12, 6);
+            buses[3].KillFromRefueling = 1198;
+            buses[4].KillFromRefueling = 1198;
+            buses[5].KillFromRefueling = 50;
+            buses[6].KillFromRefueling = 400;
+            buses[6].KillFromLastCheckup = 19997;
+            busesBox.ItemsSource = buses;
         }
     }
 }
