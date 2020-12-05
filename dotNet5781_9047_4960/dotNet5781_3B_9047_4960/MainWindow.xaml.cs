@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace dotNet5781_3B_9047_4960
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection <dotNet5781_01_9047_4960.Program.Bus> buses = new ObservableCollection<Program.Bus>();
         public MainWindow()
         {
             //BusLineCollection Buses = new BusLineCollection();
@@ -35,7 +37,6 @@ namespace dotNet5781_3B_9047_4960
             //busesBox.ItemsSource = Buses;
             //InitializeComponent();
             InitializeComponent();
-            List<dotNet5781_01_9047_4960.Program.Bus> buses = new List<Program.Bus>();
             dotNet5781_01_9047_4960.Program.Bus bus;
             for (int i = 0; i < 10; i++)
             {

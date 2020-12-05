@@ -10,9 +10,22 @@ using System.Threading.Tasks;
 {
     public class Program
     {
+        public enum state { ReadyToGo, midRide, refueling, handling };
         static Random w = new Random();
         public class Bus
         {
+            private state s;
+            public state State
+            {
+                get
+                {
+                    return s;
+                }
+                set
+                {
+                    s = value;
+                }
+            }
            public int Num //property
             {
                 get

@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ListBox Name="busesBox" HorizontalContentAlignment="Stretch" Grid.Row="1">
             <ListBox.ItemTemplate>
@@ -29,7 +30,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="bus managment" Grid.Row="0" HorizontalAlignment="Left" Margin="112,10,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Yu Gothic Light"/>
+        <Label Content="bus managment" Grid.Row="0" HorizontalAlignment="Center" Margin="45,0,489.6,0" VerticalAlignment="Center" FontSize="36" FontFamily="Yu Gothic Light" Height="60"/>
+        <Button Name="addBusButon" Content="Add Bus" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Height="29" Margin="45,21,0,0"/>
     </Grid>
     <!--<TextBlock Text="need refueling"  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     <ProgressBar Grid.Column="3" Minimum="0" Maximum="1200" Value="{Binding KillFromRefueling}" Foreground="#FFB00606" />
@@ -42,8 +44,9 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <Label Content="bus managment system" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="759" FontSize="36"/>
-            --><!--<ListBox x:Name="busesBox" HorizontalAlignment="Left" Height="261" Margin="27,6.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="182"/>-->
-            <!--<ListBox Name="busesBox" HorizontalContentAlignment="Stretch" ItemsSource="{Binding}">
+            -->
+    <!--<ListBox x:Name="busesBox" HorizontalAlignment="Left" Height="261" Margin="27,6.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="182"/>-->
+    <!--<ListBox Name="busesBox" HorizontalContentAlignment="Stretch" ItemsSource="{Binding}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
@@ -55,7 +58,8 @@
                             <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding num}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>--><!--
+            </ListBox>-->
+    <!--
         </Grid>
     </Grid>-->
 </Window>
