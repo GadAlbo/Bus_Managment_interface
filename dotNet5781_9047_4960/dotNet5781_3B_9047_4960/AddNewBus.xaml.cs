@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -19,14 +20,10 @@ namespace dotNet5781_3B_9047_4960
     /// </summary>
     public partial class AddNewBus : Window
     {
-        public AddNewBus()
+        public AddNewBus(Bus b)
         {
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            //grid1.DataContext = b;
         }
     }
 }

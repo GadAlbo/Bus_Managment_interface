@@ -21,35 +21,30 @@ namespace dotNet5781_3B_9047_4960
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection <dotNet5781_01_9047_4960.Program.Bus> buses = new ObservableCollection<Program.Bus>();
+        ObservableCollection <Bus> ObservableCollectionBus = new ObservableCollection<Bus>();
         public MainWindow()
         {
-            //BusLineCollection Buses = new BusLineCollection();
-            //dotNet5781_01_9047_4960.Program.Bus bus;
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    bus = new dotNet5781_01_9047_4960.Program.Bus();
-            //    Buses.buses.Add(bus);
-            //}
-            //Buses.buses[0].LastCheckup = new DateTime(2018, 12, 6);
-            //Buses.buses[3].KillFromRefueling = 1198;
-            //Buses.buses[6].KillFromLastCheckup = 19997;
-            //busesBox.ItemsSource = Buses;
-            //InitializeComponent();
             InitializeComponent();
-            dotNet5781_01_9047_4960.Program.Bus bus;
+            Bus bus;
             for (int i = 0; i < 10; i++)
             {
-                bus = new dotNet5781_01_9047_4960.Program.Bus();
-                buses.Add(bus);
+                bus = new Bus();
+                ObservableCollectionBus.Add(bus);
             }
-            buses[0].LastCheckup = new DateTime(2018, 12, 6);
-            buses[3].KillFromRefueling = 1198;
-            buses[4].KillFromRefueling = 1198;
-            buses[5].KillFromRefueling = 50;
-            buses[6].KillFromRefueling = 400;
-            buses[6].KillFromLastCheckup = 19997;
-            busesBox.ItemsSource = buses;
+            ObservableCollectionBus[0].LastCheckup = new DateTime(2018, 12, 6);
+            ObservableCollectionBus[3].KillFromRefueling = 1198;
+            ObservableCollectionBus[4].KillFromRefueling = 1198;
+            ObservableCollectionBus[5].KillFromRefueling = 50;
+            ObservableCollectionBus[6].KillFromRefueling = 400;
+            ObservableCollectionBus[6].KillFromLastCheckup = 19997;
+            busesBox.ItemsSource = ObservableCollectionBus;
+        }
+
+        private void addBusButon_Click(object sender, RoutedEventArgs e)
+        {
+            Bus b = new Bus();
+            AddNewBus add=new AddNewBus(b);
+            ObservableCollectionBus.Add(b);
         }
     }
 }

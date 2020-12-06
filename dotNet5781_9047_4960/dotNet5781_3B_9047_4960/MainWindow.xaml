@@ -31,7 +31,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="bus managment" Grid.Row="0" HorizontalAlignment="Center" Margin="45,0,489.6,0" VerticalAlignment="Center" FontSize="36" FontFamily="Yu Gothic Light" Height="60"/>
-        <Button Name="addBusButon" Content="Add Bus" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Height="29" Margin="45,21,0,0"/>
+        <Button Name="addBusButon" Content="Add Bus" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Height="29" Margin="45,21,0,0" Click="addBusButon_Click"/>
     </Grid>
     <!--<TextBlock Text="need refueling"  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     <ProgressBar Grid.Column="3" Minimum="0" Maximum="1200" Value="{Binding KillFromRefueling}" Foreground="#FFB00606" />
