@@ -44,6 +44,7 @@ namespace dotNet5781_3B_9047_4960
         {
             Bus b = new Bus();
             AddNewBus add=new AddNewBus(b);
+            //add.Show();
             ObservableCollectionBus.Add(b);
         }
     }
