@@ -128,7 +128,7 @@ namespace dotNet5781_3B_9047_4960
             }
         }
 
-        public Bus()
+        public Bus(int x)
         {
             int y = w.Next(1908, 2050);
             startOfActivity = new DateTime(y, w.Next(1, 12), w.Next(1, 28)); // trys to cunstract a datetime, if it doesnt work sends an exsseption
@@ -139,6 +139,10 @@ namespace dotNet5781_3B_9047_4960
                 LicenseNumber = w.Next(11111111, 99999999).ToString();
             }//lisens number
             LastCheckup = new DateTime(w.Next(1, 2050), w.Next(1, 12), w.Next(1, 28));
+        }
+        public Bus()
+        {
+
         }
         public void AddKilometrage(int addKill) //adds Kilometrage to all the necessary variables
         {

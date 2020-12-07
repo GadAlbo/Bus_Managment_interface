@@ -28,7 +28,7 @@ namespace dotNet5781_3B_9047_4960
             Bus bus;
             for (int i = 0; i < 10; i++)
             {
-                bus = new Bus();
+                bus = new Bus(0);
                 ObservableCollectionBus.Add(bus);
             }
             ObservableCollectionBus[0].LastCheckup = new DateTime(2018, 12, 6);
