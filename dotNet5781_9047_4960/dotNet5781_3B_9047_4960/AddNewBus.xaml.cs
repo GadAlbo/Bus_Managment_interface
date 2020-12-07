@@ -20,6 +20,10 @@ namespace dotNet5781_3B_9047_4960
     /// </summary>
     public partial class AddNewBus : Window
     {
+        public AddNewBus()
+        {
+            InitializeComponent();
+        }
         public AddNewBus(Bus b)
         {
             InitializeComponent();
