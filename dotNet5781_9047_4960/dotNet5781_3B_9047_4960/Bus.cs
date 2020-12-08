@@ -106,10 +106,9 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                if (value >= 0)//shoud be positive
-                {
-                    killFromLastCheckup = value;
-                }
+
+                killFromLastCheckup = value;
+                allKilometrage += value;
             }
         }
         private int killFromRefueling = 0;
@@ -121,7 +120,8 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                    killFromRefueling = value;
+                killFromRefueling = value;
+                allKilometrage += value;    
             }
         }
 
@@ -161,6 +161,11 @@ namespace dotNet5781_3B_9047_4960
         public void refuel()
         {
             killFromRefueling = 0;
+        }
+        public void Treat()
+        {
+            lastCheckup = DateTime.Now;
+            killFromLastCheckup = 0;
         }
     }
 }

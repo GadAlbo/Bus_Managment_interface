@@ -7,8 +7,12 @@
         mc:Ignorable="d"
         Title="showBus" Height="400" Width="450" >
     
+
     <Grid>
-        <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="75,47,0,0" VerticalAlignment="Top" Height="206" Width="282">
+
+        <Button Name="treatmentButton" Content="Treatment" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="262,294,0,0" RenderTransformOrigin="0.517,-0.633" Click="treatmentButton_Click"/>
+        <Button Name="refuelButton" Content="Refuel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="93,294,0,0" Click="refuelButton_Click"/>
+        <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="93,57,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -22,20 +26,18 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Content="All Kilometrage:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="allKilometrageTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding AllKilometrage, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBlock x:Name="allKilometrageTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding AllKilometrage}" VerticalAlignment="Center"/>
             <Label Content="Kill From Last Checkup:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="killFromLastCheckupTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding KillFromLastCheckup, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBlock x:Name="killFromLastCheckupTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding KillFromLastCheckup}" VerticalAlignment="Center"/>
             <Label Content="Kill From Refueling:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="killFromRefuelingTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding KillFromRefueling, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBlock x:Name="killFromRefuelingTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" Text="{Binding KillFromRefueling}" VerticalAlignment="Center"/>
             <Label Content="Last Checkup:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
             <DatePicker x:Name="lastCheckupDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" SelectedDate="{Binding LastCheckup, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
             <Label Content="License Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <TextBox x:Name="licenseNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding LicenseNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBlock x:Name="licenseNumberTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding LicenseNumber}" VerticalAlignment="Center"/>
             <Label Content="Start Of Activity:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
             <DatePicker x:Name="startOfActivityDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" SelectedDate="{Binding StartOfActivity, Mode=OneWay}" VerticalAlignment="Center"/>
         </Grid>
-        <Button Name="treatmentButton" Content="Treatment" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="262,294,0,0" RenderTransformOrigin="0.517,-0.633"/>
-        <Button Name="refuelButton" Content="Refuel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="93,294,0,0" Click="refuelButton_Click"/>
 
     </Grid>
 </Window>
