@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
+
 
 namespace dotNet5781_3B_9047_4960
 {
@@ -20,14 +22,25 @@ namespace dotNet5781_3B_9047_4960
     /// </summary>
     public partial class AddNewBus : Window
     {
-        public AddNewBus()
-        {
-            InitializeComponent();
-        }
+        //public AddNewBus()
+        //{
+        //    InitializeComponent();
+        //}
         public AddNewBus(Bus b)
         {
             InitializeComponent();
-            //grid1.DataContext = b;
+            grid1.DataContext = b;
+            //stateComboBox.ItemsSource = Enum.GetValues(typeof(state));
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //BindingExpression binding = licenseNumberTextBox.GetBindingExpression(TextBox.TextProperty);
+            //binding.UpdateSource();
+            //licenseNumberTextBox.
+            //bdika se a tochen rak im nachon do close
+            Close();
         }
     }
 }

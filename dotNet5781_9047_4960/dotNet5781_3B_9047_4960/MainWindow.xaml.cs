@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using dotNet5781_01_9047_4960;
+using System.ComponentModel;
+
 namespace dotNet5781_3B_9047_4960
 {
     /// <summary>
@@ -42,11 +44,20 @@ namespace dotNet5781_3B_9047_4960
 
         private void addBusButon_Click(object sender, RoutedEventArgs e)
         {
-            //Bus b = new Bus();
-            //AddNewBus add=new AddNewBus(b);
-            AddNewBus add = new AddNewBus();
-             add.Show();
+            Bus b = new Bus();
+            AddNewBus add = new AddNewBus(b);
+            add.ShowDialog();
             ObservableCollectionBus.Add(b);
+        }
+
+        private void MouseDoubleClickBus(object sender, MouseButtonEventArgs e)
+        {
+            Bus b= (busesBox.SelectedItem as Bus);
+            if (b != null)
+            {
+                showBus show = new showBus(b);
+                show.Show();
+            }
         }
     }
 }

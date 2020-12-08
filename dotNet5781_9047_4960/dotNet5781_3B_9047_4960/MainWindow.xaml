@@ -12,7 +12,7 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListBox Name="busesBox" HorizontalContentAlignment="Stretch" Grid.Row="1">
+        <ListBox Name="busesBox" HorizontalContentAlignment="Stretch" Grid.Row="1" MouseDoubleClick="MouseDoubleClickBus">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">

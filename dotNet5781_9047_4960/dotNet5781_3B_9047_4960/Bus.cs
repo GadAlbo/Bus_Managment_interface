@@ -121,10 +121,7 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                if (value >= 0)//shoud be positive
-                {
                     killFromRefueling = value;
-                }
             }
         }
 
@@ -160,6 +157,10 @@ namespace dotNet5781_3B_9047_4960
         public override string ToString() //override the toString func
         {
             return "License Number:" + licenseNumber + " total Kilometrage from last checkup:" + killFromLastCheckup;
+        }
+        public void refuel()
+        {
+            killFromRefueling = 0;
         }
     }
 }
