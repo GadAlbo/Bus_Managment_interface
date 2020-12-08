@@ -69,7 +69,7 @@ namespace dotNet5781_3B_9047_4960
         private void Worker_DoWork1(object sender, DoWorkEventArgs e)
         {
             (e.Argument as Bus).Treat();
-
+            (e.Argument as Bus).refuel();
         }
         private void Worker_ProgressChanged2(object sender, ProgressChangedEventArgs e)
         {
