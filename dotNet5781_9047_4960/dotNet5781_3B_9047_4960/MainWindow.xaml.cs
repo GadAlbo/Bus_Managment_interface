@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using dotNet5781_01_9047_4960;
 using System.ComponentModel;
+using System.Threading;
 
 namespace dotNet5781_3B_9047_4960
 {
@@ -58,6 +59,10 @@ namespace dotNet5781_3B_9047_4960
                 showBus show = new showBus(b);
                 show.Show();
             }
+        }
+        private void refuelingButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
