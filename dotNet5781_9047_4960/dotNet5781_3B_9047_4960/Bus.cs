@@ -150,6 +150,8 @@ namespace dotNet5781_3B_9047_4960
             {
                 LicenseNumber = w.Next(11111111, 99999999).ToString();
             }//lisens number
+            startOfActivity = DateTime.Now;
+            LastCheckup = startOfActivity;
         }
         public void AddKilometrage(int addKill) //adds Kilometrage to all the necessary variables
         {
