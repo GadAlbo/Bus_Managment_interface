@@ -24,6 +24,7 @@ namespace dotNet5781_3B_9047_4960
     /// </summary>
     public partial class MainWindow : Window
     {
+        BackgroundWorker workerREFUAL;
         ObservableCollection <Bus> ObservableCollectionBus = new ObservableCollection<Bus>();
         public MainWindow()
         {
@@ -62,7 +63,14 @@ namespace dotNet5781_3B_9047_4960
         }
         private void refuelingButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Bus b = (sender as Bus);
+            if (b != null)
+            {
+                b.KillFromRefueling = 0;
+                Thread.Sleep(12000);
+                MessageBox.Show("Refuel completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
         }
     }
 }

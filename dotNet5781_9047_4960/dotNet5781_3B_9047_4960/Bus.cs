@@ -135,11 +135,21 @@ namespace dotNet5781_3B_9047_4960
             {
                 LicenseNumber = w.Next(11111111, 99999999).ToString();
             }//lisens number
-            LastCheckup = new DateTime(w.Next(1, 2050), w.Next(1, 12), w.Next(1, 28));
+            LastCheckup = new DateTime(w.Next(1908, 2050), w.Next(1, 12), w.Next(1, 28));
+            if(LastCheckup< startOfActivity)
+            {
+                LastCheckup = startOfActivity;
+            }
         }
         public Bus()
         {
-
+            int y = w.Next(1908, 2050);
+            if (y < 2018)
+                LicenseNumber = w.Next(1111111, 9999999).ToString();
+            else
+            {
+                LicenseNumber = w.Next(11111111, 99999999).ToString();
+            }//lisens number
         }
         public void AddKilometrage(int addKill) //adds Kilometrage to all the necessary variables
         {
