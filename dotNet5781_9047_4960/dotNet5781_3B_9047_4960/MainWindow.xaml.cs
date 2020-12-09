@@ -25,6 +25,7 @@ namespace dotNet5781_3B_9047_4960
     public partial class MainWindow : Window
     {
         BackgroundWorker workerREFUAL;
+        BackgroundWorker workerTREAT;
         ObservableCollection <Bus> ObservableCollectionBus = new ObservableCollection<Bus>();
         public MainWindow()
         {
@@ -63,14 +64,54 @@ namespace dotNet5781_3B_9047_4960
         }
         private void refuelingButton_Click(object sender, RoutedEventArgs e)
         {
-            Bus b = (sender as Bus);
-            if (b != null)
-            {
-                b.KillFromRefueling = 0;
-                Thread.Sleep(12000);
-                MessageBox.Show("Refuel completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            }
+            //Button refuel = (Button)sender;
+            workerREFUAL = new BackgroundWorker();
+            workerREFUAL.DoWork += Worker_DoWork;
+            workerREFUAL.ProgressChanged += Worker_ProgressChanged;
+            workerREFUAL.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            workerREFUAL.WorkerReportsProgress = true;
+            workerREFUAL.RunWorkerAsync(busesgrid.DataContext);
         }
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            (e.Argument as Bus).refuel();
+            e.Result = (e.Argument as Bus);
+        }
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Thread.Sleep(12000);
+            MessageBox.Show("Refuel completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
+            busesgrid.DataContext = (e.Result as Bus);
+        }
+        private void treatmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            workerTREAT = new BackgroundWorker();
+            workerTREAT.DoWork += Worker_DoWork1;
+            workerTREAT.ProgressChanged += Worker_ProgressChanged2;
+            workerTREAT.RunWorkerCompleted += Worker_RunWorkerCompleted3;
+            workerTREAT.WorkerReportsProgress = true;
+            workerTREAT.RunWorkerAsync(busesgrid.DataContext);
+        }
+
+        private void Worker_DoWork1(object sender, DoWorkEventArgs e)
+        {
+            (e.Argument as Bus).Treat();
+            (e.Argument as Bus).refuel();
+            e.Result = (e.Argument as Bus);
+        }
+        private void Worker_ProgressChanged2(object sender, ProgressChangedEventArgs e)
+        {
+        }
+        private void Worker_RunWorkerCompleted3(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Thread.Sleep(12000);
+            MessageBox.Show("Treatment completed", "Treatment message", MessageBoxButton.OK, MessageBoxImage.Information);
+            busesgrid.DataContext = (e.Result as Bus);
+        }
+
     }
 }

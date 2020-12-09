@@ -55,10 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="driveBus.xaml.cs">
+      <DependentUpon>driveBus.xaml</DependentUpon>
+    </Compile>
     <Compile Include="showBus.xaml.cs">
       <DependentUpon>showBus.xaml</DependentUpon>
     </Compile>
     <Page Include="AddNewBus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="driveBus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

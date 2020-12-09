@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:dotNet5781_3B_9047_4960"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Name="MainGrid" Background="#FF17B419">
+    <Grid Name="busesgrid" Background="#FF17B419">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
@@ -26,8 +26,8 @@
                         <TextBlock Text="License Number:" Grid.Column="0" />
                         <TextBlock Text="{Binding LicenseNumber}"  Grid.Column="1"/>
                         <Button Name="driveButton" Content="Drive" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
-                        <Button Name="refuelingButton" Content="Refuel" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
-                        <Button Name="treatgButton" Content="Treatment" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
+                        <Button Name="refuelingButton" Content="Refuel" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="refuelingButton_Click"/>
+                        <Button Name="treatgButton" Content="Treatment" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="treatmentButton_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
