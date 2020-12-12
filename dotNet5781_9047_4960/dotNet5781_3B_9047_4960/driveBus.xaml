@@ -22,4 +22,12 @@
         <TextBox x:Name="drive" Grid.Column="2" HorizontalAlignment="Left" Height="38" Margin="63,90,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" KeyDown="TextBox_KeyDown"/>
 
     </Grid>
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize"
+              Value="12" />
+            <Setter Property="FontFamily"
+              Value="Segoe UI" />
+        </Style>
+    </Window.Resources>
 </Window>
