@@ -52,11 +52,11 @@ namespace dotNet5781_3B_9047_4960
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-           
+            Thread.Sleep(12000);
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Thread.Sleep(12000);
+           // Thread.Sleep(12000);
             MessageBox.Show("Refuel completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
             grid1.DataContext = (e.Result as Bus);
         }
@@ -69,15 +69,15 @@ namespace dotNet5781_3B_9047_4960
         private void Worker_DoWork1(object sender, DoWorkEventArgs e)
         {
             (e.Argument as Bus).Treat();
-            (e.Argument as Bus).refuel();
             e.Result = (e.Argument as Bus);
         }
         private void Worker_ProgressChanged2(object sender, ProgressChangedEventArgs e)
         {
+            Thread.Sleep(60000);
         }
         private void Worker_RunWorkerCompleted3(object sender, RunWorkerCompletedEventArgs e)
         {
-            Thread.Sleep(12000);
+            //Thread.Sleep(12000);
             MessageBox.Show("Treatment completed", "Treatment message", MessageBoxButton.OK, MessageBoxImage.Information);
             grid1.DataContext = (e.Result as Bus);
         }
