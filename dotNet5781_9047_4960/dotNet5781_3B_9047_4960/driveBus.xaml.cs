@@ -22,6 +22,7 @@ namespace dotNet5781_3B_9047_4960
     public partial class driveBus : Window
     {
         BackgroundWorker workerDRIVE;
+        static Random w = new Random();
         public driveBus(Bus b)
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace dotNet5781_3B_9047_4960
             if (e == null) return;
 
             //allow get out of the text box
-            if  (e.Key == Key.Return || e.Key == Key.Tab)
+            if  ((e.Key == Key.Enter)|| e.Key == Key.Return || e.Key == Key.Tab)
                 return;
 
             //allow list of system keys (add other key here if you want to allow)
@@ -53,29 +54,44 @@ namespace dotNet5781_3B_9047_4960
             if (Char.IsDigit(c))
                 if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
                     return; //let this key be written inside the textbox
-            if (e.Key == Key.Enter)
-            {
-               
-            }
 
             //forbid letters and signs (#,$, %, ...)
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
-        /*private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            (e.Argument as Bus).AddKilometrage();
-            e.Result = (e.Argument as Bus);
+            if(e.Key==Key.Enter)
+            {
+                if(drive.Text!="")
+                {
+                    /*  (drive.DataContext as Bus).AddKilometrage(drive.Text);
+                      MessageBox.Show("The drive compleated", "Drive message", MessageBoxButton.OK, MessageBoxImage.Information);*/
+                    workerDRIVE.RunWorkerAsync(busesgrid.DataContext);
+                }
+                else
+                {
+                    MessageBox.Show("You do not enret a number", "Drive message", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void Worker_DoWorkDrive(object sender, DoWorkEventArgs e)
         {
-            Thread.Sleep(12000);
+            if((e.Argument as Bus).State == state.ReadyToGo)
+             {
+                (e.Argument as Bus).AddKilometrage(drive.Text);
+                (e.Argument as Bus).State = state.midRide;
+                Thread.Sleep(w.Next(20, 50) * Convert.ToInt32(drive.Text) * 10);
+            }
+            else
+            {
+                MessageBox.Show("Drive Can not be handled because the bus is occupied, try later", "Drive message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
-        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void Worker_RunWorkerCompletedDrive(object sender, RunWorkerCompletedEventArgs e)
         {
-            // Thread.Sleep(12000);
-            MessageBox.Show("Refuel completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
-            grid1.DataContext = (e.Result as Bus);
-        }*/
+            (busesgrid.DataContext as Bus).State = state.ReadyToGo;
+            MessageBox.Show("Drive completed", "Drive message", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }
