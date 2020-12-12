@@ -162,12 +162,12 @@ namespace dotNet5781_3B_9047_4960
         }
         public void refuel()
         {
-            killFromRefueling = 0;
+            KillFromRefueling = 0;
         }
         public void Treat()
         {
-            lastCheckup = DateTime.Now;
-            killFromLastCheckup = 0;
+            LastCheckup = DateTime.Now;
+            KillFromRefueling = 0;
         }
     }
 }
