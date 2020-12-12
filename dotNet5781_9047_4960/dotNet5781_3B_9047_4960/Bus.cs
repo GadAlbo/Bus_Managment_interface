@@ -143,13 +143,13 @@ namespace dotNet5781_3B_9047_4960
         }
         public Bus()
         {
-            int y = w.Next(1908, 2050);
-            if (y < 2018)
-                LicenseNumber = w.Next(1111111, 9999999).ToString();
-            else
-            {
-                LicenseNumber = w.Next(11111111, 99999999).ToString();
-            }//lisens number
+            //int y = w.Next(1908, 2050);
+            //if (y < 2018)
+            //    LicenseNumber = w.Next(1111111, 9999999).ToString();
+            //else
+            //{
+            //    LicenseNumber = w.Next(11111111, 99999999).ToString();
+            //}//lisens number
             startOfActivity = DateTime.Now;
             LastCheckup = startOfActivity;
         }

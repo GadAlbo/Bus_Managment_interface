@@ -28,16 +28,21 @@ namespace dotNet5781_3B_9047_4960
             InitializeComponent();
             grid1.DataContext = b;
             refuelButton.DataContext = b;
-        }
-
-        private void refuelButton_Click(object sender, RoutedEventArgs e)
-        {
-            //Button refuel = (Button)sender;
             workerREFUAL = new BackgroundWorker();
             workerREFUAL.DoWork += Worker_DoWork;
             workerREFUAL.ProgressChanged += Worker_ProgressChanged;
             workerREFUAL.RunWorkerCompleted += Worker_RunWorkerCompleted;
             workerREFUAL.WorkerReportsProgress = true;
+            workerTREAT = new BackgroundWorker();
+            workerTREAT.DoWork += Worker_DoWork1;
+            workerTREAT.ProgressChanged += Worker_ProgressChanged2;
+            workerTREAT.RunWorkerCompleted += Worker_RunWorkerCompleted3;
+            workerTREAT.WorkerReportsProgress = true;
+        }
+
+        private void refuelButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Button refuel = (Button)sender;
             workerREFUAL.RunWorkerAsync(grid1.DataContext);
         }
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -58,11 +63,6 @@ namespace dotNet5781_3B_9047_4960
 
         private void treatmentButton_Click(object sender, RoutedEventArgs e)
         {
-            workerTREAT = new BackgroundWorker();
-            workerTREAT.DoWork += Worker_DoWork1;
-            workerTREAT.ProgressChanged += Worker_ProgressChanged2;
-            workerTREAT.RunWorkerCompleted += Worker_RunWorkerCompleted3;
-            workerTREAT.WorkerReportsProgress = true;
             workerTREAT.RunWorkerAsync(grid1.DataContext);
         }
             
