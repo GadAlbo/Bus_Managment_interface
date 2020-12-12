@@ -66,9 +66,9 @@ namespace dotNet5781_3B_9047_4960
         }
         private void refuelingButton_Click(object sender, RoutedEventArgs e)
         {
-            if ((busesBox.SelectedItem as Bus).State == state.ReadyToGo)
+            if (((sender as Button).DataContext as Bus).State == state.ReadyToGo)
             {
-                workerREFUAL.RunWorkerAsync(busesBox.SelectedItem);
+                workerREFUAL.RunWorkerAsync((sender as Button).DataContext);
             }
             else
             {
@@ -79,13 +79,13 @@ namespace dotNet5781_3B_9047_4960
         {
             (e.Argument as Bus).refuel();
             (e.Argument as Bus).State = state.refueling;
-            Thread.Sleep(12000);
             e.Result = e.Argument;
+            Thread.Sleep(12000);
         }
         private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)
         {
             (e.Result as Bus).State = state.ReadyToGo;
-            MessageBox.Show("Refuel completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Refuel of "+ (e.Result as Bus).LicenseNumber+ " bus is completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
