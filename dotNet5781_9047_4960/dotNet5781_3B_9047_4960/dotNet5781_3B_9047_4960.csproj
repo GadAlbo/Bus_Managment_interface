@@ -58,6 +58,7 @@
     <Compile Include="driveBus.xaml.cs">
       <DependentUpon>driveBus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObservaleObject.cs" />
     <Compile Include="showBus.xaml.cs">
       <DependentUpon>showBus.xaml</DependentUpon>
     </Compile>
