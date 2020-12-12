@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace dotNet5781_3B_9047_4960
 {
     
    public enum state { ReadyToGo, midRide, refueling, handling };
-    public class Bus
+    public class Bus:ObservaleObject
     {
         static Random w = new Random();
         private state s;
@@ -23,15 +24,8 @@ namespace dotNet5781_3B_9047_4960
             set
             {
                 s = value;
+                OnPropertyChanged("State");
             }
-        }
-        public int Num //property
-        {
-            get
-            {
-                return ((1200 - KillFromRefueling) / 1200) * 100;
-            }
-            set { }
         }
         private string licenseNumber;
         public string LicenseNumber //property
@@ -42,21 +36,15 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                bool flag = true;
-                while (flag)                                //while the license Number is not corect
-                {
-                    if (startOfActivity.Year < 2018)          //checks if the year is before 2018
-                    {
-                            flag = false;                   //the while is false now 
-                            licenseNumber = value[0] + "" + value[1] + "-" + value[2] + value[3] + value[4] + "-" + value[5] + value[6]; //enter the right order o nums and -
-                    }
-                    else
-                    {
-                            flag = false; //the while is false now 
-                            licenseNumber = "" + value[0] + "" + value[1] + "" + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; //enter the right order o nums and -
-                    }
-                    //licenseNumber = value;
+                if (startOfActivity.Year < 2018)          //checks if the year is before 2018
+                {                  //the while is false now 
+                        licenseNumber = value[0] + "" + value[1] + "-" + value[2] + value[3] + value[4] + "-" + value[5] + value[6]; //enter the right order o nums and -
                 }
+                else
+                {        //the while is false now 
+                        licenseNumber = "" + value[0] + "" + value[1] + "" + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; //enter the right order o nums and -
+                }
+                OnPropertyChanged("LicenseNumber");
             }
         }
         private DateTime startOfActivity;
@@ -69,6 +57,7 @@ namespace dotNet5781_3B_9047_4960
             private set
             {
                 startOfActivity = value;
+                OnPropertyChanged("StartOfActivity");
             }
         }
         private DateTime lastCheckup = new DateTime();
@@ -81,6 +70,7 @@ namespace dotNet5781_3B_9047_4960
             set
             {
                 lastCheckup = value;
+                OnPropertyChanged("LastCheckup");
             }
         }
         private int allKilometrage = 0;
@@ -92,13 +82,9 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                if (value > allKilometrage)// can not subtract
-                {
-                    if (value < 20000)
-                    {
-                        allKilometrage = value;
-                    }
-                }
+                if (value > allKilometrage) // can not subtract
+                    allKilometrage = value;
+                OnPropertyChanged("AllKilometrage");
             }
         }
 
@@ -114,6 +100,7 @@ namespace dotNet5781_3B_9047_4960
 
                 killFromLastCheckup = value;
                 allKilometrage += value;
+                OnPropertyChanged("KillFromLastCheckup");
             }
         }
         private int killFromRefueling = 0;
@@ -126,7 +113,8 @@ namespace dotNet5781_3B_9047_4960
             set
             {
                 killFromRefueling = value;
-                allKilometrage += value;    
+                allKilometrage += value;  
+                OnPropertyChanged("KillFromRefueling");
             }
         }
 
@@ -167,10 +155,6 @@ namespace dotNet5781_3B_9047_4960
                 killFromLastCheckup += addKill;
                 KillFromRefueling += addKill;
             }
-            else
-            {
-                Console.WriteLine("can not reduce the amount of kilometrage");
-            }
         }
         public override string ToString() //override the toString func
         {
@@ -178,12 +162,12 @@ namespace dotNet5781_3B_9047_4960
         }
         public void refuel()
         {
-            killFromRefueling = 0;
+            KillFromRefueling = 0;
         }
         public void Treat()
         {
-            lastCheckup = DateTime.Now;
-            killFromLastCheckup = 0;
+            LastCheckup = DateTime.Now;
+            KillFromRefueling = 0;
         }
     }
 }
