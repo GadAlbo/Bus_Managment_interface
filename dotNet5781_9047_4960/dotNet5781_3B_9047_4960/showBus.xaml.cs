@@ -54,6 +54,7 @@ namespace dotNet5781_3B_9047_4960
         {
             (e.Argument as Bus).State = state.refueling;
             Thread.Sleep(12000);
+            int i = 0;
         }
         private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)
         {
