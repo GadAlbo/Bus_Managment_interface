@@ -23,11 +23,16 @@ namespace dotNet5781_3B_9047_4960
     {
         BackgroundWorker workerDRIVE;
         static Random w = new Random();
+        string driveNumber;
         public driveBus(Bus b)
         {
             InitializeComponent();
             busesgrid.DataContext = b;
             drive.DataContext = b;
+            workerDRIVE = new BackgroundWorker();
+            workerDRIVE.DoWork += Worker_DoWorkDrive;
+            workerDRIVE.RunWorkerCompleted += Worker_RunWorkerCompletedDrive;
+            workerDRIVE.WorkerReportsProgress = true;
         }
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -65,8 +70,7 @@ namespace dotNet5781_3B_9047_4960
             {
                 if(drive.Text!="")
                 {
-                    /*  (drive.DataContext as Bus).AddKilometrage(drive.Text);
-                      MessageBox.Show("The drive compleated", "Drive message", MessageBoxButton.OK, MessageBoxImage.Information);*/
+                    driveNumber = drive.Text;
                     workerDRIVE.RunWorkerAsync(busesgrid.DataContext);
                 }
                 else
@@ -79,9 +83,9 @@ namespace dotNet5781_3B_9047_4960
         {
             if((e.Argument as Bus).State == state.ReadyToGo)
              {
-                (e.Argument as Bus).AddKilometrage(drive.Text);
+                (e.Argument as Bus).AddKilometrage(driveNumber);
                 (e.Argument as Bus).State = state.midRide;
-                Thread.Sleep(w.Next(20, 50) * Convert.ToInt32(drive.Text) * 10);
+                Thread.Sleep(w.Next(20, 50) * Convert.ToInt32(drive.Text) * 200);
             }
             else
             {
