@@ -85,7 +85,7 @@ namespace dotNet5781_3B_9047_4960
              {
                 (e.Argument as Bus).AddKilometrage(driveNumber);
                 (e.Argument as Bus).State = state.midRide;
-                Thread.Sleep(w.Next(20, 50) * Convert.ToInt32(drive.Text) * 200);
+                Thread.Sleep(w.Next(20, 50) * Convert.ToInt32(driveNumber)*2);
             }
             else
             {
