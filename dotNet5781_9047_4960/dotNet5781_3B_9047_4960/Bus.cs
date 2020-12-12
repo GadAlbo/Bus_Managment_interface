@@ -92,8 +92,13 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                if (value > allKilometrage) // can not subtract
-                    allKilometrage = value;
+                if (value > allKilometrage)// can not subtract
+                {
+                    if (value < 20000)
+                    {
+                        allKilometrage = value;
+                    }
+                }
             }
         }
 

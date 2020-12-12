@@ -66,5 +66,14 @@ namespace dotNet5781_3B_9047_4960
         {
             
         }
+        private void driveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Bus b = (busesBox.SelectedItem as Bus);
+            if (b != null)
+            {
+                driveBus drive = new driveBus(b);
+                drive.Show();
+            }
+        }
     }
 }
