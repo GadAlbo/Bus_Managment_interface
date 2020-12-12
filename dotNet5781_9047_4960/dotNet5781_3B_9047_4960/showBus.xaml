@@ -6,10 +6,7 @@
         xmlns:local="clr-namespace:dotNet5781_3B_9047_4960"
         mc:Ignorable="d"
         Title="showBus" Height="400" Width="450" >
-    
-
     <Grid>
-
         <Button Name="treatmentButton" Content="Treatment" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="262,294,0,0" RenderTransformOrigin="0.517,-0.633" Click="treatmentButton_Click"/>
         <Button Name="refuelButton" Content="Refuel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="93,294,0,0" Click="refuelButton_Click"/>
         <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="93,57,0,0" VerticalAlignment="Top">
@@ -38,6 +35,25 @@
             <Label Content="Start Of Activity:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
             <DatePicker x:Name="startOfActivityDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" SelectedDate="{Binding StartOfActivity, Mode=OneWay}" VerticalAlignment="Center"/>
         </Grid>
-
     </Grid>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize"
+              Value="12" />
+            <Setter Property="FontFamily"
+              Value="Segoe UI" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize"
+              Value="12" />
+            <Setter Property="FontFamily"
+              Value="Segoe UI" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize"
+              Value="12" />
+            <Setter Property="FontFamily"
+              Value="Segoe UI" />
+        </Style>
+    </Window.Resources>
 </Window>

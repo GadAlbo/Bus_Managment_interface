@@ -151,7 +151,6 @@ namespace dotNet5781_3B_9047_4960
             int addKill = Convert.ToInt32(add);
             if (addKill > 0) //needs to be positive
             {
-                allKilometrage += addKill;
                 killFromLastCheckup += addKill;
                 KillFromRefueling += addKill;
             }
