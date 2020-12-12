@@ -87,5 +87,14 @@ namespace dotNet5781_3B_9047_4960
             (e.Result as Bus).State = state.ReadyToGo;
             MessageBox.Show("Refuel of "+ (e.Result as Bus).LicenseNumber+ " bus is completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        private void driveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Bus b = (busesBox.SelectedItem as Bus);
+            if (b != null)
+            {
+                driveBus drive = new driveBus(b);
+                drive.Show();
+            }
+        }
     }
 }

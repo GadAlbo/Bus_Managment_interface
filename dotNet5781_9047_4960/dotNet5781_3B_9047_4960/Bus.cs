@@ -146,8 +146,9 @@ namespace dotNet5781_3B_9047_4960
             startOfActivity = DateTime.Now;
             LastCheckup = startOfActivity;
         }
-        public void AddKilometrage(int addKill) //adds Kilometrage to all the necessary variables
+        public void AddKilometrage(string add) //adds Kilometrage to all the necessary variables
         {
+            int addKill = Convert.ToInt32(add);
             if (addKill > 0) //needs to be positive
             {
                 allKilometrage += addKill;
