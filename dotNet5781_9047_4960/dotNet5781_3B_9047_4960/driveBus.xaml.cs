@@ -83,9 +83,23 @@ namespace dotNet5781_3B_9047_4960
         {
             if((e.Argument as Bus).State == state.ReadyToGo)
              {
-                (e.Argument as Bus).AddKilometrage(driveNumber);
-                (e.Argument as Bus).State = state.midRide;
-                Thread.Sleep(w.Next(20, 50) * Convert.ToInt32(drive.Text) * 200);
+                    if ((e.Argument as Bus).KillFromLastCheckup + Convert.ToInt32(driveNumber) < 20000)
+                    {
+                    if ((e.Argument as Bus).KillFromRefueling + Convert.ToInt32(driveNumber) < 1200)
+                        {
+                        (e.Argument as Bus).AddKilometrage(driveNumber);
+                        (e.Argument as Bus).State = state.midRide;
+                        Thread.Sleep(w.Next(20, 50) * Convert.ToInt32(driveNumber) * 2);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Drive Can not be handled because the buds drive too mutch from last refual , try later", "Drive message", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Drive Can not be handled because the buds drive too mutch from last checkup , try later", "Drive message", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
@@ -95,7 +109,10 @@ namespace dotNet5781_3B_9047_4960
         private void Worker_RunWorkerCompletedDrive(object sender, RunWorkerCompletedEventArgs e)
         {
             (busesgrid.DataContext as Bus).State = state.ReadyToGo;
-            MessageBox.Show("Drive completed", "Drive message", MessageBoxButton.OK, MessageBoxImage.Information);
+            if ((busesgrid.DataContext as Bus).KillFromLastCheckup != 0)
+            {
+                MessageBox.Show("Drive completed", "Drive message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }
