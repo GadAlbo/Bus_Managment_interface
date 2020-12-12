@@ -10,13 +10,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
+        <Label x:Name="label" Content="Enter killometr's number" Grid.Column="1" HorizontalAlignment="Left" Margin="10,86,0,0" Grid.Row="1" VerticalAlignment="Top" Height="42" Width="180"/>
+        <TextBlock x:Name="textBlock" Grid.Column="2" HorizontalAlignment="Left" Margin="64,91,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="65" Width="254"/>
     </Grid>
 </Window>
