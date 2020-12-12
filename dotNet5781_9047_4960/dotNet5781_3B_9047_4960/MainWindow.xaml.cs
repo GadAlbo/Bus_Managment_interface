@@ -62,7 +62,6 @@ namespace dotNet5781_3B_9047_4960
         }
         private void refuelingButton_Click(object sender, RoutedEventArgs e)
         {
-            
         }
     }
 }
