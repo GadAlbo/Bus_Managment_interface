@@ -77,7 +77,6 @@ namespace dotNet5781_3B_9047_4960
         }
         private void Worker_DoWorkRefuel(object sender, DoWorkEventArgs e)
         {
-            (e.Argument as Bus).refuel();
             (e.Argument as Bus).State = state.refueling;
             e.Result = e.Argument;
             Thread.Sleep(12000);
@@ -85,6 +84,7 @@ namespace dotNet5781_3B_9047_4960
         private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)
         {
             (e.Result as Bus).State = state.ReadyToGo;
+            (e.Result as Bus).refuel();
             MessageBox.Show("Refuel of "+ (e.Result as Bus).LicenseNumber+ " bus is completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void driveButton_Click(object sender, RoutedEventArgs e)
