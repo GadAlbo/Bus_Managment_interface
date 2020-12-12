@@ -24,9 +24,8 @@ namespace dotNet5781_3B_9047_4960
     /// </summary>
     public partial class MainWindow : Window
     {
-        BackgroundWorker workerREFUAL;
-        BackgroundWorker workerTREAT;
         ObservableCollection <Bus> ObservableCollectionBus = new ObservableCollection<Bus>();
+        BackgroundWorker workerREFUAL;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,8 +42,11 @@ namespace dotNet5781_3B_9047_4960
             ObservableCollectionBus[6].KillFromRefueling = 400;
             ObservableCollectionBus[6].KillFromLastCheckup = 19997;
             busesBox.ItemsSource = ObservableCollectionBus;
+            workerREFUAL = new BackgroundWorker();
+            workerREFUAL.DoWork += Worker_DoWorkRefuel;
+            workerREFUAL.RunWorkerCompleted += Worker_RunWorkerCompletedRefuel;
+            workerREFUAL.WorkerReportsProgress = true;
         }
-
         private void addBusButon_Click(object sender, RoutedEventArgs e)
         {
             Bus b = new Bus();
@@ -64,7 +66,26 @@ namespace dotNet5781_3B_9047_4960
         }
         private void refuelingButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (((sender as Button).DataContext as Bus).State == state.ReadyToGo)
+            {
+                workerREFUAL.RunWorkerAsync((sender as Button).DataContext);
+            }
+            else
+            {
+                MessageBox.Show("refuel Can not be handled because the bus is occupied, try later", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        private void Worker_DoWorkRefuel(object sender, DoWorkEventArgs e)
+        {
+            (e.Argument as Bus).refuel();
+            (e.Argument as Bus).State = state.refueling;
+            e.Result = e.Argument;
+            Thread.Sleep(12000);
+        }
+        private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)
+        {
+            (e.Result as Bus).State = state.ReadyToGo;
+            MessageBox.Show("Refuel of "+ (e.Result as Bus).LicenseNumber+ " bus is completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void driveButton_Click(object sender, RoutedEventArgs e)
         {

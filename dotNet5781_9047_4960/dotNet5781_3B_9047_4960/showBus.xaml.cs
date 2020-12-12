@@ -28,58 +28,63 @@ namespace dotNet5781_3B_9047_4960
             InitializeComponent();
             grid1.DataContext = b;
             refuelButton.DataContext = b;
+            workerREFUAL = new BackgroundWorker();
+            workerREFUAL.DoWork += Worker_DoWorkRefuel;
+            workerREFUAL.RunWorkerCompleted += Worker_RunWorkerCompletedRefuel;
+            workerREFUAL.WorkerReportsProgress = true;
+            workerTREAT = new BackgroundWorker();
+            workerTREAT.DoWork += Worker_DoWorktreatment;
+            workerTREAT.RunWorkerCompleted += Worker_RunWorkerCompletedtreatment;
+            workerTREAT.WorkerReportsProgress = true;
         }
 
         private void refuelButton_Click(object sender, RoutedEventArgs e)
         {
-            //Button refuel = (Button)sender;
-            workerREFUAL = new BackgroundWorker();
-            workerREFUAL.DoWork += Worker_DoWork;
-            workerREFUAL.ProgressChanged += Worker_ProgressChanged;
-            workerREFUAL.RunWorkerCompleted += Worker_RunWorkerCompleted;
-            workerREFUAL.WorkerReportsProgress = true;
-            workerREFUAL.RunWorkerAsync(grid1.DataContext);
+
+            if ((grid1.DataContext as Bus).State == state.ReadyToGo)
+            {
+                workerREFUAL.RunWorkerAsync(grid1.DataContext);
+            }
+            else
+            {
+                MessageBox.Show("refuel Can not be handled because the bus is occupied, try later", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        private void Worker_DoWorkRefuel(object sender, DoWorkEventArgs e)
         {
             (e.Argument as Bus).refuel();
-            e.Result = (e.Argument as Bus);
-        }
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
+            (e.Argument as Bus).State = state.refueling;
             Thread.Sleep(12000);
         }
-        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)
         {
-           // Thread.Sleep(12000);
+            (grid1.DataContext as Bus).State = state.ReadyToGo;
             MessageBox.Show("Refuel completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
-            grid1.DataContext = (e.Result as Bus);
         }
 
         private void treatmentButton_Click(object sender, RoutedEventArgs e)
         {
-            workerTREAT = new BackgroundWorker();
-            workerTREAT.DoWork += Worker_DoWork1;
-            workerTREAT.ProgressChanged += Worker_ProgressChanged2;
-            workerTREAT.RunWorkerCompleted += Worker_RunWorkerCompleted3;
-            workerTREAT.WorkerReportsProgress = true;
-            workerTREAT.RunWorkerAsync(grid1.DataContext);
+            if((grid1.DataContext as Bus).State==state.ReadyToGo)
+            {
+                workerTREAT.RunWorkerAsync(grid1.DataContext);
+            }
+            else
+            {
+                MessageBox.Show("Treatment Can not be handled because the bus is occupied, try later", "Treatment message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
             
-        private void Worker_DoWork1(object sender, DoWorkEventArgs e)
+        private void Worker_DoWorktreatment(object sender, DoWorkEventArgs e)
         {
+            (e.Argument as Bus).refuel();
             (e.Argument as Bus).Treat();
-            e.Result = (e.Argument as Bus);
+            (e.Argument as Bus).State = state.handling;
+            Thread.Sleep(6000);
         }
-        private void Worker_ProgressChanged2(object sender, ProgressChangedEventArgs e)
+        private void Worker_RunWorkerCompletedtreatment(object sender, RunWorkerCompletedEventArgs e)
         {
-            Thread.Sleep(60000);
-        }
-        private void Worker_RunWorkerCompleted3(object sender, RunWorkerCompletedEventArgs e)
-        {
-            //Thread.Sleep(12000);
+            (grid1.DataContext as Bus).State = state.ReadyToGo;
             MessageBox.Show("Treatment completed", "Treatment message", MessageBoxButton.OK, MessageBoxImage.Information);
-            grid1.DataContext = (e.Result as Bus);
         }
 
     }
