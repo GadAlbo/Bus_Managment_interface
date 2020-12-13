@@ -21,6 +21,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="License Number:" Grid.Column="0" />
                         <TextBlock Text="{Binding LicenseNumber}"  Grid.Column="1"/>
