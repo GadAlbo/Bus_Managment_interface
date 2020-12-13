@@ -5,22 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_3B_9047_4960"
         mc:Ignorable="d"
-        Title="driveBus" Height="450" Width="800">
+        Title="driveBus" Height="150" Width="400">
     <Grid Name="busesgrid" RenderTransformOrigin="0.493,0.292">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Label x:Name="label" Content="Enter killometr's number" Grid.Column="1" HorizontalAlignment="Left" Margin="10,86,0,0" Grid.Row="1" VerticalAlignment="Top" Height="42" Width="180"/>
-        <TextBox x:Name="drive" Grid.Column="2" HorizontalAlignment="Left" Height="38" Margin="63,90,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" KeyDown="TextBox_KeyDown"/>
-
+        <Label x:Name="label" Content="Enter killometr's number" Grid.Column="1" Height="25" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" />
+        <TextBox x:Name="drive" Grid.Column="2" HorizontalAlignment="Left" Width="68" Height="25" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"  PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" KeyDown="TextBox_KeyDown" Margin="0.2,0.2,0,0"/>
+        <!--Height="42" Width="180" Margin="10,86,0,0"-->
+        <!--Height="38" Margin="63,90,0,0"Width="149" Width="149"-->
     </Grid>
     <Window.Resources>
         <Style TargetType="Label">

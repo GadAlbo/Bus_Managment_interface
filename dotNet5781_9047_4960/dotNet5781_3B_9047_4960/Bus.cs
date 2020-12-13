@@ -36,7 +36,7 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                if (startOfActivity.Year < 2018)          //checks if the year is before 2018
+                if (StartOfActivity.Year < 2018)          //checks if the year is before 2018
                 {                  //the while is false now 
                         licenseNumber = value[0] + "" + value[1] + "-" + value[2] + value[3] + value[4] + "-" + value[5] + value[6]; //enter the right order o nums and -
                 }
@@ -54,7 +54,7 @@ namespace dotNet5781_3B_9047_4960
             {
                 return startOfActivity;
             }
-            private set
+            set
             {
                 startOfActivity = value;
                 OnPropertyChanged("StartOfActivity");
@@ -99,7 +99,7 @@ namespace dotNet5781_3B_9047_4960
             {
 
                 killFromLastCheckup = value;
-                allKilometrage += value;
+                AllKilometrage += value;
                 OnPropertyChanged("KillFromLastCheckup");
             }
         }
@@ -113,7 +113,7 @@ namespace dotNet5781_3B_9047_4960
             set
             {
                 killFromRefueling = value;
-                allKilometrage += value;  
+                AllKilometrage += value;  
                 OnPropertyChanged("KillFromRefueling");
             }
         }
