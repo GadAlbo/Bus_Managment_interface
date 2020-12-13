@@ -166,7 +166,7 @@ namespace dotNet5781_3B_9047_4960
         {
             int addKill;
             Int32.TryParse(add, out addKill);
-            if (addKill > 0) //needs to be positive
+            if (addKill >= 0) //needs to be positive
             {
                 killFromLastCheckup += addKill;
                 KillFromRefueling += addKill;
