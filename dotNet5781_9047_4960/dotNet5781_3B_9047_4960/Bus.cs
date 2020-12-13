@@ -14,7 +14,7 @@ namespace dotNet5781_3B_9047_4960
     public class Bus:ObservaleObject
     {
         static Random w = new Random();
-        private state s;
+        private state s=state.ReadyToGo;
         public state State
         {
             get
@@ -27,7 +27,7 @@ namespace dotNet5781_3B_9047_4960
                 OnPropertyChanged("State");
             }
         }
-        private string licenseNumber;
+        private string licenseNumber="";
         public string LicenseNumber //property
         {
             get
