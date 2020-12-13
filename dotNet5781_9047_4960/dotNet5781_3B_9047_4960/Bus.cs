@@ -103,7 +103,7 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                if (value > 0)
+                if (value >= 0)
                 {
                     killFromLastCheckup = value;
                     AllKilometrage += value;
@@ -120,7 +120,7 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                if (value > 0)
+                if (value >= 0)
                 {
                     killFromRefueling = value;
                     AllKilometrage += value;
