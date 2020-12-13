@@ -203,26 +203,26 @@ namespace dotNet5781_3B_9047_4960
             {
                 return Binding.DoNothing;
             }
+            if((KillFromRefueling>1150)||(LastCheckup.Subtract(DateTime.Now).Days>365)||(KillFromLastCheckup>15000))
+                return new BitmapImage(new Uri("warning.png"));
             state s = (state)value;
             switch (s)
             {
-                //case state.ReadyToGo:
-                //    return new ImageSource("parking.png");
-                //    break;
-                //case state.midRide:
-                //    return new ImageSource("refuel.png");
-                //    break;
-                //case state.refueling:
-                //    return s;
-                //    break;
-                //case state.handling:
-                //    return s;
-                //    break;
-                //default:
-                //    return s;
-                //    break;
+                case state.ReadyToGo:
+                    return new BitmapImage(new Uri("parking.png"));
+                    break;
+                case state.midRide:
+                    return new BitmapImage(new Uri("steering-wheel.png"));
+                case state.refueling:
+                    return new BitmapImage(new Uri("refuel.png"));
+                    break;
+                case state.handling:
+                    return new BitmapImage(new Uri("wrench.png"));
+                    break;
+                default:
+                    return null;
+                    break;
             }
-            return true;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
