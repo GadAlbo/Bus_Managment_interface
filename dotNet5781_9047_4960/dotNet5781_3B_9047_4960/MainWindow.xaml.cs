@@ -99,5 +99,21 @@ namespace dotNet5781_3B_9047_4960
                 drive.Show();
             }
         }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            foreach (var item in ObservableCollectionBus)
+            {
+                ListBoxItem bus = (ListBoxItem)busesBox.ItemContainerGenerator.ContainerFromItem(item);
+                string searchS = SearchBox.Text;
+                int num = searchS.Length;
+                if ((num <= item.LicenseNumber.Length) && (searchS == (item as Bus).LicenseNumber.Substring(0, num)))
+                {
+                    bus.Visibility = Visibility.Visible;
+                }
+                else
+                    bus.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }
