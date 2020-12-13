@@ -6,12 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dotNet5781_01_9047_4960;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Data;
+using System.Globalization;
+using System.Windows.Media;
 
 namespace dotNet5781_3B_9047_4960
 {
     
    public enum state { ReadyToGo, midRide, refueling, handling };
-    public class Bus:ObservaleObject
+    public class Bus:ObservaleObject, IValueConverter
     {
         static Random w = new Random();
         private state s=state.ReadyToGo;
@@ -159,7 +164,8 @@ namespace dotNet5781_3B_9047_4960
         }
         public void AddKilometrage(string add) //adds Kilometrage to all the necessary variables
         {
-            int addKill = Convert.ToInt32(add);
+            int addKill;
+            Int32.TryParse(add, out addKill);
             if (addKill > 0) //needs to be positive
             {
                 killFromLastCheckup += addKill;
@@ -189,6 +195,39 @@ namespace dotNet5781_3B_9047_4960
             else if (licenseNumber.Length == 9)
                 return true;
             return false;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(!(value is state))
+            {
+                return Binding.DoNothing;
+            }
+            state s = (state)value;
+            switch (s)
+            {
+                //case state.ReadyToGo:
+                //    return new ImageSource("parking.png");
+                //    break;
+                //case state.midRide:
+                //    return new ImageSource("refuel.png");
+                //    break;
+                //case state.refueling:
+                //    return s;
+                //    break;
+                //case state.handling:
+                //    return s;
+                //    break;
+                //default:
+                //    return s;
+                //    break;
+            }
+            return true;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

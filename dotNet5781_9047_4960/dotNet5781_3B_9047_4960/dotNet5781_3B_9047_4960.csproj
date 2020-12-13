@@ -124,6 +124,12 @@
       <Name>dotNet5781_01_9047_4960</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="parking.png" />
+    <Resource Include="refuel.png" />
+    <Resource Include="steering-wheel.png" />
+    <Resource Include="warning.png" />
+    <Resource Include="wrench.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
