@@ -18,6 +18,7 @@ namespace dotNet5781_3B_9047_4960
    public enum state { ReadyToGo, midRide, refueling, handling };
     public class Bus:ObservaleObject
     {
+        public BackgroundWorker worker;
         static Random w = new Random();
         private state s=state.ReadyToGo;
         public state State
