@@ -52,7 +52,10 @@ namespace dotNet5781_3B_9047_4960
             Bus b = new Bus();
             AddNewBus add = new AddNewBus(b);
             add.ShowDialog();
-            ObservableCollectionBus.Add(b);
+            if(b.isBusTrue())
+            {
+                ObservableCollectionBus.Add(b);
+            }
         }
 
         private void MouseDoubleClickBus(object sender, MouseButtonEventArgs e)

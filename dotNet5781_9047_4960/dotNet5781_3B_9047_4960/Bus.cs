@@ -36,13 +36,17 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                if (StartOfActivity.Year < 2018)          //checks if the year is before 2018
-                {                  //the while is false now 
-                        licenseNumber = value[0] + "" + value[1] + "-" + value[2] + value[3] + value[4] + "-" + value[5] + value[6]; //enter the right order o nums and -
-                }
-                else
-                {        //the while is false now 
-                        licenseNumber = "" + value[0] + "" + value[1] + "" + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; //enter the right order o nums and -
+                int i;
+                if (Int32.TryParse(value, out i))
+                {
+                    if (StartOfActivity.Year < 2018)          //checks if the year is before 2018
+                    {                  //the while is false now 
+                            licenseNumber = value[0] + "" + value[1] + "-" + value[2] + value[3] + value[4] + "-" + value[5] + value[6]; //enter the right order o nums and -
+                    }
+                    else
+                    {        //the while is false now 
+                            licenseNumber = "" + value[0] + "" + value[1] + "" + value[2] + "-" + value[3] + value[4] + "-" + value[5] + value[6] + value[7]; //enter the right order o nums and -
+                    }
                 }
                 OnPropertyChanged("LicenseNumber");
             }
@@ -83,8 +87,10 @@ namespace dotNet5781_3B_9047_4960
             set
             {
                 if (value > allKilometrage) // can not subtract
+                {
                     allKilometrage = value;
-                OnPropertyChanged("AllKilometrage");
+                    OnPropertyChanged("AllKilometrage");
+                }
             }
         }
 
@@ -97,10 +103,12 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-
-                killFromLastCheckup = value;
-                AllKilometrage += value;
-                OnPropertyChanged("KillFromLastCheckup");
+                if (value > 0)
+                {
+                    killFromLastCheckup = value;
+                    AllKilometrage += value;
+                    OnPropertyChanged("KillFromLastCheckup");
+                }
             }
         }
         private int killFromRefueling = 0;
@@ -112,9 +120,12 @@ namespace dotNet5781_3B_9047_4960
             }
             set
             {
-                killFromRefueling = value;
-                AllKilometrage += value;  
-                OnPropertyChanged("KillFromRefueling");
+                if (value > 0)
+                {
+                    killFromRefueling = value;
+                    AllKilometrage += value;
+                    OnPropertyChanged("KillFromRefueling");
+                }
             }
         }
 
@@ -167,6 +178,17 @@ namespace dotNet5781_3B_9047_4960
         {
             LastCheckup = DateTime.Now;
             KillFromRefueling = 0;
+        }
+        public bool isBusTrue()
+        {
+            if (StartOfActivity.Year > 2018)
+            {
+                if (licenseNumber.Length == 10)
+                    return true;
+            }
+            else if (licenseNumber.Length == 9)
+                return true;
+            return false;
         }
     }
 }

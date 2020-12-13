@@ -31,7 +31,14 @@ namespace dotNet5781_3B_9047_4960
 
         private void Button_Click(object sender, RoutedEventArgs e)
         { 
-            Close();
+            if((grid1.DataContext as Bus).isBusTrue())
+            {
+                Close();
+            }
+            else
+            {
+               // licenseNumberTextBox
+            }
         }
     }
 }
