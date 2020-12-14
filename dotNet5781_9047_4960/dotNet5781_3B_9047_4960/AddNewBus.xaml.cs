@@ -37,8 +37,7 @@ namespace dotNet5781_3B_9047_4960
             }
             else
             {
-              // licenseNumberTextBox.Has
-                    //Validation.HasError
+                MessageBox.Show("the License Number you entered does not fit the format", "ERROR message", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

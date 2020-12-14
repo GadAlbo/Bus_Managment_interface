@@ -77,7 +77,7 @@ namespace dotNet5781_3B_9047_4960
         private void Worker_DoWorktreatment(object sender, DoWorkEventArgs e)
         {
             (e.Argument as Bus).State = state.handling;
-            Thread.Sleep(6000);
+            Thread.Sleep(144000);
         }
         private void Worker_RunWorkerCompletedtreatment(object sender, RunWorkerCompletedEventArgs e)
         {
