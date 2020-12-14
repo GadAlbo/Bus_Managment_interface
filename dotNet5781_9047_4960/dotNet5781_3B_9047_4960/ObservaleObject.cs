@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_3B_9047_4960
 {
-    public class ObservaleObject : INotifyPropertyChanged
+    public class ObservaleObject : INotifyPropertyChanged//observable to the bus properties
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

@@ -39,14 +39,12 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Width="20"  Source="{Binding State, Converter={StaticResource convertImage}}"/>
                         <TextBlock Text="License Number:" Grid.Column="1" />
                         <TextBlock Text="{Binding LicenseNumber}"  Grid.Column="2"/>
                         <Button Name="driveButton" Content="Drive" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="driveButton_Click"/>
                         <Button Name="refuelingButton" Content="Refuel" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="refuelingButton_Click"/>
-                        <TextBlock Text="{Binding Timer}" Grid.Column="5"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

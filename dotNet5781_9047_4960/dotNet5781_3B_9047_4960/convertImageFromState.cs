@@ -10,9 +10,9 @@ using System.Windows.Media.Imaging;
 
 namespace dotNet5781_3B_9047_4960
 {
-    public class convertImageFromState : IValueConverter
+    public class convertImageFromState : IValueConverter//convert state to image for the icons behynd the buses
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)//convert
         {
             if (!(value is state))
             {
