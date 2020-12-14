@@ -22,7 +22,7 @@ namespace dotNet5781_3B_9047_4960
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window// show all of the buses and refual and drive buttons
+    public partial class MainWindow : Window//window that shows all of the buses with refual and drive buttons, dablle tap to show bus and on optiong to add buses
     {
         ObservableCollection <Bus> ObservableCollectionBus = new ObservableCollection<Bus>();
         public MainWindow()// constractor- add the list of buses
