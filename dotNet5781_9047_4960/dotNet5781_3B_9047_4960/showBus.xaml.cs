@@ -23,7 +23,7 @@ namespace dotNet5781_3B_9047_4960
     {
         BackgroundWorker workerTREAT;
         BackgroundWorker workerREFUAL;
-        public showBus(Bus b)
+        public showBus(Bus b)//constractor
         {
             InitializeComponent();
             grid1.DataContext = b;
@@ -38,7 +38,7 @@ namespace dotNet5781_3B_9047_4960
             workerTREAT.WorkerReportsProgress = true;
         }
 
-        private void refuelButton_Click(object sender, RoutedEventArgs e)
+        private void refuelButton_Click(object sender, RoutedEventArgs e)//refual the bus if is ready to go
         {
 
             if ((grid1.DataContext as Bus).State == state.ReadyToGo)
@@ -50,21 +50,19 @@ namespace dotNet5781_3B_9047_4960
                 MessageBox.Show("refuel Can not be handled because the bus is occupied, try later", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-        private void Worker_DoWorkRefuel(object sender, DoWorkEventArgs e)
+        private void Worker_DoWorkRefuel(object sender, DoWorkEventArgs e)//refual the bus- waiting
         {
             (e.Argument as Bus).State = state.refueling;
-            (e.Argument as Bus).Timer.Interval = new TimeSpan(0, 0, 1200);
-            (e.Argument as Bus).Timer.Start();
             Thread.Sleep(12000);
         }
-        private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)
+        private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)//refual the bus
         {
             (grid1.DataContext as Bus).State = state.ReadyToGo;
             (grid1.DataContext as Bus).refuel();
             MessageBox.Show("Refuel completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void treatmentButton_Click(object sender, RoutedEventArgs e)
+        private void treatmentButton_Click(object sender, RoutedEventArgs e)//treat the bus if is ready to go
         {
             if((grid1.DataContext as Bus).State==state.ReadyToGo)
             {
@@ -76,14 +74,12 @@ namespace dotNet5781_3B_9047_4960
             }
         }
             
-        private void Worker_DoWorktreatment(object sender, DoWorkEventArgs e)
+        private void Worker_DoWorktreatment(object sender, DoWorkEventArgs e)//treat the bus- waiting
         {
             (e.Argument as Bus).State = state.handling;
-            (e.Argument as Bus).Timer.Interval = new TimeSpan(0, 0, 6000);
-            (e.Argument as Bus).Timer.Start();
             Thread.Sleep(6000);
         }
-        private void Worker_RunWorkerCompletedtreatment(object sender, RunWorkerCompletedEventArgs e)
+        private void Worker_RunWorkerCompletedtreatment(object sender, RunWorkerCompletedEventArgs e)//treat the bus
         {
             (grid1.DataContext as Bus).State = state.ReadyToGo;
             (grid1.DataContext as Bus).refuel();

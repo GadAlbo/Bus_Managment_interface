@@ -24,7 +24,7 @@ namespace dotNet5781_3B_9047_4960
         BackgroundWorker workerDRIVE;
         static Random w = new Random();
         string driveNumber;
-        public driveBus(Bus b)
+        public driveBus(Bus b)//constractor
         {
             InitializeComponent();
             busesgrid.DataContext = b;
@@ -34,7 +34,7 @@ namespace dotNet5781_3B_9047_4960
             workerDRIVE.RunWorkerCompleted += Worker_RunWorkerCompletedDrive;
             workerDRIVE.WorkerReportsProgress = true;
         }
-        private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)//allow only numbers
         {
             TextBox text = sender as TextBox;
             if (text == null) return;
@@ -64,7 +64,7 @@ namespace dotNet5781_3B_9047_4960
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)//send to drive when the user enter- Enter
         {
             if(e.Key==Key.Enter)
             {
@@ -79,7 +79,7 @@ namespace dotNet5781_3B_9047_4960
                 }
             }
         }
-        private void Worker_DoWorkDrive(object sender, DoWorkEventArgs e)
+        private void Worker_DoWorkDrive(object sender, DoWorkEventArgs e)//do worker- send to drive only when the bus is ready to go and it refual and checkuo close enught
         {
             if((e.Argument as Bus).State == state.ReadyToGo)
              {
@@ -106,7 +106,7 @@ namespace dotNet5781_3B_9047_4960
                 MessageBox.Show("Drive Can not be handled because the bus is occupied, try later", "Drive message", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void Worker_RunWorkerCompletedDrive(object sender, RunWorkerCompletedEventArgs e)
+        private void Worker_RunWorkerCompletedDrive(object sender, RunWorkerCompletedEventArgs e)//drive the bus
         {
             (busesgrid.DataContext as Bus).State = state.ReadyToGo;
             if(e.Result is Bus)

@@ -25,7 +25,7 @@ namespace dotNet5781_3B_9047_4960
     public partial class MainWindow : Window
     {
         ObservableCollection <Bus> ObservableCollectionBus = new ObservableCollection<Bus>();
-        public MainWindow()
+        public MainWindow()// constractor- add the list of buses
         {
             InitializeComponent();
             Bus bus;
@@ -35,14 +35,14 @@ namespace dotNet5781_3B_9047_4960
                 ObservableCollectionBus.Add(bus);
             }
             ObservableCollectionBus[0].LastCheckup = new DateTime(2018, 12, 6);
-            ObservableCollectionBus[3].KillFromRefueling = 1198;
-            ObservableCollectionBus[4].KillFromRefueling = 1198;
+            ObservableCollectionBus[3].KillFromRefueling = 1198;//close to the next refual
+            ObservableCollectionBus[4].KillFromRefueling = 1198;//close to the next refual
             ObservableCollectionBus[5].KillFromRefueling = 50;
             ObservableCollectionBus[6].KillFromRefueling = 400;
-            ObservableCollectionBus[6].KillFromLastCheckup = 19997;
+            ObservableCollectionBus[6].KillFromLastCheckup = 19997;//close to next checkup
             busesBox.ItemsSource = ObservableCollectionBus;
         }
-        private void addBusButon_Click(object sender, RoutedEventArgs e)
+        private void addBusButon_Click(object sender, RoutedEventArgs e)// add a new bus- open the addBus window and set the new data to the main window
         {
             Bus b = new Bus();
             AddNewBus add = new AddNewBus(b);
@@ -53,7 +53,7 @@ namespace dotNet5781_3B_9047_4960
             }
         }
 
-        private void MouseDoubleClickBus(object sender, MouseButtonEventArgs e)
+        private void MouseDoubleClickBus(object sender, MouseButtonEventArgs e)//show bus- open the showBus window
         {
             Bus b= (busesBox.SelectedItem as Bus);
             if (b != null)
@@ -62,7 +62,7 @@ namespace dotNet5781_3B_9047_4960
                 show.Show();
             }
         }
-        private void refuelingButton_Click(object sender, RoutedEventArgs e)
+        private void refuelingButton_Click(object sender, RoutedEventArgs e)//refual the bus if the bus is ready to go
         {
             if (((sender as Button).DataContext as Bus).State == state.ReadyToGo)
             {
@@ -77,19 +77,19 @@ namespace dotNet5781_3B_9047_4960
                 MessageBox.Show("refuel Can not be handled because the bus is occupied, try later", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void Worker_DoWorkRefuel(object sender, DoWorkEventArgs e)
+        private void Worker_DoWorkRefuel(object sender, DoWorkEventArgs e)//do worker for the refual- wait the time
         {
             (e.Argument as Bus).State = state.refueling;
             e.Result = e.Argument;
             Thread.Sleep(12000);
         }
-        private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)
+        private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)//refual the bus
         {
             (e.Result as Bus).State = state.ReadyToGo;
             (e.Result as Bus).refuel();
             MessageBox.Show("Refuel of "+ (e.Result as Bus).LicenseNumber+ " bus is completed", "Refuel message", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-        private void driveButton_Click(object sender, RoutedEventArgs e)
+        private void driveButton_Click(object sender, RoutedEventArgs e)//drive bus- open the driveBus window
         {
             Bus b = (sender as Button).DataContext as Bus;
             if (b != null)
@@ -99,7 +99,7 @@ namespace dotNet5781_3B_9047_4960
             }
         }
 
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)//search a bus
         {
             foreach (var item in ObservableCollectionBus)
             {

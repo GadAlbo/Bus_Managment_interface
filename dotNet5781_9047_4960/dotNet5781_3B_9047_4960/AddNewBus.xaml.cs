@@ -22,23 +22,18 @@ namespace dotNet5781_3B_9047_4960
     /// </summary>
     public partial class AddNewBus : Window
     {
-        public AddNewBus(Bus b)
+        public AddNewBus(Bus b)//constractor
         {
             InitializeComponent();
             grid1.DataContext = b;
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)//add the bus if we send a right data
         { 
             if((grid1.DataContext as Bus).isBusTrue())
             {
                 Close();
-            }
-            else
-            {
-              // licenseNumberTextBox.Has
-                    //Validation.HasError
             }
         }
     }
