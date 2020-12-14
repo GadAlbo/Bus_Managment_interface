@@ -90,6 +90,5 @@ namespace dotNet5781_3B_9047_4960
             (grid1.DataContext as Bus).Treat();
             MessageBox.Show("Treatment completed", "Treatment message", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
     }
 }
