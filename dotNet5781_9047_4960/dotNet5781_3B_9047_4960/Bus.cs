@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Data;
 using System.Globalization;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace dotNet5781_3B_9047_4960
 {
@@ -100,6 +101,15 @@ namespace dotNet5781_3B_9047_4960
         }
 
         private int killFromLastCheckup = 0;
+      /*  public DispatcherTimer DispatcherTimerRefual 
+        { 
+            get;
+            set
+            {
+
+            }
+        }
+        public DispatcherTimer DispatcherTimerTreat { get; set; }*/
         public int KillFromLastCheckup//property
         {
             get
