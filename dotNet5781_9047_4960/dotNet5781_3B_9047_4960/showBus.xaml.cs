@@ -53,6 +53,8 @@ namespace dotNet5781_3B_9047_4960
         private void Worker_DoWorkRefuel(object sender, DoWorkEventArgs e)
         {
             (e.Argument as Bus).State = state.refueling;
+            (e.Argument as Bus).Timer.Interval = new TimeSpan(0, 0, 1200);
+            (e.Argument as Bus).Timer.Start();
             Thread.Sleep(12000);
         }
         private void Worker_RunWorkerCompletedRefuel(object sender, RunWorkerCompletedEventArgs e)
@@ -77,6 +79,8 @@ namespace dotNet5781_3B_9047_4960
         private void Worker_DoWorktreatment(object sender, DoWorkEventArgs e)
         {
             (e.Argument as Bus).State = state.handling;
+            (e.Argument as Bus).Timer.Interval = new TimeSpan(0, 0, 6000);
+            (e.Argument as Bus).Timer.Start();
             Thread.Sleep(144000);
         }
         private void Worker_RunWorkerCompletedtreatment(object sender, RunWorkerCompletedEventArgs e)
