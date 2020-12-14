@@ -19,7 +19,7 @@ namespace dotNet5781_3B_9047_4960
     /// <summary>
     /// Interaction logic for showBus.xaml
     /// </summary>
-    public partial class showBus : Window
+    public partial class showBus : Window// create a window to show the whole data about the bus and also a treat and refual buttons
     {
         BackgroundWorker workerTREAT;
         BackgroundWorker workerREFUAL;

@@ -20,7 +20,7 @@ namespace dotNet5781_3B_9047_4960
     /// <summary>
     /// Interaction logic for AddNewBus.xaml
     /// </summary>
-    public partial class AddNewBus : Window
+    public partial class AddNewBus : Window//crate a window for add a new bus to the list
     {
         public AddNewBus(Bus b)//constractor
         {

@@ -19,7 +19,7 @@ namespace dotNet5781_3B_9047_4960
     /// <summary>
     /// Interaction logic for driveBus.xaml
     /// </summary>
-    public partial class driveBus : Window
+    public partial class driveBus : Window//create a window for drive a bus from the list
     {
         BackgroundWorker workerDRIVE;
         static Random w = new Random();
