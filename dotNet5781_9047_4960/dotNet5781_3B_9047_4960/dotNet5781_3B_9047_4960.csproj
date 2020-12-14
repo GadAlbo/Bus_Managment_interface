@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="convertImageFromState.cs" />
     <Compile Include="driveBus.xaml.cs">
       <DependentUpon>driveBus.xaml</DependentUpon>
     </Compile>
@@ -125,11 +126,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="parking.png" />
-    <Resource Include="refuel.png" />
-    <Resource Include="steering-wheel.png" />
-    <Resource Include="warning.png" />
-    <Resource Include="wrench.png" />
+    <Resource Include="image\parking.png" />
+    <Resource Include="image\refuel.png" />
+    <Resource Include="image\steering-wheel.png" />
+    <Resource Include="image\warning.png" />
+    <Resource Include="image\wrench.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\loupe.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

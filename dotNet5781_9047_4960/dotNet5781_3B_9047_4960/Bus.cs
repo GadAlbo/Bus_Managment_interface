@@ -17,8 +17,9 @@ namespace dotNet5781_3B_9047_4960
 {
     
    public enum state { ReadyToGo, midRide, refueling, handling };
-    public class Bus:ObservaleObject, IValueConverter
+    public class Bus:ObservaleObject
     {
+        public BackgroundWorker worker;
         static Random w = new Random();
         private state s=state.ReadyToGo;
         public state State
@@ -207,37 +208,6 @@ namespace dotNet5781_3B_9047_4960
             return false;
         }
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if(!(value is state))
-            {
-                return Binding.DoNothing;
-            }
-            if((KillFromRefueling>1150)||(LastCheckup.Subtract(DateTime.Now).Days>365)||(KillFromLastCheckup>15000))
-                return new BitmapImage(new Uri("warning.png"));
-            state s = (state)value;
-            switch (s)
-            {
-                case state.ReadyToGo:
-                    return new BitmapImage(new Uri("parking.png"));
-                    break;
-                case state.midRide:
-                    return new BitmapImage(new Uri("steering-wheel.png"));
-                case state.refueling:
-                    return new BitmapImage(new Uri("refuel.png"));
-                    break;
-                case state.handling:
-                    return new BitmapImage(new Uri("wrench.png"));
-                    break;
-                default:
-                    return null;
-                    break;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
