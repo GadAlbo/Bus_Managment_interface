@@ -34,6 +34,8 @@ namespace dotNet5781_3B_9047_4960
                 OnPropertyChanged("State");
             }
         }
+
+        public DispatcherTimer Timer { get; set; }
         private string licenseNumber="";
         public string LicenseNumber //property
         {
@@ -160,6 +162,7 @@ namespace dotNet5781_3B_9047_4960
             {
                 LastCheckup = startOfActivity;
             }
+            Timer = new DispatcherTimer();
         }
         public Bus()
         {
@@ -172,6 +175,7 @@ namespace dotNet5781_3B_9047_4960
             //}//lisens number
             startOfActivity = DateTime.Now;
             LastCheckup = startOfActivity;
+            Timer = new DispatcherTimer();
         }
         public void AddKilometrage(string add) //adds Kilometrage to all the necessary variables
         {
