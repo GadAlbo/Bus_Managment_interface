@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5B61ADE8-24DE-4DEF-9B71-2B2D60B189BC}</ProjectGuid>
+    <ProjectGuid>{A8252F83-9704-4C5E-83DD-F0747CA05B71}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BL</RootNamespace>
-    <AssemblyName>BL</AssemblyName>
+    <RootNamespace>APIDL</RootNamespace>
+    <AssemblyName>APIDL</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,20 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlFactory.cs" />
-    <Compile Include="BLIMP.cs" />
-    <Compile Include="BO.cs" />
-    <Compile Include="IBL.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\APIDL\APIDL.csproj">
-      <Project>{ea7e5e12-5a9e-4e41-9c03-a1dee0cdfed8}</Project>
-      <Name>APIDL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

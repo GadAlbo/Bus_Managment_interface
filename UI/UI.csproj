@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EA7E5E12-5A9E-4E41-9C03-A1DEE0CDFED8}</ProjectGuid>
+    <ProjectGuid>{017FFC65-E408-4728-81BC-227673802401}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>APIDL</RootNamespace>
-    <AssemblyName>APIDL</AssemblyName>
+    <RootNamespace>UI</RootNamespace>
+    <AssemblyName>UI</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,11 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DalConfig.cs" />
-    <Compile Include="DalFactory.cs" />
-    <Compile Include="DO.cs" />
-    <Compile Include="IClonable.cs" />
-    <Compile Include="IDAL.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

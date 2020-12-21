@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlApi
+namespace DS
 {
-    public static class BlFactory
+    class Program
     {
-        public static IBL GetBl()
+        static void Main(string[] args)
         {
-            return new BL.BlImp1();
         }
     }
 }
