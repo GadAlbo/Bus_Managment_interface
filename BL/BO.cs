@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace BO
 {
-    class Program
+    public class Weather
     {
-        static void Main(string[] args)
-        {
-        }
+        public int Feeling { get; set; }
     }
 }

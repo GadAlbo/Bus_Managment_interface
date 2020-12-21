@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DO;
 
 namespace APIDL
+
 {
-    class Program
+    public interface IDAL
     {
-        static void Main(string[] args)
-        {
-        }
+        double GetTemparture(int day);
+        WindDirection GetWindDirection(int day);
+
     }
 }

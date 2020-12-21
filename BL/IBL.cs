@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO;
 
-namespace DalObject
+namespace BlApi
 {
-    class Program
+    public interface IBL
     {
-        static void Main(string[] args)
-        {
-        }
+        Weather GetWeather(int day);
     }
 }
