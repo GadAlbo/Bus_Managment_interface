@@ -8,15 +8,16 @@ namespace DO
 {
     public class DrivingBus
     {
-        public int BusKey { get; set; }
+       // public int BusKey { get; set; }
         public string LicenseNumber { get; set; }
         public int LineNumber { get; set; }
-        public int LineKey { get; set; }
+        // public int LineKey { get; set; } it in // because i dont anderstend why you need it
+        public DateTime Start { get; set; }
 
-       /* public override string ToString()
-        {
-            return this.ToStringProperty();
-        }*/
+        /* public override string ToString()
+         {
+             return this.ToStringProperty();
+         }*/
         //need more things in the next stages
     }
 }

@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 
 namespace DO
 {
-    class BusStation
+    public class BusStation
     {
         public int BusStationKey { get; set; }
         public GeoCoordinate Coordinates { get; set; }
@@ -17,6 +17,5 @@ namespace DO
         public string StationAddress{ get; set; }
         public bool HasARoof { get; set; } //we need to add more options
         public bool IsActive { get; set; }
-
     }
 }
