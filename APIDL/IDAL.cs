@@ -11,8 +11,11 @@ namespace APIDL
 {
     public interface IDAL
     {
-        double GetTemparture(int day);
-        WindDirection GetWindDirection(int day);
+        bool addBus(Bus bus);
+        bool update(Bus bus);
+        void delete(Bus bus);
+        Bus read(int license);
+        bool addBusInTravel(DrivingBus bus);
 
     }
 }
