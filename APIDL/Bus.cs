@@ -12,9 +12,9 @@ namespace DO
     {
         public WindDirections direction { get; set; }
     }*/
+    public enum state { ReadyToGo, midRide, refueling, handling };
     public class Bus
     {
-        public enum state { ReadyToGo, midRide, refueling, handling };
         public state State { get; set; }
         public string LicenseNumber { get; set; }
         public DateTime StartOfActivity { get; set; }
@@ -24,15 +24,9 @@ namespace DO
         public int KillFromRefueling { get; set; }
         public bool IsActive { get; set; }
         public int BusKey { get; set; }
+        /*public override string ToString()
+        {
+            return this.ToStringProperty();
+        }*/
     }
-    public class DrivingBus
-    {
-        public int BusKey { get; set; }
-        public string LicenseNumber { get; set; }
-        public int LineNumber { get; set; }
-        public int LineKey { get; set; }
-
-        //need more things in the next stages
-    }
-
 }
