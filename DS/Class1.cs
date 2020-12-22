@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO
+namespace DS
 {
-    public class Weather
+    public class Class1
     {
-        public int Feeling { get; set; }
     }
 }
