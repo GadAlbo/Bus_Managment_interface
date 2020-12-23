@@ -7,11 +7,6 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    /*public enum WindDirections { S, N, W, E, SE, SW, NE, NW, SSE, SEE, SSW, SWW, NNE, NEE, NNW, NWW }
-    public class WindDirection //: IClonable
-    {
-        public WindDirections direction { get; set; }
-    }*/
     public enum state { ReadyToGo, midRide, refueling, handling };
     public class Bus
     {
