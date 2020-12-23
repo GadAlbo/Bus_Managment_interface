@@ -30,8 +30,7 @@ namespace DS
                 BusStationList.Add(new BusStation
                 {
                     BusStationKey = RunNumbers.BusStationRunNumber++,
-                    Coordinates = new GeoCoordinate(,
-
+                    Coordinates = new GeoCoordinate(r.NextDouble() * (33.3 - 31) + 31, r.NextDouble() * (35.5 - 34.3) + 34.3)
                 });
             }
             BusLineList = new List<BusLine>();
