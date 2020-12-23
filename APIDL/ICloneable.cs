@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    public interface IClonable { }
+    public interface IClonable: ICloneable
+    { }
 }

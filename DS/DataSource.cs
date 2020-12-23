@@ -14,13 +14,13 @@ namespace DS
         public static List<BusLine> BusLineList;
         public static List<BusLineStation> BusLineStationList;
         public static List<BusStation> BusStationList;
-        public static List<User> userList;
+        public static List<User> UserList;
         public static Random r= new Random();
         static DataSource()
         {
             BusLineStationList = new List<BusLineStation>();
             BusStationList = new List<BusStation>();
-            userList = new List<User>();
+            UserList = new List<User>();
         }
         static void InitAllLists()
         {
@@ -28,9 +28,9 @@ namespace DS
             for(int i=0;i<50;i++)
             {
                 BusStationList.Add(new BusStation
-                { 
-                    BusStationKey = i,
-                    Coordinates=new GeoCoordinate(,
+                {
+                    BusStationKey = RunNumbers.BusStationRunNumber++,
+                    Coordinates = new GeoCoordinate(,
 
                 });
             }
@@ -39,7 +39,7 @@ namespace DS
             {
                 BusLineList.Add(new BusLine
                 {
-                    BusLineKey = i,
+                    BusLineKey = RunNumbers.BusLineRunNumber++,
                     LineNumber = r.Next(1000000, 10000000),
                     Area = (Areas)r.Next(0, 5),
                     IsActive = true

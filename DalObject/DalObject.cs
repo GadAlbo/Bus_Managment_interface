@@ -13,7 +13,7 @@ namespace DL
     public class DalObject : IDAL
     {
         #region singelton
-        static readonly DalObject instance = new DalObject();
+     /*   static readonly DalObject instance = new DalObject();
         static DalObject() { }
         DalObject() { }
         public static DalObject Instance => instance;
@@ -36,6 +36,6 @@ namespace DL
             direction.direction = directions[rnd.Next(0, directions.Length)];
 
             return direction.Clone();
-        }
+        }*/
     }
 }
