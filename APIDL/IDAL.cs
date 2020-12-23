@@ -21,14 +21,14 @@ namespace APIDL
         IEnumerable<BusLine> GetAllBusLines();
         IEnumerable<BusLine> GetAllBusLinesBy(Predicate<BusLine> predicate);
         void AddBusLine(BusLine bus);
-        bool UpdateBusLine(BusLine bus);
-        bool UpdateBusLine(int busLineKey, Action<BusLine> update); //method that knows to updt specific fields in bus
+        void UpdateBusLine(BusLine bus);
+        void UpdateBusLine(int busLineKey, Action<BusLine> update); //method that knows to updt specific fields in bus
         void DeleteBusLine(BusLine bus);
         BusLine GetBusLine(int busLineKey);
         #endregion
 
         #region DrivingLine
-        bool addLineInTravel(DrivingLine bus);
+        void addLineInTravel(DrivingLine bus);
         IEnumerable<DrivingLine> GetBusLinetInDriveList(Predicate<DrivingLine> predicate);
         #endregion
 

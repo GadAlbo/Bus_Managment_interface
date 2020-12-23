@@ -37,11 +37,11 @@ namespace DL
                 throw new BadBusLineKeyException(bus.BusLineKey, "Duplicate Bus Key");
             DataSource.BusLineList.Add(bus.Clone());
         }
-        public bool UpdateBusLine(BusLine bus)
+        public void UpdateBusLine(BusLine bus)
         {
             throw new NotImplementedException();
         }
-        public bool UpdateBusLine(int busLineKey, Action<BusLine> update)
+        public void UpdateBusLine(int busLineKey, Action<BusLine> update)
         {
             throw new NotImplementedException();
         }
@@ -60,7 +60,7 @@ namespace DL
         #endregion
 
         #region DrivingLine
-        public bool addLineInTravel(DrivingLine bus)
+        public void addLineInTravel(DrivingLine bus)
         {
             throw new NotImplementedException();
         }
