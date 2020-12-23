@@ -20,9 +20,9 @@ namespace APIDL
         #region BusLine
         IEnumerable<BusLine> GetAllBusLines();
         IEnumerable<BusLine> GetAllBusLinesBy(Predicate<BusLine> predicate);
-        bool AddBusLine(BusLine bus);
+        void AddBusLine(BusLine bus);
         bool UpdateBusLine(BusLine bus);
-        bool UpdateBusLine(int busLineKey, Action<BusLine> update); //method that knows to updt specific fields in Person
+        bool UpdateBusLine(int busLineKey, Action<BusLine> update); //method that knows to updt specific fields in bus
         void DeleteBusLine(BusLine bus);
         BusLine GetBusLine(int busLineKey);
         #endregion

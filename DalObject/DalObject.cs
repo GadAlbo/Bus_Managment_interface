@@ -10,32 +10,100 @@ using DS;
 
 namespace DL
 {
-    public class DalObject : IDAL
+    sealed class DalObject : IDAL
     {
         #region singelton
-     /*   static readonly DalObject instance = new DalObject();
-        static DalObject() { }
-        DalObject() { }
-        public static DalObject Instance => instance;
+        static readonly DalObject instance = new DalObject();
+        static DalObject() { }// static ctor to ensure instance init is done just before first usage
+        DalObject() { } // default => private
+        public static DalObject Instance { get => instance; }// The public Instance property to use
         #endregion
 
-        static Random rnd = new Random(DateTime.Now.Millisecond);
-        double temperature;
-
-        public double GetTemparture(int day)
+        #region BusLine
+        public IEnumerable<BusLine> GetAllBusLines()
         {
-            temperature = rnd.NextDouble() * 50 - 10;
-            temperature += rnd.NextDouble() * 10 - 5;
-            return temperature;
+            return from BusLine in DataSource.BusLineList
+                   select BusLine.Clone();
+        }
+        public IEnumerable<BusLine> GetAllBusLinesBy(Predicate<BusLine> predicate)
+        {
+            return from BusLine in DataSource.BusLineList
+                   where predicate(BusLine)
+                   select BusLine.Clone();
+        }
+        public void AddBusLine(BusLine bus)
+        {
+            if (DataSource.BusLineList.FirstOrDefault(b => b.BusLineKey == bus.BusLineKey) != null)
+                throw new BadBusLineKeyException(bus.BusLineKey, "Duplicate Bus Key");
+            DataSource.BusLineList.Add(bus.Clone());
+        }
+        public bool UpdateBusLine(BusLine bus)
+        {
+            throw new NotImplementedException();
+        }
+        public bool UpdateBusLine(int busLineKey, Action<BusLine> update)
+        {
+            throw new NotImplementedException();
+        }
+        public void DeleteBusLine(BusLine bus)
+        {
+            throw new NotImplementedException();
+        }
+        public BusLine GetBusLine(int busLineKey)
+        {
+            BusLine busLine = DataSource.BusLineList.Find(b => b.BusLineKey == busLineKey);
+            if (busLine != null)
+                return busLine.Clone();
+            else
+                throw new BadBusLineKeyException(busLineKey, $"bad bus line key: {busLineKey}");
+        }
+        #endregion
+
+        #region DrivingLine
+        public bool addLineInTravel(DrivingLine bus)
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<DrivingLine> GetBusLinetInDriveList(Predicate<DrivingLine> predicate)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region BusStation
+        public BusStation GetBusStation(int busStationKey)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region User
+        public User GetUser(string userName)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Bus
+        public bool addBus(Bus bus)
+        {
+            throw new NotImplementedException();
         }
 
-        public WindDirection GetWindDirection(int day)
+        public bool update(Bus bus)
         {
-            WindDirection direction = DataSource.directions.Find(d => true);
-            var directions = (WindDirections[])Enum.GetValues(typeof(WindDirections));
-            direction.direction = directions[rnd.Next(0, directions.Length)];
+            throw new NotImplementedException();
+        }
 
-            return direction.Clone();
-        }*/
+        public void delete(Bus bus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Bus read(int license)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }
