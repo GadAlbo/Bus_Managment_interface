@@ -15,5 +15,9 @@ namespace DO
         public int FirstStation { get; set; }
         public int LastStation { get; set; }
         public bool IsActive { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }

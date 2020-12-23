@@ -17,5 +17,9 @@ namespace DO
         public string StationAddress{ get; set; }
         public bool HasARoof { get; set; } //we need to add more options
         public bool IsActive { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }
