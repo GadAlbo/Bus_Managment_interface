@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    public enum state { ReadyToGo, midRide, refueling, handling };
     public class Bus
     {
         public state State { get; set; }
@@ -19,9 +18,9 @@ namespace DO
         public int KillFromRefueling { get; set; }
         public bool IsActive { get; set; }
         public int BusKey { get; set; }
-        /*public override string ToString()
+        public override string ToString()
         {
             return this.ToStringProperty();
-        }*/
+        }
     }
 }
