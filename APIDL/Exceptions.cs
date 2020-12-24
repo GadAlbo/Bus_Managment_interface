@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace DO
 {
     [Serializable]
+    #region BusExceptions
     public class BadBusLineKeyException : Exception
     {
         public int BUSLINEKEY;
@@ -17,6 +18,8 @@ namespace DO
             base(message, innerException) => BUSLINEKEY = busLineKey;
         public override string ToString() => base.ToString() + $", bad line key: {BUSLINEKEY}";
     }
+    #endregion
+    #region BusStationExceptions
     public class BadBusStationKeyException : Exception
     {
         public int BUSSATIONKEY;
@@ -27,4 +30,5 @@ namespace DO
             base(message, innerException) => BUSSATIONKEY = busStationKey;
         public override string ToString() => base.ToString() + $", bad line key: {BUSSATIONKEY}";
     }
+    #endregion
 }
