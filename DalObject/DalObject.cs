@@ -77,8 +77,7 @@ namespace DL
             if (busStation != null)
                 return busStation.Clone();
             else
-
-            throw new NotImplementedException();
+                throw new BadBusStationKeyException(busStationKey, $"bad bus line key: {busStationKey}");
         }
         #endregion
 
