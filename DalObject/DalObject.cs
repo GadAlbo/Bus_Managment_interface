@@ -73,6 +73,11 @@ namespace DL
         #region BusStation
         public BusStation GetBusStation(int busStationKey)
         {
+            BusStation busStation = DataSource.BusStationList.Find(b => b.BusStationKey == busStationKey);
+            if (busStation != null)
+                return busStation.Clone();
+            else
+
             throw new NotImplementedException();
         }
         #endregion

@@ -17,4 +17,14 @@ namespace DO
             base(message, innerException) => BUSLINEKEY = busLineKey;
         public override string ToString() => base.ToString() + $", bad line key: {BUSLINEKEY}";
     }
+    public class BadBusStationKeyException : Exception
+    {
+        public int BUSSATIONKEY;
+        public BadBusStationKeyException(int busStationKey) : base() => BUSSATIONKEY = busStationKey;
+        public BadBusStationKeyException(int busStationKey, string message) :
+            base(message) => BUSSATIONKEY = busStationKey;
+        public BadBusStationKeyException(int busStationKey, string message, Exception innerException) :
+            base(message, innerException) => BUSSATIONKEY = busStationKey;
+        public override string ToString() => base.ToString() + $", bad line key: {BUSSATIONKEY}";
+    }
 }
