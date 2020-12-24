@@ -45,8 +45,9 @@ namespace DL
         {
             throw new NotImplementedException();
         }
-        public void DeleteBusLine(BusLine bus)
+        public void DeleteBusLine(int busLineKey)
         {
+
             throw new NotImplementedException();
         }
         public BusLine GetBusLine(int busLineKey)
