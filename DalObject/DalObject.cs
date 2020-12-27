@@ -47,8 +47,15 @@ namespace DL
         }
         public void DeleteBusLine(int busLineKey)
         {
-
-            throw new NotImplementedException();
+            BusLine busLine= DataSource.BusLineList.Find(b => b.BusLineKey == busLineKey);
+            if (busLine != null)
+            {
+                busLine.IsActive = false;
+            }
+            else
+            {
+                throw new BadBusLineKeyException(busLineKey, $"bad bus line key: {busLineKey}");
+            }
         }
         public BusLine GetBusLine(int busLineKey)
         {
