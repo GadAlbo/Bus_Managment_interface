@@ -39,7 +39,15 @@ namespace DL
         }
         public void UpdateBusLine(BusLine bus)
         {
-            throw new NotImplementedException();
+            BusLine busLine = DataSource.BusLineList.Find(b => b.BusLineKey == bus.BusLineKey);
+            if (busLine != null)
+            {
+                busLine = bus;
+            }
+            else
+            {
+                throw new BadBusLineKeyException(bus.BusLineKey, $"bad bus line key: {bus.BusLineKey}");
+            }
         }
         public void UpdateBusLine(int busLineKey, Action<BusLine> update)
         {
