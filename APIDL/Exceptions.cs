@@ -31,4 +31,17 @@ namespace DO
         public override string ToString() => base.ToString() + $", bad line key: {BUSSATIONKEY}";
     }
     #endregion
+    #region UserExseption
+    public class BadUserNameException : Exception
+    {
+        public string USERNAME;
+        public BadUserNameException(string userName) : base() => USERNAME = userName;
+        public BadUserNameException(string userName, string massege) : 
+            base(massege) => USERNAME = userName;
+        public BadUserNameException(string userName, string massege, Exception innerException) : 
+            base(massege, innerException) => USERNAME = userName;
+        public override string ToString() => base.ToString() + $", bad user name: {USERNAME}";
+    }
+    #endregion
 }
+
