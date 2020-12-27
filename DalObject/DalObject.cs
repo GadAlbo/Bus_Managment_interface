@@ -20,20 +20,29 @@ namespace DL
         #endregion
 
         #region BusLine
+        public BusLine GetBusLine(int busLineKey)
+        {
+            BusLine busLine = DataSource.BusLineList.Find(b => (b.BusLineKey == busLineKey& b.IsActive));
+            if (busLine != null)
+                return busLine.Clone();
+            else
+                throw new BadBusLineKeyException(busLineKey, $"bad bus line key: {busLineKey}");
+        }
         public IEnumerable<BusLine> GetAllBusLines()
         {
             return from BusLine in DataSource.BusLineList
+                   where BusLine.IsActive
                    select BusLine.Clone();
         }
         public IEnumerable<BusLine> GetAllBusLinesBy(Predicate<BusLine> predicate)
         {
             return from BusLine in DataSource.BusLineList
-                   where predicate(BusLine)
+                   where (predicate(BusLine))&(BusLine.IsActive)
                    select BusLine.Clone();
         }
         public void AddBusLine(BusLine bus)
         {
-            if (DataSource.BusLineList.FirstOrDefault(b => b.BusLineKey == bus.BusLineKey) != null)
+            if (DataSource.BusLineList.FirstOrDefault(b => (b.BusLineKey == bus.BusLineKey & b.IsActive)) != null)
                 throw new BadBusLineKeyException(bus.BusLineKey, "Duplicate Bus Key");
             DataSource.BusLineList.Add(bus.Clone());
         }
@@ -42,7 +51,8 @@ namespace DL
             BusLine busLine = DataSource.BusLineList.Find(b => b.BusLineKey == bus.BusLineKey);
             if (busLine != null)
             {
-                busLine = bus;
+                DeleteBusLine(bus.BusLineKey);
+                AddBusLine(bus.Clone());
             }
             else
             {
@@ -55,24 +65,21 @@ namespace DL
         }
         public void DeleteBusLine(int busLineKey)
         {
-            BusLine busLine= DataSource.BusLineList.Find(b => b.BusLineKey == busLineKey);
-            if (busLine != null)
-            {
-                busLine.IsActive = false;
-            }
-            else
+            BusLine busLine = DataSource.BusLineList.Find(b =>
+             {
+                 if (b.BusLineKey == busLineKey & b.IsActive)
+                 {
+                     b.IsActive = false;
+                     return true;
+                 }
+                 else return false;
+             });
+            if (busLine == null)
             {
                 throw new BadBusLineKeyException(busLineKey, $"bad bus line key: {busLineKey}");
             }
         }
-        public BusLine GetBusLine(int busLineKey)
-        {
-            BusLine busLine = DataSource.BusLineList.Find(b => b.BusLineKey == busLineKey);
-            if (busLine != null)
-                return busLine.Clone();
-            else
-                throw new BadBusLineKeyException(busLineKey, $"bad bus line key: {busLineKey}");
-        }
+
         #endregion
 
         #region DrivingLine
