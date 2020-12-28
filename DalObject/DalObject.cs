@@ -105,15 +105,50 @@ namespace DL
         public IEnumerable <BusStation> GetAllBusStations ()
         {
             return from BusStation in DataSource.BusStationList
+                   where BusStation.IsActive
                    select BusStation.Clone();
         }
         public IEnumerable<BusStation> GetAllBusStationsBy(Predicate<BusStation> predicate)
         {
             return from BusStation in DataSource.BusStationList
-                   where (predicate(BusStation))
+                   where (predicate(BusStation)&(BusStation.IsActive))
                    select BusStation.Clone();
         }
-
+        public void AddBusStation(BusStation station)
+        {
+            if (DataSource.BusStationList.FirstOrDefault(b => (b.BusStationKey == station.BusStationKey & b.IsActive)) != null)
+                throw new BadBusStationKeyException(station.BusStationKey, "Duplicate Bus Key");
+            DataSource.BusStationList.Add(station.Clone());
+        }
+        public void UpdateBusStation(BusStation station)
+        {
+            BusStation busStation = DataSource.BusStationList.Find(b => b.BusStationKey == station.BusStationKey);
+            if (busStation != null)
+            {
+                DeleteBusStation(station.BusStationKey);
+                AddBusStation(station.Clone());
+            }
+            else
+            {
+                throw new BadBusStationKeyException(station.BusStationKey, $"bad bus line key: {station.BusStationKey}");
+            }
+        }
+        public void DeleteBusStation(int busStationKey)
+        {
+            BusStation busLine = DataSource.BusStationList.Find(b =>
+            {
+                if (b.BusStationKey == busStationKey & b.IsActive)
+                {
+                    b.IsActive = false;
+                    return true;
+                }
+                else return false;
+            });
+            if (busLine == null)
+            {
+                throw new BadBusStationKeyException(busStationKey, $"bad bus line key: {busStationKey}");
+            }
+        }
         #endregion
 
         #region User

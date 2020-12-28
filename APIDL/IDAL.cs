@@ -36,6 +36,9 @@ namespace APIDL
         BusStation GetBusStation(int busStationKey);
         IEnumerable<BusStation> GetAllBusStations();
         IEnumerable<BusStation> GetAllBusStationsBy(Predicate<BusStation> predicate);
+        void AddBusStation(BusStation station);
+        void UpdateBusStation(BusStation station);
+        void DeleteBusStation(int busStationKey);
         #endregion
 
         #region User
