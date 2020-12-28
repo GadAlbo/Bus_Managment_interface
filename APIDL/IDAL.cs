@@ -34,6 +34,8 @@ namespace APIDL
 
         #region BusStation
         BusStation GetBusStation(int busStationKey);
+        IEnumerable<BusStation> GetAllBusStations();
+        IEnumerable<BusStation> GetAllBusStationsBy(Predicate<BusStation> predicate);
         #endregion
 
         #region User

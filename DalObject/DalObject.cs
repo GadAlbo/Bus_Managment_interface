@@ -113,6 +113,7 @@ namespace DL
                    where (predicate(BusStation))
                    select BusStation.Clone();
         }
+
         #endregion
 
         #region User
