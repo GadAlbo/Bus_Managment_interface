@@ -107,6 +107,12 @@ namespace DL
             return from BusStation in DataSource.BusStationList
                    select BusStation.Clone();
         }
+        public IEnumerable<BusStation> GetAllBusStationsBy(Predicate<BusStation> predicate)
+        {
+            return from BusStation in DataSource.BusStationList
+                   where (predicate(BusStation))
+                   select BusStation.Clone();
+        }
         #endregion
 
         #region User
