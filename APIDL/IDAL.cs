@@ -43,7 +43,22 @@ namespace APIDL
 
         #region User
         User GetUser(string userName);
+        IEnumerable<User> GetAllUsers();
+        IEnumerable<User> GetAlUersBy(Predicate<User> predicate);
+        void AddUser(User user);
+        void UpdateUser(User user);
+        void DeletUser(string userName);
         #endregion
+        
+        #region ConsecutiveStations
+        ConsecutiveStations GetConsecutiveStations(int key1, int key2);
+        IEnumerable<ConsecutiveStations> GetAllConsecutiveStations();
+        IEnumerable<ConsecutiveStations> GetAlConsecutiveStationsBy(Predicate<ConsecutiveStations> predicate);
+        void AddConsecutiveStations(ConsecutiveStations consecutiveStations);
+        void UpdateConsecutiveStations(ConsecutiveStations consecutiveStations);
+        void DeletConsecutiveStations(int key1, int key2);
+        #endregion
+
 
     }
 }

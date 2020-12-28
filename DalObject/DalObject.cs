@@ -164,8 +164,125 @@ namespace DL
                 throw new BadUserNameException(userName, $"bad bus user name: {userName}");
             }
         }
+        public IEnumerable<User> GetAllUsers()
+        {
+            return from User in DataSource.UserList
+                   where User.IsActive
+                   select User.Clone();
+        }
+
+        public IEnumerable<User> GetAlUersBy(Predicate<User> predicate)
+        {
+            return from user in DataSource.UserList
+                   where (predicate(user)) & (user.IsActive)
+                   select user.Clone();
+        }
+
+        public void AddUser(User user)
+        {
+            if (DataSource.UserList.FirstOrDefault(b => (b.UserName == user.UserName & b.IsActive)) != null)
+                throw new BadUserNameException(user.UserName, "Duplicate user name");
+            DataSource.UserList.Add(user.Clone());
+        }
+
+        public void UpdateUser(User user)
+        {
+            User u = DataSource.UserList.Find(b => b.UserName == user.UserName);
+            if (u != null)
+            {
+                DeletUser(user.UserName);
+                AddUser(user.Clone());
+            }
+            else
+            {
+                throw new BadUserNameException(user.UserName, $"bad username: {user.UserName} does not exist");
+            }
+        }
+
+        public void DeletUser(string userName)
+        {
+            User user = DataSource.UserList.Find(b =>
+            {
+                if (b.UserName == userName & b.IsActive)
+                {
+                    b.IsActive = false;
+                    return true;
+                }
+                else return false;
+            });
+            if (user == null)
+            {
+                throw new BadUserNameException(userName, $"bad userName: {userName}");
+            }
+        }
         #endregion
 
+        #region ConsecutiveStations
+        public ConsecutiveStations GetConsecutiveStations(int key1, int key2)
+        {
+            ConsecutiveStations consecutiveStations = DataSource.ConsecutiveStationsList.Find(b => (b.Station1Key == key1 & b.Station2Key == key2 & b.IsActive));
+            if (consecutiveStations != null)
+            {
+                return consecutiveStations.Clone();
+            }
+            else
+            {
+                throw new BadConsecutiveStationsException(key1, key2, $"bad Consecutive Stations keys: {key1}{key2}");
+            }
+        }
+
+        public IEnumerable<ConsecutiveStations> GetAllConsecutiveStations()
+        {
+            return from ConsecutiveStations in DataSource.ConsecutiveStationsList
+                   where ConsecutiveStations.IsActive
+                   select ConsecutiveStations.Clone();
+        }
+
+        public IEnumerable<ConsecutiveStations> GetAlConsecutiveStationsBy(Predicate<ConsecutiveStations> predicate)
+        {
+            return from ConsecutiveStations in DataSource.ConsecutiveStationsList
+                   where (predicate(ConsecutiveStations)) & ConsecutiveStations.IsActive
+                   select ConsecutiveStations.Clone();
+        }
+
+        public void AddConsecutiveStations(ConsecutiveStations consecutiveStations)
+        {
+            if (DataSource.ConsecutiveStationsList.FirstOrDefault(b => (b.Station1Key == consecutiveStations.Station1Key & b.Station2Key == consecutiveStations.Station2Key & b.IsActive)) != null)
+                throw new BadConsecutiveStationsException(consecutiveStations.Station1Key, consecutiveStations.Station2Key, "Duplicate consecutive Stations");
+            DataSource.ConsecutiveStationsList.Add(consecutiveStations.Clone());
+        }
+
+        public void UpdateConsecutiveStations(ConsecutiveStations consecutiveStations)
+        {
+            ConsecutiveStations c = DataSource.ConsecutiveStationsList.Find(b => (b.Station1Key == consecutiveStations.Station1Key & b.Station2Key == consecutiveStations.Station2Key & b.IsActive));
+            if (c != null)
+            {
+                DeletConsecutiveStations(consecutiveStations.Station1Key, consecutiveStations.Station2Key);
+                AddConsecutiveStations(consecutiveStations.Clone());
+            }
+            else
+            {
+                throw new BadConsecutiveStationsException(consecutiveStations.Station1Key, consecutiveStations.Station2Key, $"bad bus user name: {consecutiveStations.Station1Key}{consecutiveStations.Station2Key}");
+            }
+        }
+
+        public void DeletConsecutiveStations(int key1, int key2)
+        {
+            ConsecutiveStations consecutiveStations = DataSource.ConsecutiveStationsList.Find(b => 
+            {
+                if (b.Station1Key == key1 & b.Station2Key == key2 & b.IsActive)
+                {
+                    b.IsActive = false;
+                    return true;
+                }
+                else return false;
+            });
+            if (consecutiveStations == null)
+            {
+                throw new BadConsecutiveStationsException(key1, key2, $"bad Consecutive Stations keys: {key1}{key2}");
+            }
+        }
+        #endregion
         #region Bus
         public bool addBus(Bus bus)
         {
@@ -187,5 +304,6 @@ namespace DL
             throw new NotImplementedException();
         }
         #endregion
+
     }
 }

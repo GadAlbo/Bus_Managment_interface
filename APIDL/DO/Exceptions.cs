@@ -43,5 +43,17 @@ namespace DO
         public override string ToString() => base.ToString() + $", bad user name: {USERNAME}";
     }
     #endregion
+    #region ConsecutiveStations
+    public class BadConsecutiveStationsException : Exception
+    {
+        public int KEY1, KEY2;
+        public BadConsecutiveStationsException(int Key1, int Key2) : base() => KEY1 = Key1; 
+        public BadConsecutiveStationsException(int Key1, int Key2, string message) :
+            base(message) => KEY1 = Key1;
+        public BadConsecutiveStationsException(int Key1, int Key2, string message, Exception innerException) :
+            base(message, innerException) => KEY1 = Key1;
+        public override string ToString() => base.ToString() + $", bad Consecutive Stations station key: {KEY1}";
+    }
+    #endregion
 }
 
