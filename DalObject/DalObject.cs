@@ -102,6 +102,11 @@ namespace DL
             else
                 throw new BadBusStationKeyException(busStationKey, $"bad bus line key: {busStationKey}");
         }
+        public IEnumerable <BusStation> GetAllBusStations ()
+        {
+            return from BusStation in DataSource.BusStationList
+                   select BusStation.Clone();
+        }
         #endregion
 
         #region User
