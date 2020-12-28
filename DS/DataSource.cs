@@ -15,6 +15,7 @@ namespace DS
         public static List<BusLineStation> BusLineStationList;
         public static List<BusStation> BusStationList;
         public static List<User> UserList;
+        public static List<ConsecutiveStations> ConsecutiveStationsList;
         public static Random r= new Random();
         static DataSource()
         {
