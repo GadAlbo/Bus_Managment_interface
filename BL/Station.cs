@@ -10,9 +10,7 @@ namespace BO
     public class Station
     {
         public int Key { get; set; }
-       // public BusStation BusStation { get; set; }
-        // public BusLineStation BusLineStation { get; set; }
-
-
+        public BusStation BusStation { get; set; }
+        public IEnumerable<Line> Lines { get; set; }
     }
 }

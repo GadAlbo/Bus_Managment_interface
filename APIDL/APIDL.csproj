@@ -49,7 +49,6 @@
     <Compile Include="DrivingLine.cs" />
     <Compile Include="DalConfig.cs" />
     <Compile Include="DalFactory.cs" />
-    <Compile Include="Bus.cs" />
     <Compile Include="DO\Enums.cs" />
     <Compile Include="DO\Exceptions.cs" />
     <Compile Include="IDAL.cs" />

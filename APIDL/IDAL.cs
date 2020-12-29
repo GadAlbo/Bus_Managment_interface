@@ -10,13 +10,6 @@ namespace APIDL
 {
     public interface IDAL
     {
-        #region Bus //i think we need to erace it
-        bool addBus(Bus bus);
-        bool update(Bus bus);
-        void delete(Bus bus);
-        Bus read(int license);
-        #endregion
-
         #region BusLine
         IEnumerable<BusLine> GetAllBusLines();
         IEnumerable<BusLine> GetAllBusLinesBy(Predicate<BusLine> predicate);

@@ -283,27 +283,6 @@ namespace DL
             }
         }
         #endregion
-        #region Bus
-        public bool addBus(Bus bus)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool update(Bus bus)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void delete(Bus bus)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Bus read(int license)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
 
     }
 }
