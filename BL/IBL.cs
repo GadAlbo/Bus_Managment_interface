@@ -21,5 +21,10 @@ namespace BlApi
         bool HasLine(int lineNumber);
         #endregion
 
+        #region Driving
+        void AddDeatinationStation(int stationKey);
+        void AddSourceStation(int stationKey);
+        #endregion
+
     }
 }

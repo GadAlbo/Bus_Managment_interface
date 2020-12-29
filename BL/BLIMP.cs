@@ -9,8 +9,14 @@ namespace BL
 {
     public class BlImp1 : IBL
     {
-        
-        
+        #region Line
+        public bool HasBusStation(int stationKey)
+        {
+            BusLineStation lineStation = new BusLineStation();
+            lineStation.BusLineStationKey = stationKey;
 
+            return true;
+        }
+        #endregion
     }
 }
