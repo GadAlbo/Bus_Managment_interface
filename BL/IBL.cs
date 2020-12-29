@@ -9,6 +9,17 @@ namespace BlApi
 {
     public interface IBL
     {
-        Weather GetWeather(int day);
+        #region Line
+        bool HasBusStation(int stationKey);
+        DateTime DistanceBetweanStations(int firstStationKey, int lastStationKey);
+        void AddStation(int stationKey);
+        void DeleatStation(int stationKey);
+
+        #endregion
+
+        #region Station
+        bool HasLine(int lineNumber);
+        #endregion
+
     }
 }

@@ -10,7 +10,7 @@ namespace BL
     public class BlImp1 : IBL
     {
         
-
+        
 
     }
 }
