@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Device.Location;
-using System.Diagnostics;
-using System.Runtime.Serialization;
 
 namespace BO
 {
-    public class BusStation
+    public class  StationBO
     {
         public int BusStationKey { get; set; }
         public GeoCoordinate Coordinates { get; set; }

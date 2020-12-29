@@ -11,7 +11,7 @@ namespace DO
         public int Station1Key { get; set; }
         public int Station2Key { get; set; }
         public double Distance { get; set; }
-        public double DriveDistanceTime { get; set; }
+        public TimeSpan DriveDistanceTime { get; set; }
         public bool IsActive { get; set; }
 
         public override string ToString()
