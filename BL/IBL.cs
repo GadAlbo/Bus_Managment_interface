@@ -13,17 +13,17 @@ namespace BlApi
         BusLineBO GetBusLine(int busLineKey);
         IEnumerable<BusLineBO> GetAllBusLines();
         IEnumerable<BusLineBO> GetAllBusLinesBy(Predicate<BusLineBO> predicate);
+        bool HasBusStation(BusLineBO busLine, int stationKey);//done
         void UpdateBusLine(BusLineBO busLine);
         void AddBusLine(BusLineBO bus);
         void DeleteBusLine(int busLineKey);
         #endregion
 
         #region BusLineStationBO
-        IEnumerable<BO.BusLineStationBO> GetAllBusLineStationOfBusLine(BusLineBO busLine);
-        bool HasBusStation(BusLineBO busLine,int stationKey);
+        IEnumerable<BO.BusLineStationBO> GetAllBusLineStationOfBusLine(BusLineBO busLine);//done
         DateTime DistanceBetweanStations(BusLineBO busLine,int firstStationKey, int lastStationKey);
         void AddStation(BusLineBO busLine,int stationKey);
-        void DeleatStation(BusLineBO busLine,int stationKey);
+        void DeleatStation(BusLineBO busLine,int stationKey);//done
         #endregion
 
         #region StationBO
