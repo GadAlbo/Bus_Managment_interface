@@ -10,11 +10,20 @@ namespace BlApi
     public interface IBL
     {
         #region BusLineBO
-        bool HasBusStation(int stationKey);
-        DateTime DistanceBetweanStations(int firstStationKey, int lastStationKey);
-        void AddStation(int stationKey);
-        void DeleatStation(int stationKey);
+        BusLineBO GetBusLine(int busLineKey);
+        IEnumerable<BusLineBO> GetAllBusLines();
+        IEnumerable<BusLineBO> GetAllBusLinesBy(Predicate<BusLineBO> predicate);
+        void UpdateBusLine(BusLineBO busLine);
+        void AddBusLine(BusLineBO bus);
+        void DeleteBusLine(int busLineKey);
+        #endregion
 
+        #region BusLineStationBO
+        IEnumerable<BO.BusLineStationBO> GetAllBusLineStationOfBusLine(BusLineBO busLine);
+        bool HasBusStation(BusLineBO busLine,int stationKey);
+        DateTime DistanceBetweanStations(BusLineBO busLine,int firstStationKey, int lastStationKey);
+        void AddStation(BusLineBO busLine,int stationKey);
+        void DeleatStation(BusLineBO busLine,int stationKey);
         #endregion
 
         #region StationBO
