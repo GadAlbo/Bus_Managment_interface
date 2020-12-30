@@ -11,7 +11,7 @@ namespace BO
     /// </summary>
     public class BusLineStationBO
     {
-        public int BusLineStationCode { get; set; }// i think it is need to be the key of the bus station
+        public int BusLineStationCode { get; set; }
         public int StationNumberInLine { get; set; }
         public double DistanceFromLastStation { get; set; }
         public TimeSpan DriveDistanceTimeFromLastStation { get; set; }

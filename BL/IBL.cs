@@ -9,7 +9,7 @@ namespace BlApi
 {
     public interface IBL
     {
-        #region Line
+        #region BusLineBO
         bool HasBusStation(int stationKey);
         DateTime DistanceBetweanStations(int firstStationKey, int lastStationKey);
         void AddStation(int stationKey);
@@ -17,13 +17,15 @@ namespace BlApi
 
         #endregion
 
-        #region Station
+        #region StationBO
         bool HasLine(int lineNumber);
         #endregion
 
         #region Driving
         void AddDeatinationStation(int stationKey);
         void AddSourceStation(int stationKey);
+        #endregion
+        #region User
         #endregion
 
     }
