@@ -4,11 +4,15 @@ using APIDL;
 //using DL;
 using BO;
 using DO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace BL
 {
     public class BlImp1 : IBL
     {
+        IDAL dl = DalFactory.GetDal();
         #region BusLineBO
 
         BO.BusLineBO BusLineDOBOAdapter(DO.BusLine busLineDo)
