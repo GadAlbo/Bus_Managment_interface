@@ -16,7 +16,7 @@ namespace BO
         public bool HasARoof { get; set; } //we need to add more options
         public bool IsActive { get; set; }
 
-        public IEnumerable<BO.BusLineStationBO> busLineStations;
+        public IEnumerable<BO.BusLineBO> busLineStations;
         public override string ToString()
         {
             return this.ToStringProperty();

@@ -9,7 +9,7 @@ namespace BO
 {
     public class Driving
     {
-        public Station Source { get; set; }
-        public Station Destination { get; set; }
+        public StationBO Source { get; set; }
+        public StationBO Destination { get; set; }
     }
 }
