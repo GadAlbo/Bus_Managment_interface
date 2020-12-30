@@ -27,7 +27,14 @@ namespace BlApi
         #endregion
 
         #region StationBO
-        bool HasLine(int lineNumber);
+        StationBO GetBusStation(int busStationKey);
+        IEnumerable<StationBO> GetAllBusStations();
+        IEnumerable<StationBO> GetAllBusStationsBy(Predicate<StationBO> predicate);
+        void AddBusStation(StationBO station);
+        void UpdateBusStation(StationBO station);
+        void DeleteBusStation(int busStationKey);
+        bool HasLine(StationBO station,int lineNumber);
+        IEnumerable<IGrouping<int, int>> GetBusLineGrouptByStation();
         #endregion
 
         #region Driving
