@@ -9,7 +9,7 @@ namespace DO
     public class BusLineStation
     {
         public int BusLineStationKey { get; set; }
-        public int BusLineStationCode { get; set; }// i think it is need to be the key of the bus station
+        public int BusLineCode { get; set; }
         public int StationNumberInLine { get; set; }
         public bool IsActive { get; set; }
     }

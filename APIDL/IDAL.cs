@@ -20,11 +20,6 @@ namespace APIDL
         BusLine GetBusLine(int busLineKey);
         #endregion
 
-        #region DrivingLine
-        void addLineInTravel(DrivingLine bus);
-        IEnumerable<DrivingLine> GetBusLinetInDriveList(Predicate<DrivingLine> predicate);
-        #endregion
-
         #region BusStation
         BusStation GetBusStation(int busStationKey);
         IEnumerable<BusStation> GetAllBusStations();
