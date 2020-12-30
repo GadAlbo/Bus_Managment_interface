@@ -13,15 +13,31 @@ namespace BL
     public class BlImp1 : IBL
     {
         IDAL dl = DalFactory.GetDal();
-        #region BusLineBO
 
+        #region BusLineBO
         BO.BusLineBO BusLineDOBOAdapter(DO.BusLine busLineDo)
         {
             BO.BusLineBO busLineBO = new BO.BusLineBO();
             busLineDo.CopyPropertiesTo(busLineBO);
             return busLineBO;
         }
-
+        public IEnumerable<BO.BusLineStationBO> GetAllBusLineStationOfBusLine(BusLineBO busLine)
+        {
+            return busLine.busLineStations;
+        }
+        public bool HasBusStation(BusLineBO busLine, int stationKey)
+        {
+            if(busLine.busLineStations.FirstOrDefault(b => (b.BusLineStationKey == stationKey & b.IsActive)) !=null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public void AddStation(BusLineBO busLine, int stationKey)//im not finish this one because im not sure how to do it
+        {
+            DO.BusStation busStationDO = dl.GetBusStation(stationKey);
+            BO.StationBO stationBO = BusStationDOBOAdapter(busStationDO);
+        }
         #endregion
 
         #region BusLineStationBO
