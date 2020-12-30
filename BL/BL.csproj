@@ -49,6 +49,7 @@
     <Compile Include="BO\Driving.cs" />
     <Compile Include="BO\Enum.cs" />
     <Compile Include="BO\Exception.cs" />
+    <Compile Include="DeepCopyUtilities.cs" />
     <Compile Include="IBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BO\StationBO.cs" />

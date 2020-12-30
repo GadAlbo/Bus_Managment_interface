@@ -41,15 +41,11 @@ namespace BL
             busLineDo.CopyPropertiesTo(busLineBO);
             return busLineBO;
         }
-        public bool HasBusStation(int stationKey)
-        {
-            return true;
-        }
 
+        #endregion
         public bool HasLine(int lineNumber)
         {
             throw new NotImplementedException();
         }
-        #endregion
     }
 }
