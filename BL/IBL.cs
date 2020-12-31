@@ -21,7 +21,8 @@ namespace BlApi
 
         #region BusLineStationBO
         IEnumerable<BO.BusLineStationBO> GetAllBusLineStationOfBusLine(BusLineBO busLine);//done
-        DateTime DistanceBetweanStations(BusLineBO busLine,int firstStationKey, int lastStationKey);
+        double DistanceBetweanStations(BusLineBO busLine,int firstStationKey, int lastStationKey);
+        TimeSpan TimeBetweanStations(BusLineBO busLine,int firstStationKey, int lastStationKey);
         void AddStation(BusLineBO busLine,int stationKey);
         void DeleatStation(BusLineBO busLine,int stationKey);//done
         #endregion

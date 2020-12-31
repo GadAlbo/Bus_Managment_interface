@@ -28,9 +28,13 @@ namespace BL
                 throw new BO.BadBusLineKeyException("bus line key does not exist", ex);
             }
             busLineDo.CopyPropertiesTo(busLineBO);
+
             busLineBO.busLineStations = from b in dl.GetAllBusLineStationBy(b => (b.BusLineKey == BusLineKeyOfDO & b.IsActive))
-                                        let ConsecutiveStations = dl.GetConsecutiveStations(b.StationNumberInLine - 1, b.StationNumberInLine)
+                                        let busStationKey2 = dl.GetBusLineStation(BusLineKeyOfDO, b.StationNumberInLine + 1)
+                                        where busStationKey2!=null
+                                        let ConsecutiveStations = dl.GetConsecutiveStations(b.BusStationKey, busStationKey2.BusStationKey)
                                         select ConsecutiveStations.CopyToBusLineStationBO(b);
+
             return busLineBO;
         }
         DO.BusLine BusLineBODOAdapter(BO.BusLineBO busLineBO)
@@ -110,6 +114,13 @@ namespace BL
             busLineStationDo.CopyPropertiesTo(busLineStationBO);
             return busLineStationBO;
         }
+        public double DistanceBetweanStations(BusLineBO busLine, int firstStationKey, int lastStationKey)
+        {
+            var PartOfBusLineStation = busLine.busLineStations.ToList().FindAll(b=>b.StationNumberInLine>=firstStationKey&b.StationNumberInLine<=lastStationKey&b.IsActive).OrderBy(b=>b.StationNumberInLine);
+
+            return 5.6;
+        }
+
         public void AddStation(BusLineBO busLine, int stationKey)//im not finish this one because im not sure how to do it
         {
             DO.BusStation busStationDO = dl.GetBusStation(stationKey);
@@ -166,7 +177,7 @@ namespace BL
             }
             catch (DO.BadBusStationKeyException busExaption)
             {
-                throw new BO.BadBusStationKeyException("this bus already exsist", busExaption);
+                throw new BO.BadBusStationKeyException("dupliceited bus lune station", busExaption);
             }
         }
         public void DeleteBusStation(int busStationKey)
