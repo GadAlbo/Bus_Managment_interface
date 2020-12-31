@@ -43,23 +43,19 @@ namespace BL
         }
         public BusLineBO GetBusLine(int busLineKey)
         {
-            DO.BusLine busLineDO = new BusLine();
-            busLineDO = dl.GetBusLine(busLineKey);
-            return BusLineDOBOAdapter(busLineDO);
+            return BusLineDOBOAdapter(dl.GetBusLine(busLineKey));
 
         }
         public IEnumerable<BusLineBO> GetAllBusLines()
         {
-            IEnumerable<BusLineBO> busLineBO= from b in dl.GetAllBusLinesBy(b => b.IsActive)
-                                              select BusLineDOBOAdapter(b);
-            return busLineBO;
+           return from b in dl.GetAllBusLinesBy(b => b.IsActive)
+                    select BusLineDOBOAdapter(b);
         }
         public IEnumerable<BusLineBO> GetAllBusLinesBy(Predicate<BusLineBO> predicate)
         {
-            IEnumerable<BusLineBO> busLineBO = from b in GetAllBusLines()
-                                               where predicate(b)
-                                               select b;
-            return busLineBO;
+            return from b in GetAllBusLines()
+                where predicate(b)
+                select b;
         }
         #endregion
 
@@ -86,11 +82,27 @@ namespace BL
         #endregion
 
         #region StationBO
-        BO.StationBO BusStationDOBOAdapter(DO.BusStation busStationDo)
+        public BO.StationBO BusStationDOBOAdapter(DO.BusStation busStationDo)
         {
             BO.StationBO busStationBO = new BO.StationBO();
             busStationDo.CopyPropertiesTo(busStationBO);
             return busStationBO;
+        }
+        public StationBO GetBusStation(int busStationKey)
+        {
+            return BusStationDOBOAdapter(dl.GetBusStation(busStationKey));
+        }
+        public IEnumerable<StationBO> GetAllBusStations()
+        {
+            return from b in dl.GetAllBusStationsBy(b => b.IsActive)
+                   select BusStationDOBOAdapter(b);
+        }
+    
+        public IEnumerable<StationBO> GetAllBusStationsBy(Predicate<StationBO> predicate)
+        {
+            return from b in GetAllBusStations()
+                   where predicate(b)
+                   select b;
         }
         #endregion
 
