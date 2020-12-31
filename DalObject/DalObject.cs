@@ -83,7 +83,7 @@ namespace DL
         #endregion
 
         #region BusLineStation
-        public IEnumerable<BusLineStation> GetAllBusLinesBy(Predicate<BusLineStation> predicate)
+        public IEnumerable<BusLineStation> GetAllBusLineStationBy(Predicate<BusLineStation> predicate)
         {
             return from BLstation in DataSource.BusLineStationList
                    where predicate(BLstation)

@@ -28,5 +28,12 @@ namespace BL
             from.CopyPropertiesTo(to);
             return to;
         }
+        public static BO.BusLineStationBO CopyToBusLineStationBO(this DO.ConsecutiveStations consecutiveStations, DO.BusLineStation busLineStation)
+        {
+            BO.BusLineStationBO result = (BO.BusLineStationBO)busLineStation.CopyPropertiesToNew(typeof(BO.BusLineStationBO));
+            result.DistanceFromLastStation = consecutiveStations.Distance;
+            result.DriveDistanceTimeFromLastStation = consecutiveStations.DriveDistanceTime;
+            return result;
+        }
     }
 }

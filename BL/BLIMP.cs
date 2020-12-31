@@ -28,8 +28,9 @@ namespace BL
                 throw new BO.BadBusLineKeyException("bus line key does not exist", ex);
             }
             busLineDo.CopyPropertiesTo(busLineBO);
-            busLineBO.busLineStations =from sic in dl.get
-            return busLineBO;
+            busLineBO.busLineStations = from b in dl.GetAllBusLineStationBy(b => (b.BusLineKey == BusLineKeyOfDO & b.IsActive))
+                                        let ConsecutiveStations = dl.GetConsecutiveStations(b.StationNumberInLine - 1, b.StationNumberInLine)
+                                        select ConsecutiveStations.CopyToBusLineStationBO(b);
         }
         public bool HasBusStation(BusLineBO busLine, int stationKey)
         {
