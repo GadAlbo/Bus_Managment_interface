@@ -18,7 +18,17 @@ namespace BL
         BO.BusLineBO BusLineDOBOAdapter(DO.BusLine busLineDo)
         {
             BO.BusLineBO busLineBO = new BO.BusLineBO();
+            int BusLineKeyOfDO = busLineDo.BusLineKey;
+            try
+            {
+                busLineDo = dl.GetBusLine(BusLineKeyOfDO);
+            }
+            catch(DO.BadBusLineKeyException ex)
+            {
+                throw new BO.BadBusLineKeyException("bus line key does not exist", ex);
+            }
             busLineDo.CopyPropertiesTo(busLineBO);
+            busLineBO.busLineStations =from sic in dl.get
             return busLineBO;
         }
         public bool HasBusStation(BusLineBO busLine, int stationKey)

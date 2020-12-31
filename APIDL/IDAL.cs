@@ -29,6 +29,15 @@ namespace APIDL
         void DeleteBusStation(int busStationKey);
         #endregion
 
+        #region BusLineStation
+        IEnumerable<BusLineStation> GetAllBusLinesBy(Predicate<BusLineStation> predicate);
+        void AddBusLineStation(BusLineStation station);
+        void UpdateBusLineStation(BusLineStation station);
+        void DeleteBusLineStationInOneBusLine(int BusStationKey, int BusLineKey);
+        void DeleteBusLineStationAllBusLine(int BusStationKey);
+
+        #endregion
+
         #region User
         User GetUser(string userName);
         IEnumerable<User> GetAllUsers();

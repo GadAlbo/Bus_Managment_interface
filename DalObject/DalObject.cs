@@ -82,21 +82,85 @@ namespace DL
 
         #endregion
 
-        #region DrivingLine
-        public void addLineInTravel(DrivingLine bus)
+        #region BusLineStation
+        public IEnumerable<BusLineStation> GetAllBusLinesBy(Predicate<BusLineStation> predicate)
         {
-            throw new NotImplementedException();
+            return from BLstation in DataSource.BusLineStationList
+                   where predicate(BLstation)
+                   select BLstation.Clone();
         }
-        public IEnumerable<DrivingLine> GetBusLinetInDriveList(Predicate<DrivingLine> predicate)
+
+        public void AddBusLineStation(BusLineStation station)
         {
-            throw new NotImplementedException();
+            if (DataSource.BusLineStationList.FirstOrDefault(b => (b.BusStationKey == station.BusStationKey& b.BusLineKey == station.BusLineKey & b.IsActive)) != null)
+                throw new BadBusLineStationsException(station.BusStationKey,station.BusLineKey, "Duplicate Bus Line Station");
+            DataSource.BusLineStationList.Add(station.Clone());
+        }
+
+        public void UpdateBusLineStation(BusLineStation station)
+        {
+            BusLineStation busStation = DataSource.BusLineStationList.Find(b => (b.BusStationKey == station.BusStationKey & b.BusLineKey == station.BusLineKey & b.IsActive));
+            if (busStation != null)
+            {
+                DeleteBusLineStationInOneBusLine(station.BusStationKey, station.BusLineKey);
+                AddBusLineStation(station.Clone());
+            }
+            else
+            {
+                throw new BadBusLineStationsException(station.BusStationKey,station.BusLineKey, "station is not in the bus Line path");
+            }
+        }
+
+        public void DeleteBusLineStationInOneBusLine(int BusStationKey, int BusLineKey)
+        {
+            BusLineStation busLine = DataSource.BusLineStationList.Find(b =>
+            {
+                if (b.BusStationKey == BusStationKey & b.BusLineKey == BusLineKey & b.IsActive)
+                {
+                    b.IsActive = false;
+                    return true;
+                }
+                else return false;
+            });
+            if (busLine == null)
+            {
+                throw new BadBusLineStationsException(BusStationKey, BusLineKey, "station is not in the bus Line path");
+            }
+        }
+
+        public void DeleteBusLineStationAllBusLine(int BusStationKey)
+        {
+            BusLineStation bLstation;
+            do
+            {
+                bLstation = DataSource.BusLineStationList.Find(b =>
+                {
+                    if (b.BusStationKey == BusStationKey & b.IsActive)
+                    {
+                        b.IsActive = false;
+                        return true;
+                    }
+                    else return false;
+                });
+            }
+            while (bLstation != null);
         }
         #endregion
+        //#region DrivingLine
+        //public void addLineInTravel(DrivingLine bus)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //public IEnumerable<DrivingLine> GetBusLinetInDriveList(Predicate<DrivingLine> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //#endregion
 
         #region BusStation
         public BusStation GetBusStation(int busStationKey)
         {
-            BusStation busStation = DataSource.BusStationList.Find(b => b.BusStationKey == busStationKey);
+            BusStation busStation = DataSource.BusStationList.Find(b => (b.BusStationKey == busStationKey& b.IsActive));
             if (busStation != null)
                 return busStation.Clone();
             else
