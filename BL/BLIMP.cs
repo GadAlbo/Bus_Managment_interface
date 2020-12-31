@@ -23,7 +23,7 @@ namespace BL
             {
                 busLineDo = dl.GetBusLine(BusLineKeyOfDO);
             }
-            catch(DO.BadBusLineKeyException ex)
+            catch (DO.BadBusLineKeyException ex)
             {
                 throw new BO.BadBusLineKeyException("bus line key does not exist", ex);
             }
@@ -31,14 +31,35 @@ namespace BL
             busLineBO.busLineStations = from b in dl.GetAllBusLineStationBy(b => (b.BusLineKey == BusLineKeyOfDO & b.IsActive))
                                         let ConsecutiveStations = dl.GetConsecutiveStations(b.StationNumberInLine - 1, b.StationNumberInLine)
                                         select ConsecutiveStations.CopyToBusLineStationBO(b);
+            return busLineBO;
         }
         public bool HasBusStation(BusLineBO busLine, int stationKey)
         {
-            if(busLine.busLineStations.FirstOrDefault(b => (b.BusLineStationKey == stationKey & b.IsActive)) !=null)
+            if (busLine.busLineStations.FirstOrDefault(b => (b.BusLineStationKey == stationKey & b.IsActive)) != null)
             {
                 return true;
             }
             return false;
+        }
+        public BusLineBO GetBusLine(int busLineKey)
+        {
+            DO.BusLine busLineDO = new BusLine();
+            busLineDO = dl.GetBusLine(busLineKey);
+            return BusLineDOBOAdapter(busLineDO);
+
+        }
+        public IEnumerable<BusLineBO> GetAllBusLines()
+        {
+            IEnumerable<BusLineBO> busLineBO= from b in dl.GetAllBusLinesBy(b => b.IsActive)
+                                              select BusLineDOBOAdapter(b);
+            return busLineBO;
+        }
+        public IEnumerable<BusLineBO> GetAllBusLinesBy(Predicate<BusLineBO> predicate)
+        {
+            IEnumerable<BusLineBO> busLineBO = from b in GetAllBusLines()
+                                               where predicate(b)
+                                               select b;
+            return busLineBO;
         }
         #endregion
 
