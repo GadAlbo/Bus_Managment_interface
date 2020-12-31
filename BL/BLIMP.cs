@@ -33,6 +33,12 @@ namespace BL
                                         select ConsecutiveStations.CopyToBusLineStationBO(b);
             return busLineBO;
         }
+        DO.BusLine BusLineBODOAdapter(BO.BusLineBO busLineBO)
+        {
+            DO.BusLine busLineDO = new BusLine();
+            busLineBO.CopyPropertiesTo(busLineDO);
+            return busLineDO;
+        }
         public bool HasBusStation(BusLineBO busLine, int stationKey)
         {
             if (busLine.busLineStations.FirstOrDefault(b => (b.BusLineStationKey == stationKey & b.IsActive)) != null)
@@ -75,11 +81,25 @@ namespace BL
         }
         public void AddBusLine(BusLineBO bus)
         {
-
+            try
+            {
+                dl.AddBusLine(BusLineBODOAdapter(bus));
+            }
+            catch (DO.BadBusLineKeyException busExaption)
+            {
+                throw new BO.BadBusLineKeyException("this bus already exsist", busExaption);
+            }
         }
         public void DeleteBusLine(int busLineKey)
         {
-
+            try
+            {
+                dl.DeleteBusLine(busLineKey);
+            }
+            catch (DO.BadBusLineKeyException busExaption)
+            {
+                throw new BO.BadBusLineKeyException("this bus already exsist", busExaption);
+            }
         }
         #endregion
 
