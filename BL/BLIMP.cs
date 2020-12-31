@@ -54,14 +54,14 @@ namespace BL
         }
         public IEnumerable<BusLineBO> GetAllBusLines()
         {
-           return from b in dl.GetAllBusLinesBy(b => b.IsActive)
-                    select BusLineDOBOAdapter(b);
+            return from b in dl.GetAllBusLinesBy(b => b.IsActive)
+                   select BusLineDOBOAdapter(b);
         }
         public IEnumerable<BusLineBO> GetAllBusLinesBy(Predicate<BusLineBO> predicate)
         {
             return from b in GetAllBusLines()
-                where predicate(b)
-                select b;
+                   where predicate(b)
+                   select b;
         }
         public void UpdateBusLine(BusLineBO busLine)
         {
@@ -74,7 +74,7 @@ namespace BL
                     AddBusLine(busLine);
                 }
             }
-            catch(DO.BadBusLineKeyException busExaption)
+            catch (DO.BadBusLineKeyException busExaption)
             {
                 throw new BO.BadBusLineKeyException("this bus does not exsist", busExaption);
             }
@@ -130,10 +130,10 @@ namespace BL
         {
             BO.StationBO busStationBO = new BO.StationBO();
             busStationDo.CopyPropertiesTo(busStationBO);
-            busStationBO.busLines= from b in GetAllBusLines()
-                                   where (b.busLineStations.FirstOrDefault
-                                   (s => (s.BusLineStationKey == busStationDo.BusStationKey & s.IsActive)) != null)
-                                   select b;
+            busStationBO.busLines = from b in GetAllBusLines()
+                                    where (b.busLineStations.FirstOrDefault
+                                    (s => (s.BusLineStationKey == busStationDo.BusStationKey & s.IsActive)) != null)
+                                    select b;
             return busStationBO;
         }
         DO.BusStation BusStationBODOAdapter(BO.StationBO busStationBO)
@@ -151,7 +151,7 @@ namespace BL
             return from b in dl.GetAllBusStationsBy(b => b.IsActive)
                    select BusStationDOBOAdapter(b);
         }
-    
+
         public IEnumerable<StationBO> GetAllBusStationsBy(Predicate<StationBO> predicate)
         {
             return from b in GetAllBusStations()
@@ -198,7 +198,7 @@ namespace BL
         }
         public bool HasLine(StationBO station, int lineNumber)
         {
-            if(station.busLines.FirstOrDefault(s => (s.BusLineKey == lineNumber & s.IsActive))!=null)
+            if (station.busLines.FirstOrDefault(s => (s.BusLineKey == lineNumber & s.IsActive)) != null)
             {
                 return true;
             }
@@ -213,7 +213,7 @@ namespace BL
         }
         public void AddSourceStation(int stationKey, Driving driving)
         {
-            driving.Source= GetBusStation(stationKey);
+            driving.Source = GetBusStation(stationKey);
         }
         #endregion
 
@@ -223,6 +223,65 @@ namespace BL
             BO.User userBO = new BO.User();
             user.CopyPropertiesTo(userBO);
             return userBO;
+        }
+        DO.User UserBODOAdapter(BO.User user)
+        {
+            DO.User userDO = new DO.User();
+            user.CopyPropertiesTo(userDO);
+            return userDO;
+        }
+        public BO.User GetUser(string userName)
+        {
+            return UserDOBOAdapter(dl.GetUser(userName));
+        }
+        public IEnumerable<BO.User> GetAllUsers()
+        {
+            return from u in dl.GetAlUersBy(u => u.IsActive)
+                   select UserDOBOAdapter(u);
+        }
+        public IEnumerable<BO.User> GetAlUersBy(Predicate<BO.User> predicate)
+        {
+            return from u in GetAllUsers()
+                   where predicate(u)
+                   select u;
+        }
+        public void AddUser(BO.User user)
+        {
+            try
+            {
+                dl.AddUser(UserBODOAdapter(user));
+            }
+            catch (DO.BadUserNameException busExaption)
+            {
+                throw new BO.BadUserNameException("this username exsist", busExaption);
+            }
+        }
+        public void DeletUser(string userName)
+        {
+            try
+            {
+                dl.DeletUser(userName);
+            }
+            catch (DO.BadUserNameException busExaption)
+            {
+                throw new BO.BadUserNameException("this username exsist", busExaption);
+            }
+        }
+        public void UpdateUser(BO.User user)
+        {
+            try
+            {
+                BO.User userBO = GetUser(user.UserName);
+                if (userBO != null)
+                {
+                    DeletUser(user.UserName);
+                    AddUser(user);
+                }
+            }
+            catch (DO.BadUserNameException busExaption)
+            {
+                throw new BO.BadUserNameException("this username exsist", busExaption);
+            }
         }
         #endregion
     }

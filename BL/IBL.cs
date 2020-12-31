@@ -41,7 +41,14 @@ namespace BlApi
         void AddDeatinationStation(int stationKey, Driving driving);
         void AddSourceStation(int stationKey, Driving driving);
         #endregion
+
         #region User
+        BO.User GetUser(string userName);
+        IEnumerable<BO.User> GetAllUsers();
+        IEnumerable<BO.User> GetAlUersBy(Predicate<BO.User> predicate);
+        void AddUser(BO.User user);
+        void UpdateUser(BO.User user);
+        void DeletUser(string userName);
         #endregion
 
     }
