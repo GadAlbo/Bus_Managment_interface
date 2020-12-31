@@ -38,8 +38,8 @@ namespace BlApi
         #endregion
 
         #region Driving
-        void AddDeatinationStation(int stationKey);
-        void AddSourceStation(int stationKey);
+        void AddDeatinationStation(int stationKey, Driving driving);
+        void AddSourceStation(int stationKey, Driving driving);
         #endregion
         #region User
         #endregion

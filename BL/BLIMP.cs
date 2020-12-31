@@ -204,7 +204,18 @@ namespace BL
             }
             return false;
         }
-#endregion
+        #endregion
+
+        #region Driving
+        public void AddDeatinationStation(int stationKey, Driving driving)
+        {
+            driving.Destination = GetBusStation(stationKey);
+        }
+        public void AddSourceStation(int stationKey, Driving driving)
+        {
+            driving.Source= GetBusStation(stationKey);
+        }
+        #endregion
 
         #region UserBO
         BO.User UserDOBOAdapter(DO.User user)
