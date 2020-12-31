@@ -61,6 +61,30 @@ namespace BL
                                                select b;
             return busLineBO;
         }
+        public void UpdateBusLine(BusLineBO busLine)
+        {
+            try
+            {
+                BusLineBO busLineBO = GetBusLine(busLine.BusLineKey);
+                if (busLineBO != null)
+                {
+                    DeleteBusLine(busLine.BusLineKey);
+                    AddBusLine(busLine);
+                }
+            }
+            catch(DO.BadBusLineKeyException busExaption)
+            {
+                throw new BO.BadBusLineKeyException("this bus does not exsist", busExaption);
+            }
+        }
+        public void AddBusLine(BusLineBO bus)
+        {
+
+        }
+        public void DeleteBusLine(int busLineKey)
+        {
+
+        }
         #endregion
 
         #region BusLineStationBO
