@@ -130,7 +130,17 @@ namespace BL
         {
             BO.StationBO busStationBO = new BO.StationBO();
             busStationDo.CopyPropertiesTo(busStationBO);
+            busStationBO.busLines= from b in GetAllBusLines()
+                                   where (b.busLineStations.FirstOrDefault
+                                   (s => (s.BusLineStationKey == busStationDo.BusStationKey & s.IsActive)) != null)
+                                   select b;
             return busStationBO;
+        }
+        DO.BusStation BusStationBODOAdapter(BO.StationBO busStationBO)
+        {
+            DO.BusStation busStationDO = new BusStation();
+            busStationBO.CopyPropertiesTo(busStationDO);
+            return busStationDO;
         }
         public StationBO GetBusStation(int busStationKey)
         {
@@ -148,7 +158,53 @@ namespace BL
                    where predicate(b)
                    select b;
         }
-        #endregion
+        public void AddBusStation(StationBO station)
+        {
+            try
+            {
+                dl.AddBusStation(BusStationBODOAdapter(station));
+            }
+            catch (DO.BadBusStationKeyException busExaption)
+            {
+                throw new BO.BadBusStationKeyException("this bus already exsist", busExaption);
+            }
+        }
+        public void DeleteBusStation(int busStationKey)
+        {
+            try
+            {
+                dl.DeleteBusStation(busStationKey);
+            }
+            catch (DO.BadBusStationKeyException busExaption)
+            {
+                throw new BO.BadBusStationKeyException("this bus does not exsist", busExaption);
+            }
+        }
+        public void UpdateBusStation(StationBO station)
+        {
+            try
+            {
+                StationBO busStationBO = GetBusStation(station.BusStationKey);
+                if (busStationBO != null)
+                {
+                    DeleteBusStation(station.BusStationKey);
+                    AddBusStation(station);
+                }
+            }
+            catch (DO.BadBusLineKeyException busExaption)
+            {
+                throw new BO.BadBusLineKeyException("this bus does not exsist", busExaption);
+            }
+        }
+        public bool HasLine(StationBO station, int lineNumber)
+        {
+            if(station.busLines.FirstOrDefault(s => (s.BusLineKey == lineNumber & s.IsActive))!=null)
+            {
+                return true;
+            }
+            return false;
+        }
+#endregion
 
         #region UserBO
         BO.User UserDOBOAdapter(DO.User user)
