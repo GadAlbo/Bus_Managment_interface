@@ -11,7 +11,7 @@ namespace APIDL
     /// Class for processing config.xml file and getting from there
     /// information which is relevant for initialization of DalApi
     /// </summary>
-    static class DalConfig
+     static class DalConfig
     {
         internal static string DalName;
         internal static Dictionary<string, string> DalPackages;
