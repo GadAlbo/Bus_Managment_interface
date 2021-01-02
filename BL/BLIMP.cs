@@ -105,6 +105,12 @@ namespace BL
                 throw new BO.BadBusLineKeyException("this bus already exsist", busExaption);
             }
         }
+        public IEnumerable<IGrouping<BO.Areas, int>> GetBusLineGrouptByArea()
+        {
+            return from BusLine in GetAllBusLines()
+                   group BusLine.BusLineKey by BusLine.Area into g
+                   select g;
+        }
         #endregion
 
         #region BusLineStationBO
@@ -116,11 +122,24 @@ namespace BL
         }
         public double DistanceBetweanStations(BusLineBO busLine, int firstStationKey, int lastStationKey)
         {
-            var PartOfBusLineStation = busLine.busLineStations.ToList().FindAll(b=>b.StationNumberInLine>=firstStationKey&b.StationNumberInLine<=lastStationKey&b.IsActive).OrderBy(b=>b.StationNumberInLine);
-
-            return 5.6;
+            List<BusLineStationBO> PartOfBusLineStation = busLine.busLineStations.OrderBy(b=>b.StationNumberInLine).ToList().FindAll(b=>b.StationNumberInLine>=firstStationKey&b.StationNumberInLine<=lastStationKey&b.IsActive);
+            double ColectiveDistance = 0;
+            foreach (BusLineStationBO BLStationBO in PartOfBusLineStation)
+            {
+                ColectiveDistance += BLStationBO.DistanceFromLastStation;
+            }
+            return ColectiveDistance;
         }
-
+        public TimeSpan TimeBetweanStations(BusLineBO busLine, int firstStationKey, int lastStationKey)
+        {
+            List<BusLineStationBO> PartOfBusLineStation = busLine.busLineStations.OrderBy(b => b.StationNumberInLine).ToList().FindAll(b => b.StationNumberInLine >= firstStationKey & b.StationNumberInLine <= lastStationKey & b.IsActive);
+            TimeSpan timeOfDravel = TimeSpan.Zero;
+            foreach (BusLineStationBO BLStationBO in PartOfBusLineStation)
+            {
+                timeOfDravel += BLStationBO.DriveDistanceTimeFromLastStation;
+            }
+            return timeOfDravel;
+        }
         public void AddStation(BusLineBO busLine, int stationKey)//im not finish this one because im not sure how to do it
         {
             DO.BusStation busStationDO = dl.GetBusStation(stationKey);
@@ -215,6 +234,7 @@ namespace BL
             }
             return false;
         }
+       
         #endregion
 
         #region Driving
@@ -295,15 +315,6 @@ namespace BL
             }
         }
 
-        public TimeSpan TimeBetweanStations(BusLineBO busLine, int firstStationKey, int lastStationKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IGrouping<int, int>> GetBusLineGrouptByStation()
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }
