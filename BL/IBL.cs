@@ -17,6 +17,8 @@ namespace BlApi
         void UpdateBusLine(BusLineBO busLine);
         void AddBusLine(BusLineBO bus);
         void DeleteBusLine(int busLineKey);
+        IEnumerable<IGrouping<Areas, int>> GetBusLineGrouptByArea();
+
         #endregion
 
         #region BusLineStationBO
@@ -35,7 +37,6 @@ namespace BlApi
         void UpdateBusStation(StationBO station);
         void DeleteBusStation(int busStationKey);
         bool HasLine(StationBO station,int lineNumber);
-        IEnumerable<IGrouping<int, int>> GetBusLineGrouptByStation();
         #endregion
 
         #region Driving
