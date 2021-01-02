@@ -294,6 +294,16 @@ namespace BL
                 throw new BO.BadUserNameException("this username exsist", busExaption);
             }
         }
+
+        public TimeSpan TimeBetweanStations(BusLineBO busLine, int firstStationKey, int lastStationKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<IGrouping<int, int>> GetBusLineGrouptByStation()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
