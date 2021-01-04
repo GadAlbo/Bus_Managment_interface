@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
-            <Label x:Name="label" Content="please enter a username" HorizontalAlignment="Left" Height="54" Margin="223,127,0,0" VerticalAlignment="Top" Width="111"/>
+        <Grid Height="401" Margin="10,10,10.333,0" VerticalAlignment="Top" Grid.ColumnSpan="4" Grid.RowSpan="4">
+            <Label x:Name="label" Content="please enter a username" HorizontalAlignment="Left" Height="54" Margin="223,127,0,0" VerticalAlignment="Top" Width="155"/>
+            <Label x:Name="label2" Content="please enter a pasword" HorizontalAlignment="Left" Margin="223,236,0,0" VerticalAlignment="Top" Height="34" Width="136"/>
         </Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
