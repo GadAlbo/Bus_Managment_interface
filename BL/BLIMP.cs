@@ -152,6 +152,7 @@ namespace BL
         }
         public void AddStation(BusLineBO busLine, int stationKey)
         {
+            dl.GetBusStation(stationKey);
             var BLstation = new BusLineStation { BusLineKey = busLine.BusLineKey, BusStationKey = stationKey, StationNumberInLine = busLine.busLineStations.Count(), IsActive = true };
             dl.AddBusLineStation(BLstation);
             busLine.busLineStations = from b in dl.GetAllBusLineStationBy(b => (b.BusLineKey == busLine.BusLineKey & b.IsActive))
