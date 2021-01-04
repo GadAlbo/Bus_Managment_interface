@@ -53,7 +53,14 @@ namespace BL
         }
         public BusLineBO GetBusLine(int busLineKey)
         {
-            return BusLineDOBOAdapter(dl.GetBusLine(busLineKey));
+            try
+            {
+                return BusLineDOBOAdapter(dl.GetBusLine(busLineKey));
+            }
+            catch (DO.BadBusLineKeyException busExaption)
+            {
+                throw new BO.BadBusLineKeyException("this bus does not exsist", busExaption);
+            }
 
         }
         public IEnumerable<BusLineBO> GetAllBusLines()
@@ -189,7 +196,8 @@ namespace BL
         }
         public IEnumerable<BO.BusLineStationBO> GetAllBusLineStationOfBusLine(BusLineBO busLine)
         {
-            return busLine.busLineStations;
+            return from b in busLine.busLineStations.Where(b => b.IsActive)
+                   select b;
         }
         #endregion
 
