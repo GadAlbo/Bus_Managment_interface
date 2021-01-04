@@ -217,6 +217,18 @@ namespace DL
             {
                 throw new BadBusStationKeyException(busStationKey, $"bad bus line key: {busStationKey}");
             }
+            else
+            {
+               DataSource.BusLineStationList.Where(b =>
+               {
+                   if (b.BusStationKey == busStationKey & b.IsActive)
+                   {
+                       b.IsActive = false;
+                       return true;
+                   }
+                   else return false;
+               });
+            }
         }
         #endregion
 
