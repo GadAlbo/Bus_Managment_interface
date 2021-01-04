@@ -171,10 +171,21 @@ namespace BL
             {
                 throw new BadBusLineStationException("the station not exsist", ex);
             }
+            catch (DO.BadBusLineKeyException ex)
+            {
+                throw new BadBusLineStationException("the line not exsist", ex);
+            }
         }
         public void DeleatStation(BusLineBO busLine, int stationKey)
         {
-            busLine.busLineStations.FirstOrDefault(b => (b.BusLineStationKey == stationKey & b.IsActive)).IsActive = false;
+            try
+            {
+                busLine.busLineStations.FirstOrDefault(b => (b.BusLineStationKey == stationKey & b.IsActive)).IsActive = false;
+            }
+            catch(DO.BadBusLineStationsException ex)
+            {
+                throw new BO.BadBusStationKeyException("this station in not exsist or unactive", ex);
+            }
         }
         public IEnumerable<BO.BusLineStationBO> GetAllBusLineStationOfBusLine(BusLineBO busLine)
         {
