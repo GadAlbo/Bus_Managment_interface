@@ -32,7 +32,7 @@ namespace BL
             busLineBO.busLineStations = from b in dl.GetAllBusLineStationBy(b => (b.BusLineKey == BusLineKeyOfDO & b.IsActive))
                                         let busStationKey2 = dl.GetBusLineStation(BusLineKeyOfDO, b.StationNumberInLine - 1)
                                         where busStationKey2!=null
-                                        let ConsecutiveStations = dl.GetConsecutiveStations(b.BusStationKey, busStationKey2.BusStationKey)
+                                        let ConsecutiveStations = dl.GetConsecutiveStations(busStationKey2.BusStationKey,b.BusStationKey)
                                         select ConsecutiveStations.CopyToBusLineStationBO(b);
 
             return busLineBO;
@@ -120,7 +120,7 @@ namespace BL
             var busStationKey2 = dl.GetBusLineStation(busLineStationDo.BusLineKey, busLineStationDo.StationNumberInLine - 1);
             if(busStationKey2!=null)
             {
-                busLineStationBO=dl.GetConsecutiveStations(busLineStationDo.BusStationKey, busStationKey2.BusStationKey).CopyToBusLineStationBO(busLineStationDo);
+                busLineStationBO=dl.GetConsecutiveStations(busStationKey2.BusStationKey,busLineStationDo.BusStationKey).CopyToBusLineStationBO(busLineStationDo);
             }
             return busLineStationBO;
         }
