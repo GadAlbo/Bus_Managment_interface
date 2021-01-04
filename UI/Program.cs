@@ -22,7 +22,6 @@ namespace PlConsole
                 userlist.RemoveAt(i);
             }
 
-
         }
     }
 }

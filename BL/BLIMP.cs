@@ -30,7 +30,7 @@ namespace BL
             busLineDo.CopyPropertiesTo(busLineBO);
 
             busLineBO.busLineStations = from b in dl.GetAllBusLineStationBy(b => (b.BusLineKey == BusLineKeyOfDO & b.IsActive))
-                                        let busStationKey2 = dl.GetBusLineStation(BusLineKeyOfDO, b.StationNumberInLine + 1)
+                                        let busStationKey2 = dl.GetBusLineStation(BusLineKeyOfDO, b.StationNumberInLine - 1)
                                         where busStationKey2!=null
                                         let ConsecutiveStations = dl.GetConsecutiveStations(b.BusStationKey, busStationKey2.BusStationKey)
                                         select ConsecutiveStations.CopyToBusLineStationBO(b);
@@ -117,8 +117,18 @@ namespace BL
         BO.BusLineStationBO BusLineStationDOBOAdapter(DO.BusLineStation busLineStationDo)
         {
             BO.BusLineStationBO busLineStationBO = new BO.BusLineStationBO();
-            busLineStationDo.CopyPropertiesTo(busLineStationBO);
+            var busStationKey2 = dl.GetBusLineStation(busLineStationDo.BusLineKey, busLineStationDo.StationNumberInLine - 1);
+            if(busStationKey2!=null)
+            {
+                busLineStationBO=dl.GetConsecutiveStations(busLineStationDo.BusStationKey, busStationKey2.BusStationKey).CopyToBusLineStationBO(busLineStationDo);
+            }
             return busLineStationBO;
+        }
+        DO.BusLineStation BusLineStationBODOAdapter(BO.BusLineStationBO busLineStationBo)
+        {
+            DO.BusLineStation busLineStationDO = new DO.BusLineStation();
+            busLineStationBo.CopyPropertiesTo(busLineStationDO);
+            return busLineStationDO;
         }
         public double DistanceBetweanStations(BusLineBO busLine, int firstStationKey, int lastStationKey)
         {
@@ -140,10 +150,19 @@ namespace BL
             }
             return timeOfDravel;
         }
-        public void AddStation(BusLineBO busLine, int stationKey)//im not finish this one because im not sure how to do it
+        public void AddStation(BusLineBO busLine, int stationKey)
         {
-            DO.BusStation busStationDO = dl.GetBusStation(stationKey);
-            BO.StationBO stationBO = BusStationDOBOAdapter(busStationDO);
+            var BLstation = new BusLineStation { BusLineKey = busLine.BusLineKey, BusStationKey = stationKey, StationNumberInLine = busLine.busLineStations.Count(), IsActive = true };
+            dl.AddBusLineStation(BLstation);
+            busLine.busLineStations = from b in dl.GetAllBusLineStationBy(b => (b.BusLineKey == busLine.BusLineKey & b.IsActive))
+                                      let busStationKey2 = dl.GetBusLineStation(busLine.BusLineKey, b.StationNumberInLine - 1)
+                                      where busStationKey2 != null
+                                      let ConsecutiveStations = dl.GetConsecutiveStations(b.BusStationKey, busStationKey2.BusStationKey)
+                                      select ConsecutiveStations.CopyToBusLineStationBO(b);
+            StationBO stationBO = GetBusStation(stationKey);
+            stationBO.busLines = from b in GetAllBusLines()
+                                 where HasBusStation(b, stationKey)
+                                 select b;
         }
         public void DeleatStation(BusLineBO busLine, int stationKey)
         {
