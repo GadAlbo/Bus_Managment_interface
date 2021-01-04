@@ -85,9 +85,9 @@ namespace DL
         #region BusLineStation
         public BusLineStation GetBusLineStation(int BusLineKey, int StationNumberInLine)//helping func, re turns null if needed intencialy
         {
-            return DataSource.BusLineStationList.Find(b => (b.BusLineKey == BusLineKey & b.StationNumberInLine == StationNumberInLine & b.IsActive));
+            return DataSource.BusLineStationList.FirstOrDefault(b => (b.BusLineKey == BusLineKey & b.StationNumberInLine == StationNumberInLine & b.IsActive));
         }
-    
+
         public IEnumerable<BusLineStation> GetAllBusLineStationBy(Predicate<BusLineStation> predicate)
         {
             return from BLstation in DataSource.BusLineStationList
