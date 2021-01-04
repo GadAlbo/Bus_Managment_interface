@@ -47,5 +47,14 @@ namespace BO
     //    public override string ToString() => base.ToString() + $", bad Consecutive Stations station key: {KEY1} and {KEY2}";
     //}
     //#endregion
+    #region BusLineStationExceptions
+    public class BadBusLineStationException : Exception
+    {
+        public int BUSLINEKEY;
+        public BadBusLineStationException(string message, Exception innerException) :
+            base(message, innerException) => BUSLINEKEY = ((DO.BadBusLineKeyException)innerException).BUSLINEKEY;
+        public override string ToString() => base.ToString() + $", bad station key: {BUSLINEKEY}";
+    }
+    #endregion
 }
 

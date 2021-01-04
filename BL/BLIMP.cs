@@ -152,18 +152,25 @@ namespace BL
         }
         public void AddStation(BusLineBO busLine, int stationKey)
         {
-            dl.GetBusStation(stationKey);
-            var BLstation = new BusLineStation { BusLineKey = busLine.BusLineKey, BusStationKey = stationKey, StationNumberInLine = busLine.busLineStations.Count(), IsActive = true };
-            dl.AddBusLineStation(BLstation);
-            busLine.busLineStations = from b in dl.GetAllBusLineStationBy(b => (b.BusLineKey == busLine.BusLineKey & b.IsActive))
-                                      let busStationKey2 = dl.GetBusLineStation(busLine.BusLineKey, b.StationNumberInLine - 1)
-                                      where busStationKey2 != null
-                                      let ConsecutiveStations = dl.GetConsecutiveStations(b.BusStationKey, busStationKey2.BusStationKey)
-                                      select ConsecutiveStations.CopyToBusLineStationBO(b);
-            StationBO stationBO = GetBusStation(stationKey);
-            stationBO.busLines = from b in GetAllBusLines()
-                                 where HasBusStation(b, stationKey)
-                                 select b;
+            try
+            {
+                dl.GetBusStation(stationKey);
+                var BLstation = new BusLineStation { BusLineKey = busLine.BusLineKey, BusStationKey = stationKey, StationNumberInLine = busLine.busLineStations.Count(), IsActive = true };
+                dl.AddBusLineStation(BLstation);
+                busLine.busLineStations = from b in dl.GetAllBusLineStationBy(b => (b.BusLineKey == busLine.BusLineKey & b.IsActive))
+                                          let busStationKey2 = dl.GetBusLineStation(busLine.BusLineKey, b.StationNumberInLine - 1)
+                                          where busStationKey2 != null
+                                          let ConsecutiveStations = dl.GetConsecutiveStations(b.BusStationKey, busStationKey2.BusStationKey)
+                                          select ConsecutiveStations.CopyToBusLineStationBO(b);
+                StationBO stationBO = GetBusStation(stationKey);
+                stationBO.busLines = from b in GetAllBusLines()
+                                     where HasBusStation(b, stationKey)
+                                     select b;
+            }
+            catch (DO.BadBusStationKeyException ex)
+            {
+                throw new BadBusLineStationException("the station not exsist", ex);
+            }
         }
         public void DeleatStation(BusLineBO busLine, int stationKey)
         {
