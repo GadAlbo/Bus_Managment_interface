@@ -42,6 +42,7 @@ namespace BlApi
         #region Driving
         void AddDeatinationStation(int stationKey, Driving driving);
         void AddSourceStation(int stationKey, Driving driving);
+        IEnumerable<BO.BusLineBO> fingALinesBeatweenStation(Driving driving);
         #endregion
 
         #region User

@@ -293,6 +293,25 @@ namespace BL
         {
             driving.Source = GetBusStation(stationKey);
         }
+        public IEnumerable<BO.BusLineBO> fingALinesBeatweenStation(Driving driving)
+        {
+            IEnumerable<BO.BusLineBO> busLines = GetAllBusLinesBy(b =>
+            {
+                if (HasBusStation(b, driving.Source.BusStationKey) & (HasBusStation(b, driving.Destination.BusStationKey)))
+                {
+                    if (b.busLineStations.FirstOrDefault(s => (s.BusLineStationKey == driving.Source.BusStationKey)).StationNumberInLine
+                    < b.busLineStations.FirstOrDefault(s => (s.BusLineStationKey == driving.Destination.BusStationKey)).StationNumberInLine)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else return false;
+            });
+
+            return busLines.OrderBy(b => (TimeBetweanStations(b, driving.Source.BusStationKey, driving.Destination.BusStationKey)));
+        }
         #endregion
 
         #region UserBO
