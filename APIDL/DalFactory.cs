@@ -30,8 +30,8 @@ namespace APIDL
         public static IDAL GetDal()
         {
             // get dal implementation name from config.xml according to <data> element
-            //string dalType = DalConfig.DalName;
-            string dalType ="DalObject";
+            string dalType = DalConfig.DalName;
+            //string dalType ="DalObject";
             // bring package name (dll file name) for the dal name (above) from the list of packages in config.xml
             string dalPackage = DalConfig.DalPackages[dalType];
             // if package name is not found in the list - there is a problem in config.xml

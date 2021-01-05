@@ -83,9 +83,14 @@ namespace DL
         #endregion
 
         #region BusLineStation
-        public BusLineStation GetBusLineStation(int BusLineKey, int StationNumberInLine)//helping func, re turns null if needed intencialy
+        public int GetBusLineStationKey(int BusLineKey, int StationNumberInLine)//helping func, returns -1 if the station doesnt exist
         {
-            return DataSource.BusLineStationList.FirstOrDefault(b => (b.BusLineKey == BusLineKey & b.StationNumberInLine == StationNumberInLine & b.IsActive));
+            var buslinestation= DataSource.BusLineStationList.FirstOrDefault(b => (b.BusLineKey == BusLineKey & b.StationNumberInLine == StationNumberInLine & b.IsActive));
+            if(buslinestation==null)
+            {
+                return -1;
+            }
+            return buslinestation.BusStationKey;
         }
 
         public IEnumerable<BusLineStation> GetAllBusLineStationBy(Predicate<BusLineStation> predicate)
@@ -301,6 +306,10 @@ namespace DL
         #region ConsecutiveStations
         public ConsecutiveStations GetConsecutiveStations(int key1, int key2)
         {
+            if (key1 == -1)
+            {
+                return new ConsecutiveStations { Distance = 0, DriveDistanceTime = TimeSpan.Zero, IsActive = true, Station1Key = -1, Station2Key = key2 };
+            }
             ConsecutiveStations consecutiveStations = DataSource.ConsecutiveStationsList.Find(b => (b.Station1Key == key1 & b.Station2Key == key2 & b.IsActive));
             if (consecutiveStations != null)
             {
