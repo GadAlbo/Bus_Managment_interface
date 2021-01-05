@@ -57,5 +57,8 @@
     <Compile Include="DO\User.cs" />
     <Compile Include="DO\UserDriving.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="config.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
